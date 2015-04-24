@@ -38,6 +38,11 @@ public class GenericUtils {
 		}
 	}
 
+	
+	/**
+	 * DO NOT USE
+	 */
+	@Deprecated
 	public static int PlayerLookdir(float yaw) {
 		int dir = (MathHelper
 				.floor_double((double) (yaw * 4.0F / 360.0F) + 0.5D) & 3) + 3;

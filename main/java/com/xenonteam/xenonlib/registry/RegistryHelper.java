@@ -4,7 +4,6 @@
 package com.xenonteam.xenonlib.registry;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

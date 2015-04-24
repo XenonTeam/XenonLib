@@ -3,7 +3,6 @@
  */
 package com.xenonteam.xenonlib.config;
 
-import java.util.ArrayList;
 
 /**
  * @author tim4242
