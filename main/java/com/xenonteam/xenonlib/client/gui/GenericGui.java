@@ -7,7 +7,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.config.Refs;
-
+/**
+ * @author tim4242
+ * @author philipas
+ * 
+ */
 public abstract class GenericGui extends GuiContainer{
     private final ResourceLocation guiTexture;
     private final IInventory inventory;
