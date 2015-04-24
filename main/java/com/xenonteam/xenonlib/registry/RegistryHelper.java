@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -37,7 +38,6 @@ public class RegistryHelper
 			
 			Annotation an = f.getAnnotation(Register.class);
 			
-			System.out.println(Arrays.asList(f.getAnnotations()));
 			
 			if(an == null)
 				continue;
@@ -52,43 +52,88 @@ public class RegistryHelper
 				
 				
 				
-				if(f.getDeclaringClass().isAssignableFrom(Block.class))
+				if(f.getType().isAssignableFrom(Block.class))
 				{
 					Block b = null;
 					try
 					{
-						f.get(b);
+						b = (Block) f.get(b);
 					} 
 					catch (Exception e)
 					{
 						e.printStackTrace();
 					}
 					
-					GameRegistry.registerBlock(b, modid + ":" + unlocName);
+					if(b != null)
+					{
+						
+					}
+					else
+					{
+						try
+						{
+							b = (Block) f.getType().newInstance();
+						} 
+						catch (InstantiationException e)
+						{
+							e.printStackTrace();
+						} 
+						catch (IllegalAccessException e)
+						{
+							e.printStackTrace();
+						}
+					}
+					
+					b.setUnlocalizedName(modid + "." + unlocName);
+					
+					GameRegistry.registerBlock(b, modid + "_" + unlocName);
 					
 					continue;
+					
 				}
 				
-				if(f.getDeclaringClass().isAssignableFrom(Item.class))
+				if(f.getType().isAssignableFrom(Item.class))
 				{
 					Item b = null;
 					try
 					{
-						f.get(b);
+						b = (Item) f.get(b);
 					} 
 					catch (Exception e)
 					{
 						e.printStackTrace();
 					}
 					
-					GameRegistry.registerItem(b, modid + ":" + unlocName);
+					if(b != null)
+					{
+						
+					}
+					else
+					{
+						try
+						{
+							b = (Item) f.getType().newInstance();
+						} 
+						catch (InstantiationException e)
+						{
+							e.printStackTrace();
+						} 
+						catch (IllegalAccessException e)
+						{
+							e.printStackTrace();
+						}
+					}
+					
+					b.setUnlocalizedName(modid + "." + unlocName);
+					
+					GameRegistry.registerItem(b, modid + "_" + unlocName);
 					
 					continue;
 				}
 				
-				if(f.getDeclaringClass().isAssignableFrom(TileEntity.class))
+				if(f.getType().isAssignableFrom(TileEntity.class))
 				{
-					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + ":" + unlocName);
+					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
 					
 					continue;
 				}
