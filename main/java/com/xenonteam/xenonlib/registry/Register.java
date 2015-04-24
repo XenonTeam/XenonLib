@@ -11,6 +11,7 @@ package com.xenonteam.xenonlib.registry;
 public @interface Register
 {
 
+	String modid();
 	String unlocName();
 	
 }
