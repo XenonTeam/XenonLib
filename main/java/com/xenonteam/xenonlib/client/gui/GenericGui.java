@@ -5,8 +5,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-
-import com.xenonteam.xenonlib.config.Refs;
 /**
  * @author tim4242
  * @author philipas
@@ -20,12 +18,23 @@ public abstract class GenericGui extends GuiContainer{
     private final ResourceLocation guiTexture;
     private final IInventory inventory;
 
-    public GenericGui(Container container, String guiTextureName, IInventory inventory){
+    
+    /**
+     * 
+     * @param container the container
+     * @param MOD_ID Your modID
+     * @param guiTexturePath the path to your png file
+     * @param inventory The tileEntity
+     */
+    public GenericGui(Container container, String MOD_ID ,String guiTexturePath, IInventory inventory){
         super(container);
-        guiTexture = new ResourceLocation(Refs.MOD_ID + ":textures/gui/" + guiTextureName + ".png");
+        guiTexture = new ResourceLocation(MOD_ID + guiTexturePath + ".png");
         this.inventory = inventory;
     }
 
+    /**
+     * this draws you gui
+     */
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTick, int mouseX, int mouseY){
         mc.getTextureManager().bindTexture(guiTexture);

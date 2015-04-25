@@ -15,6 +15,12 @@ import net.minecraft.inventory.Slot;
 public abstract class GenericContainer extends Container {
 
 
+	/**
+	 * 
+	 * @param playerInventory the player inventory
+	 * @param x Start x pos
+	 * @param y Start y pos
+	 */
     protected void addPlayerSlots(InventoryPlayer playerInventory, int x, int y){
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
