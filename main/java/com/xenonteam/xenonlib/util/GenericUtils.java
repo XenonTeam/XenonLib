@@ -146,6 +146,11 @@ public class GenericUtils {
 				+ id);
 	}
 
+	/**
+	 * Checks if the String is an instance of an Integer
+	 * @param str The String you want to check
+	 * @return If the String is an instance of Integer
+	 */
 	public static boolean isInt(String str) {
 		try {
 			int f = Integer.parseInt(str);
@@ -155,7 +160,12 @@ public class GenericUtils {
 
 		return true;
 	}
-
+	
+	/**
+	 * Checks if the String is an instance of a Float
+	 * @param str The String you want to check
+	 * @return If the String is an instance of Float
+	 */
 	public static boolean isFloat(String str) {
 		try {
 			float f = Float.parseFloat(str);
@@ -166,6 +176,11 @@ public class GenericUtils {
 		return true;
 	}
 
+	/**
+	 * Checks if the String is an instance of a Double
+	 * @param str The String you want to check
+	 * @return If the String is an instance of Double
+	 */
 	public static boolean isDouble(String str) {
 		try {
 			double f = Double.parseDouble(str);
@@ -176,11 +191,20 @@ public class GenericUtils {
 		return true;
 	}
 
+	/**
+	 * Gets the Client player
+	 * @return the player
+	 */
 	@SideOnly(Side.CLIENT)
 	public static EntityPlayer getClientPlayer() {
 		return FMLClientHandler.instance().getClientPlayerEntity();
 	}
 
+	/**
+	 * Gets an item from the ItemRegistry
+	 * @param name the unlocalized name of the item you want to get from the itemRegistry
+	 * @return The item with the unlocalized name or null if the item is not in the itemRegistry
+	 */
 	public static Item getFromItemReg(String name) {
 		if (Item.itemRegistry.containsKey(name)) {
 			return (Item) Item.itemRegistry.getObject(name);
@@ -189,6 +213,11 @@ public class GenericUtils {
 		return null;
 	}
 
+	/**
+	 * Gets an block from the BlockRegistry
+	 * @param name the unlocalized name of the item you want to get from the BlockRegistry
+	 * @return The block with the unlocalized name or null if the item is not in the BlockRegistry
+	 */
 	public static Block getFromBlockReg(String name) {
 		if (Item.itemRegistry.containsKey(name)) {
 			return (Block) Block.blockRegistry.getObject(name);
@@ -197,18 +226,37 @@ public class GenericUtils {
 		return null;
 	}
 
+	/**
+	 * check if an Item is in the itemRegistry
+	 * @param name the unlocalized name of the item you want to check if it is in the itemRegistry
+	 * @return if the item is in the itemRegistry
+	 */
 	public static boolean hasItemReg(String name) {
 		return Item.itemRegistry.containsKey(name);
 	}
-
+	/**
+	 * check if an block is in the blockRegistry
+	 * @param name the unlocalized name of the block you want to check if it is in the blockRegistry
+	 * @return if the item is in the blockRegistry
+	 */
 	public static boolean hasBlockReg(String name) {
 		return Block.blockRegistry.containsKey(name);
 	}
 
+	/**
+	 * checks both item and block Registry for the unlocalized name
+	 * @param name the unlocalized name of what you want to find in either the block of item Registry
+	 * @return The item or block
+	 */
 	public static boolean hasReg(String name) {
 		return (hasBlockReg(name) || hasItemReg(name));
 	}
 
+	/**
+	 * Gets from both the item and block Registry
+	 * @param name unlocalized name of what you want to get from either the block of item Registry
+	 * @return The item of block
+	 */
 	public static Item getFromReg(String name) {
 		if (hasItemReg(name)) {
 			return getFromItemReg(name);
