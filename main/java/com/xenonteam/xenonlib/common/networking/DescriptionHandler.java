@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 import com.xenonteam.xenonlib.config.Refs;
-import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
+import com.xenonteam.xenonlib.tileentity.IGenericTileEntity;
 import com.xenonteam.xenonlib.util.GenericUtils;
 
 /**
@@ -40,8 +40,8 @@ public class DescriptionHandler extends SimpleChannelInboundHandler<FMLProxyPack
         int y = buf.readInt();
         int z = buf.readInt();
         TileEntity te = GenericUtils.getClientPlayer().worldObj.getTileEntity(new BlockPos(x, y, z));
-        if(te instanceof GenericTileEntity) {
-            ((GenericTileEntity)te).readFromPacket(buf);
+        if(te instanceof IGenericTileEntity) {
+            ((IGenericTileEntity)te).readFromPacket(buf);
         }
     }
 
