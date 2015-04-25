@@ -38,7 +38,6 @@ public class RegistryHelper
 			
 			Annotation an = f.getAnnotation(Register.class);
 			
-			System.out.println(Arrays.asList(f.getAnnotations()));
 			
 			if(an == null)
 				continue;
@@ -53,12 +52,12 @@ public class RegistryHelper
 				
 				
 				
-				if(f.getDeclaringClass().isAssignableFrom(Block.class))
+				if(f.getType().isAssignableFrom(Block.class))
 				{
 					Block b = null;
 					try
 					{
-						f.get(b);
+						b = (Block) f.get(b);
 					} 
 					catch (Exception e)
 					{
@@ -70,24 +69,27 @@ public class RegistryHelper
 					continue;
 				}
 				
-				if(f.getDeclaringClass().isAssignableFrom(Item.class))
+				if(f.getType().isAssignableFrom(Item.class))
 				{
 					Item b = null;
 					try
 					{
-						f.get(b);
+						b = (Item) f.get(b);
 					} 
 					catch (Exception e)
 					{
 						e.printStackTrace();
 					}
 					
+					System.err.println(b.getUnlocalizedName());
+					System.err.println(modid + ":" + unlocName);
+					
 					GameRegistry.registerItem(b, modid + ":" + unlocName);
 					
 					continue;
 				}
 				
-				if(f.getDeclaringClass().isAssignableFrom(TileEntity.class))
+				if(f.getType().isAssignableFrom(TileEntity.class))
 				{
 					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + ":" + unlocName);
 					
