@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -64,9 +65,32 @@ public class RegistryHelper
 						e.printStackTrace();
 					}
 					
-					GameRegistry.registerBlock(b, modid + ":" + unlocName);
+					if(b != null)
+					{
+						
+					}
+					else
+					{
+						try
+						{
+							b = (Block) f.getType().newInstance();
+						} 
+						catch (InstantiationException e)
+						{
+							e.printStackTrace();
+						} 
+						catch (IllegalAccessException e)
+						{
+							e.printStackTrace();
+						}
+					}
+					
+					b.setUnlocalizedName(modid + "." + unlocName);
+					
+					GameRegistry.registerBlock(b, modid + "_" + unlocName);
 					
 					continue;
+					
 				}
 				
 				if(f.getType().isAssignableFrom(Item.class))
@@ -81,17 +105,36 @@ public class RegistryHelper
 						e.printStackTrace();
 					}
 					
-					System.err.println(b.getUnlocalizedName());
-					System.err.println(modid + ":" + unlocName);
+					if(b != null)
+					{
+						
+					}
+					else
+					{
+						try
+						{
+							b = (Item) f.getType().newInstance();
+						} 
+						catch (InstantiationException e)
+						{
+							e.printStackTrace();
+						} 
+						catch (IllegalAccessException e)
+						{
+							e.printStackTrace();
+						}
+					}
 					
-					GameRegistry.registerItem(b, modid + ":" + unlocName);
+					b.setUnlocalizedName(modid + "." + unlocName);
+					
+					GameRegistry.registerItem(b, modid + "_" + unlocName);
 					
 					continue;
 				}
 				
 				if(f.getType().isAssignableFrom(TileEntity.class))
 				{
-					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + ":" + unlocName);
+					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
 					
 					continue;
 				}

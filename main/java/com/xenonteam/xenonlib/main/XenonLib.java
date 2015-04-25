@@ -42,7 +42,7 @@ public class XenonLib
 	public static ModMetadata METADATA;
 	
 	@Register(modid = MOD_ID, unlocName = "test")
-	public static Item TestItem = new Item().setUnlocalizedName("testItem").setCreativeTab(CreativeTabs.tabBlock);
+	public static Item TestItem;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
