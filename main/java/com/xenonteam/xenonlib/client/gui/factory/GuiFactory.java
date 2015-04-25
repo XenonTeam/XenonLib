@@ -4,6 +4,7 @@
 package com.xenonteam.xenonlib.client.gui.factory;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +43,12 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	public boolean addElement(String ID, IGuiElement element) {
 		if (!elements.containsKey(ID)) {
 			elements.put(ID, element);
-			old_keys.add(ID);
+			if (old_keys != null) {
+				old_keys.add(ID);
+			}else{
+				old_keys = new ArrayList<String>();
+				old_keys.add(ID);
+			}
 			orderKeys();
 			return true;
 		} else {
