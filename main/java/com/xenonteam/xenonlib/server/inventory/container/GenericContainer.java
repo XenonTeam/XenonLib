@@ -11,12 +11,13 @@ import net.minecraft.inventory.Slot;
  * @author tim4242
  * @author philipas
  * 
+ * A generic Container class to be extended by custom Container.
  */
 public abstract class GenericContainer extends Container {
 
 
 	/**
-	 * 
+	 * this method is meant to create all the default player slots in you gui
 	 * @param playerInventory the player inventory
 	 * @param x Start x pos
 	 * @param y Start y pos
