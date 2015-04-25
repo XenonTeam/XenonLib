@@ -47,7 +47,7 @@ public final class XenonLib
 	public static XenonLib INSTANCE;
 	
 	@Mod.Metadata(MOD_ID)
-	public static ModMetadata METADATA;
+	private static ModMetadata METADATA;
 	
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
