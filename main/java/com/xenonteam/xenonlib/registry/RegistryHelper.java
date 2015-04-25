@@ -8,9 +8,12 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
+import com.xenonteam.xenonlib.blocks.IXenonBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -81,6 +84,28 @@ public class RegistryHelper
 						catch (IllegalAccessException e)
 						{
 							e.printStackTrace();
+						}
+					}
+					
+					
+					if(b instanceof IXenonBlock)
+					{
+						if(reg.tileenity() != Register.DefaultTE.class)
+						{
+							((IXenonBlock) b).setTileEntity(reg.tileenity());
+						}
+						else
+						{
+							((IXenonBlock) b).setTileEntity(null);
+						}
+						
+						if(reg.itemBlock() != "default")
+						{
+							((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
+						}
+						else
+						{
+							((IXenonBlock) b).setItemBlock(null);
 						}
 					}
 					

@@ -23,9 +23,7 @@ public class XenonBlock extends Block implements IXenonBlock, ITileEntityProvide
 	private Class<? extends TileEntity> m_tile;
 	private ItemBlock m_itemBlock;
 
-	/**
-	 * @param materialIn
-	 */
+	
 	protected XenonBlock()
 	{
 		super(Material.glass);
