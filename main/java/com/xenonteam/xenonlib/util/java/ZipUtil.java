@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.xenonteam.xenonlib.java;
+package com.xenonteam.xenonlib.util.java;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import java.net.URLClassLoader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import com.xenonteam.xenonlib.java.FilenameFilters.AllFilter;
+import com.xenonteam.xenonlib.util.java.FilenameFilters.AllFilter;
 
 /**
  * @author tim4242

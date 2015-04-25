@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.xenonteam.xenonlib.java;
+package com.xenonteam.xenonlib.util.java;
 
 import java.io.File;
 import java.io.FilenameFilter;
