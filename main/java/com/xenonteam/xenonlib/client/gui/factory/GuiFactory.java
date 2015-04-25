@@ -19,8 +19,8 @@ import net.minecraft.inventory.Container;
 public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
-	protected List old_keys;
-	protected List keys;
+	private List old_keys = new ArrayList<String>();
+	protected List keys = new ArrayList<String>();
 
 	public GuiFactory(Container container) {
 		super(container);
@@ -43,12 +43,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	public boolean addElement(String ID, IGuiElement element) {
 		if (!elements.containsKey(ID)) {
 			elements.put(ID, element);
-			if (old_keys != null) {
 				old_keys.add(ID);
-			}else{
-				old_keys = new ArrayList<String>();
-				old_keys.add(ID);
-			}
 			orderKeys();
 			return true;
 		} else {
@@ -60,6 +55,13 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	public boolean removeElement(String ID) {
 		if (elements.containsKey(ID)) {
 			elements.remove(ID);
+			
+			for (int i = 0; i < old_keys.size(); i++) {
+				if (old_keys.get(i).equals(ID)) {
+					old_keys.remove(i);
+				}
+			}
+			orderKeys();
 			return true;
 		} else {
 			return false;
