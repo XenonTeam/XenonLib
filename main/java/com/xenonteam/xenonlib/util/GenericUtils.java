@@ -201,9 +201,9 @@ public class GenericUtils {
 	}
 
 	/**
-	 * Gets an item from the ItemRegistry
-	 * @param name the unlocalized name of the item you want to get from the itemRegistry
-	 * @return The item with the unlocalized name or null if the item is not in the itemRegistry
+	 * Gets an item from the Item Registry
+	 * @param name the unlocalized name of the item you want to get from the item Registry
+	 * @return The item with the unlocalized name or null if the item is not in the item Registry
 	 */
 	public static Item getFromItemReg(String name) {
 		if (Item.itemRegistry.containsKey(name)) {
@@ -214,9 +214,9 @@ public class GenericUtils {
 	}
 
 	/**
-	 * Gets an block from the BlockRegistry
-	 * @param name the unlocalized name of the item you want to get from the BlockRegistry
-	 * @return The block with the unlocalized name or null if the item is not in the BlockRegistry
+	 * Gets an block from the Block Registry
+	 * @param name the unlocalized name of the item you want to get from the Block Registry
+	 * @return The block with the unlocalized name or null if the item is not in the Block Registry
 	 */
 	public static Block getFromBlockReg(String name) {
 		if (Item.itemRegistry.containsKey(name)) {
@@ -227,17 +227,17 @@ public class GenericUtils {
 	}
 
 	/**
-	 * check if an Item is in the itemRegistry
-	 * @param name the unlocalized name of the item you want to check if it is in the itemRegistry
-	 * @return if the item is in the itemRegistry
+	 * check if an Item is in the item Registry
+	 * @param name the unlocalized name of the item you want to check if it is in the item Registry
+	 * @return if the item is in the item Registry
 	 */
 	public static boolean hasItemReg(String name) {
 		return Item.itemRegistry.containsKey(name);
 	}
 	/**
-	 * check if an block is in the blockRegistry
-	 * @param name the unlocalized name of the block you want to check if it is in the blockRegistry
-	 * @return if the item is in the blockRegistry
+	 * check if an block is in the block Registry
+	 * @param name the unlocalized name of the block you want to check if it is in the block Registry
+	 * @return if the item is in the block Registry
 	 */
 	public static boolean hasBlockReg(String name) {
 		return Block.blockRegistry.containsKey(name);
