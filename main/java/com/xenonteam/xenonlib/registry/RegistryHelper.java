@@ -8,14 +8,13 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-import com.xenonteam.xenonlib.blocks.IXenonBlock;
-
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.xenonteam.xenonlib.blocks.IXenonBlock;
 
 /**
  * @author tim4242
