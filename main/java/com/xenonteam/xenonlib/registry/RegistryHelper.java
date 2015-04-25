@@ -22,10 +22,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RegistryHelper
 {
 
-	public void registerObjects(Class<?> c)
+	public static void registerObjects(Class<?> c)
 	{
 		
 		List<Field> toRegister = Arrays.asList(c.getDeclaredFields());
+		
+		
 		
 		String modid;
 		String unlocName;
@@ -33,10 +35,21 @@ public class RegistryHelper
 		for(Field f : toRegister)
 		{
 			f.setAccessible(true);
-			if(f.isAnnotationPresent(Register.class))
-			{
-				modid = f.getAnnotation(Register.class).modid();
-				unlocName = f.getAnnotation(Register.class).unlocName();
+			
+			Annotation an = f.getAnnotation(Register.class);
+			
+			if(an == null)
+				continue;
+			
+			
+			
+		
+				Register reg = (Register) an;
+				
+				modid = reg.modid();
+				unlocName = reg.unlocName();
+				
+				
 				
 				if(f.getDeclaringClass().isAssignableFrom(Block.class))
 				{
@@ -52,7 +65,7 @@ public class RegistryHelper
 					
 					GameRegistry.registerBlock(b, modid + ":" + unlocName);
 					
-					return;
+					continue;
 				}
 				
 				if(f.getDeclaringClass().isAssignableFrom(Item.class))
@@ -69,18 +82,16 @@ public class RegistryHelper
 					
 					GameRegistry.registerItem(b, modid + ":" + unlocName);
 					
-					return;
+					continue;
 				}
 				
 				if(f.getDeclaringClass().isAssignableFrom(TileEntity.class))
 				{
 					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + ":" + unlocName);
 					
-					return;
+					continue;
 				}
 			}
-		}
-		
 		
 	}
 	

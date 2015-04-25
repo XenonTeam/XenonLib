@@ -7,7 +7,11 @@ package com.xenonteam.xenonlib.main;
 import java.util.Arrays;
 
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
+import com.xenonteam.xenonlib.registry.Register;
+import com.xenonteam.xenonlib.registry.RegistryHelper;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -36,6 +40,9 @@ public class XenonLib
 	@Mod.Metadata(MOD_ID)
 	public static ModMetadata METADATA;
 	
+	@Register(modid = MOD_ID, unlocName = "test")
+	public static Item TestItem = new Item().setUnlocalizedName("testItem").setCreativeTab(CreativeTabs.tabBlock);
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -50,6 +57,8 @@ public class XenonLib
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		
+		RegistryHelper.registerObjects(XenonLib.class);
 		
 	}
 	
