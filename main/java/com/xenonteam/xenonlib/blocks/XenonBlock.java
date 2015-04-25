@@ -8,6 +8,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -20,7 +21,7 @@ public class XenonBlock extends Block implements IXenonBlock, ITileEntityProvide
 {
 
 	private Class<? extends TileEntity> m_tile;
-	private Item m_itemBlock;
+	private ItemBlock m_itemBlock;
 
 	/**
 	 * @param materialIn
@@ -47,7 +48,7 @@ public class XenonBlock extends Block implements IXenonBlock, ITileEntityProvide
 	 * @see com.xenonteam.xenonlib.blocks.IXenonBlock#setItemBlock(net.minecraft.item.Item)
 	 */
 	@Override
-	public void setItemBlock(Item item)
+	public void setItemBlock(ItemBlock item)
 	{
 		m_itemBlock = item;
 	}

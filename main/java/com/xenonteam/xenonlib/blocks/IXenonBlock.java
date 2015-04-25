@@ -3,7 +3,7 @@
  */
 package com.xenonteam.xenonlib.blocks;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -15,6 +15,6 @@ public interface IXenonBlock
 {
 
 	public void setTileEntity(Class<?extends TileEntity> tile);
-	public void setItemBlock(Item item);
+	public void setItemBlock(ItemBlock item);
 	
 }
