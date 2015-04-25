@@ -4,9 +4,14 @@
 package com.xenonteam.xenonlib.registry;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * @author tim4242
@@ -18,7 +23,66 @@ public class RegistryHelper
 
 	public void registerObjects(Class<?> c)
 	{
-		List<Annotation> toRegister = Arrays.asList(c.getAnnotations());
+		
+		List<Field> toRegister = Arrays.asList(c.getDeclaredFields());
+		
+		String unlocName;
+		
+		for(Field f : toRegister)
+		{
+			f.setAccessible(true);
+			if(f.isAnnotationPresent(Register.class))
+			{
+				unlocName = f.getAnnotation(Register.class).unlocName();
+				
+				if(f.getDeclaringClass().isAssignableFrom(Block.class))
+				{
+					Block b = null;
+					try
+					{
+						f.get(b);
+					} 
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+					
+					
+					
+					return;
+				}
+				
+				if(f.getDeclaringClass().isAssignableFrom(Item.class))
+				{
+					TileEntity b = null;
+					try
+					{
+						f.get(b);
+					} 
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+					
+					return;
+				}
+				
+				if(f.getDeclaringClass().isAssignableFrom(TileEntity.class))
+				{
+					TileEntity b = null;
+					try
+					{
+						f.get(b);
+					} 
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+					
+					return;
+				}
+			}
+		}
 		
 		
 	}
