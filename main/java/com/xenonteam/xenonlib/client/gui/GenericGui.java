@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
  * 
  * A generic GUI class to be extended by custom guis.
  */
-public abstract class GenericGui extends GuiContainer{
+public abstract class GenericGui extends GuiContainer {
     private final ResourceLocation guiTexture;
     private final IInventory inventory;
 

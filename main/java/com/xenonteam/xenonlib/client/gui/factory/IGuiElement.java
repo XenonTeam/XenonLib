@@ -13,6 +13,8 @@ import net.minecraft.util.ResourceLocation;
  * 
  */
 public interface IGuiElement {
+	
+	public void update(IGuiFactory factory);
 
 	public void setXPos(int XPos);
 	
