@@ -5,6 +5,7 @@ package com.xenonteam.xenonlib.client.gui.factory;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -17,34 +18,32 @@ import net.minecraft.inventory.Container;
 public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
-	protected String[] old_keys;
-	protected String[] keys;
+	protected List old_keys;
+	protected List keys;
 
 	public GuiFactory(Container container) {
 		super(container);
-		
-		keys = (String[]) elements.entrySet().toArray();
+
 	}
-	
-	protected void orderKeys()
-	{
+
+	protected void orderKeys() {
 		keys = old_keys;
-		
-		
-		
-		for (int i = 0; i < keys.length; i++) {
-			int priority = elements.get(old_keys[i]).getPriority();
-			keys[priority] = old_keys[i];
+
+		for (int i = 0; i < keys.size(); i++) {
+			int priority = elements.get(old_keys.get(i)).getPriority();
+			keys.set(priority, old_keys.get(i));
 		}
-		
+
 		old_keys = keys;
-	
+
 	}
 
 	@Override
 	public boolean addElement(String ID, IGuiElement element) {
 		if (!elements.containsKey(ID)) {
 			elements.put(ID, element);
+			old_keys.add(ID);
+			orderKeys();
 			return true;
 		} else {
 			return false;
