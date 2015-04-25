@@ -18,11 +18,6 @@ public class Refs
 	public static final String MOD_VERSION = "0.0.1";
 	public static final String MOD_DEPS = "";
 	
-	public static final ArrayList<String> MOD_AUTHORS = new ArrayList<String>();
-	static
-	{
-		MOD_AUTHORS.add("philipas");
-		MOD_AUTHORS.add("tim4242");
-	}
+	public static final String[] MOD_AUTHORS = new String[] {"philipas", "tim4242"};
 	
 }
