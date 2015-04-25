@@ -38,6 +38,8 @@ public class RegistryHelper
 			
 			Annotation an = f.getAnnotation(Register.class);
 			
+			System.out.println(Arrays.asList(f.getAnnotations()));
+			
 			if(an == null)
 				continue;
 			
