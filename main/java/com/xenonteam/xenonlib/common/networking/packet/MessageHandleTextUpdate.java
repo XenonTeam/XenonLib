@@ -21,7 +21,7 @@ import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
  * 
  */
 
-public class MessageHandleTextUpdate extends MessageXYZ<MessageHandleTextUpdate>{
+public final class MessageHandleTextUpdate extends MessageXYZ<MessageHandleTextUpdate>{
     private int id;
     private String text;
 

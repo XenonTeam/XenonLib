@@ -37,7 +37,7 @@ import com.xenonteam.xenonlib.util.Log;
  */
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = MOD_DEPS)
-public class XenonLib 
+public final class XenonLib 
 {
 	
 	@SidedProxy(clientSide = "com.xenonteam.xenonlib.proxy.ClientProxy", serverSide = "com.xenonteam.xenonlib.proxy.ServerProxy")

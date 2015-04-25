@@ -14,7 +14,7 @@ import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
  * @author philipas
  * 
  */
-public class MessageHandleGuiButtonPress extends MessageXYZ<MessageHandleGuiButtonPress>{
+public final class MessageHandleGuiButtonPress extends MessageXYZ<MessageHandleGuiButtonPress>{
     private int id;
 
     public MessageHandleGuiButtonPress(){}

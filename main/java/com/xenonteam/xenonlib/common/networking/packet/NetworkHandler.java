@@ -4,6 +4,7 @@
 package com.xenonteam.xenonlib.common.networking.packet;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -18,7 +19,7 @@ import com.xenonteam.xenonlib.config.Refs;
  * @author philipas
  * 
  */
-public class NetworkHandler {
+public final class NetworkHandler {
 	private static SimpleNetworkWrapper INSTANCE;
 	private static int lastID = -1;
 	private static boolean hasInit = false;
@@ -62,6 +63,15 @@ public class NetworkHandler {
 	public static void sendTo(IMessage message, EntityPlayerMP player) {
 		INSTANCE.sendTo(message, player);
 	}
+	
+    /**
+     * send the given Message to every player within 64 blocks of the XYZ of the XYZ packet.
+     * @param message
+     * @param world
+     */
+	public static void sendToAllAround(MessageXYZ message, World world){
+        INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, 64D));
+    }
 
 	/**
 	 * Send Message to all in the area
