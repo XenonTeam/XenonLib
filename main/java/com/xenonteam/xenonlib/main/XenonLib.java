@@ -24,9 +24,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
+import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
+import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
+import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.util.Log;
 
@@ -37,7 +40,7 @@ import com.xenonteam.xenonlib.util.Log;
  */
 
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = MOD_DEPS)
-public final class XenonLib 
+public final class XenonLib implements IXenonMod
 {
 	
 	@SidedProxy(clientSide = "com.xenonteam.xenonlib.proxy.ClientProxy", serverSide = "com.xenonteam.xenonlib.proxy.ServerProxy")
@@ -51,6 +54,13 @@ public final class XenonLib
 	
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
+	
+	@Register
+	private MessageHandleGuiButtonPress messageHandleGuiButtonPress = new MessageHandleGuiButtonPress();
+	
+	@Register
+	private MessageHandleTextUpdate messageHandleTextUpdate = new MessageHandleTextUpdate();
+	
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -77,6 +87,8 @@ public final class XenonLib
 		
 		DescriptionHandler.init();
 		NetworkHandler.init();
+		
+		m_plugins.add(INSTANCE);
 		
 	}
 	
@@ -108,5 +120,16 @@ public final class XenonLib
 				  "| Version: " + MOD_VERSION + "             |",
 				  "+----------------------------+");
 	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.main.IXenonMod#getRegisterClasses()
+	 */
+	@Override
+	public Class<?>[] getRegisterClasses()
+	{
+		Class<?>[] classes = new Class<?>[] {XenonLib.class};
+		return classes;
+	}
+
 	
 }

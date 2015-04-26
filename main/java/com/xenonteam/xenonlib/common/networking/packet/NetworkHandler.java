@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.xenonteam.xenonlib.config.Refs;
+import com.xenonteam.xenonlib.util.Log;
 
 /**
  * @author tim4242
@@ -48,6 +49,8 @@ public final class NetworkHandler
 		lastID++;
 		Class<REQ> requestMessageType = (Class<REQ>) messageHandler;
 		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, side);
+		if (Refs.DEBUG) 
+		Log.debug("Class "+requestMessageType.toString()+" successfuly registerd");
 	}
 	
 	/**
