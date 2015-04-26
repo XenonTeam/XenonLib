@@ -16,6 +16,20 @@ import com.xenonteam.xenonlib.util.Log;
 public class ReflectionHelper
 {
 
+	public static Method getMethodAccesseble(Class<?> temp, String methodName, Class<?>... parameters)
+	{
+		Method method = getSpecificMethod(temp, methodName, parameters);
+		method.setAccessible(true);
+		return method;
+	}
+
+	public static Field getFieldAccesseble(Class<?> temp, String fieldName)
+	{
+		Field field = getField(temp, fieldName);
+		field.setAccessible(true);
+		return field;
+	}
+
 	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?>... parameters)
 	{
 		try
