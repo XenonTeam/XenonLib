@@ -25,7 +25,8 @@ public @interface Register
 	String modid();
 	String unlocName();
 	
-	String itemBlock() default "default";
+	String itemBlock() default DefaultBI;
+	public static final String DefaultBI = "default";
 	
 	
 	Class<?extends TileEntity> tileenity() default DefaultTE.class;

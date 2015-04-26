@@ -19,4 +19,8 @@ public class Refs
 	
 	public static final String[] MOD_AUTHORS = new String[] {"philipas", "tim4242"};
 	
+	public static boolean DEBUG = false;
+	
+	
+	
 }
