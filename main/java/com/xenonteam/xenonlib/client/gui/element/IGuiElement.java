@@ -48,7 +48,7 @@ public interface IGuiElement
 	public void setResource(ResourceLocation loc);
 	
 	
-	public interface ActionHandler
+	public interface IGuiActionHandler extends IGuiElement
 	{
 		
 		public void handleAction(int action, Object... args);

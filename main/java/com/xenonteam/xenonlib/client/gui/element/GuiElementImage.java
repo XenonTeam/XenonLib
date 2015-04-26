@@ -15,16 +15,17 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
  * @author philipas
  * 
  */
-public class GuiElementImage implements IGuiElement {
-	
+public class GuiElementImage implements IGuiElement
+{
+
 	private int xpos, ypos, priority, with, hight;
 	private ResourceLocation reslocation;
 	private GuiContainer container;
 	private SpriteSheet m_sheet;
 	private String m_spriteID;
-	
-	
-	public GuiElementImage(GuiContainer container, ResourceLocation reslocation, SpriteSheet sheet, String spriteID) {
+
+	public GuiElementImage(GuiContainer container, ResourceLocation reslocation, SpriteSheet sheet, String spriteID)
+	{
 		this.container = container;
 		this.setResource(reslocation);
 		this.setHeight(sheet.getSprite(spriteID).m_h);
@@ -32,83 +33,96 @@ public class GuiElementImage implements IGuiElement {
 		m_sheet = sheet;
 		m_spriteID = spriteID;
 	}
-	
+
 	@Override
-	public void draw(IGuiFactory factory) {
+	public void draw(IGuiFactory factory)
+	{
 		m_sheet.drawSprite(this, m_spriteID, container);
 	}
 
-
 	@Override
-	public void setXPos(int XPos) {
+	public void setXPos(int XPos)
+	{
 		this.xpos = XPos;
 	}
 
 	@Override
-	public void setYPos(int YPos) {
+	public void setYPos(int YPos)
+	{
 		this.ypos = YPos;
 	}
 
 	@Override
-	public void setPos(int x, int y) {
+	public void setPos(int x, int y)
+	{
 		this.setXPos(x);
 		this.setYPos(y);
 	}
 
 	@Override
-	public void setPos(Point p) {
+	public void setPos(Point p)
+	{
 		this.setPos(p.x, p.y);
 	}
 
 	@Override
-	public void setPriority(int priority) {
+	public void setPriority(int priority)
+	{
 		this.priority = priority;
 	}
 
 	@Override
-	public void setWidth(int with) {
+	public void setWidth(int with)
+	{
 		this.with = with;
 	}
 
 	@Override
-	public void setHeight(int hight) {
+	public void setHeight(int hight)
+	{
 		this.hight = hight;
 	}
 
 	@Override
-	public int getXPos() {
+	public int getXPos()
+	{
 		return xpos;
 	}
 
 	@Override
-	public int getYPos() {
+	public int getYPos()
+	{
 		return ypos;
 	}
 
 	@Override
-	public int getPriority() {
+	public int getPriority()
+	{
 		return priority;
 	}
 
 	@Override
-	public int getWidth() {
+	public int getWidth()
+	{
 		return with;
 	}
 
 	@Override
-	public int getHeight() {
+	public int getHeight()
+	{
 		return hight;
 	}
 
 	@Override
-	public ResourceLocation getResource() {
+	public ResourceLocation getResource()
+	{
 		return reslocation;
 	}
 
 	@Override
-	public void setResource(ResourceLocation loc) {
+	public void setResource(ResourceLocation loc)
+	{
 		this.reslocation = loc;
 	}
-
 
 }
