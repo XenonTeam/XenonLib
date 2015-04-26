@@ -91,10 +91,30 @@ public class GenericUtils {
 		return meta;
 	}
 
+	/**
+	 * 
+	 * This Method sends a single line to a specified player.
+	 * 
+	 * @param player The player to send to
+	 * @param msg The message to send
+	 */
 	public static void sendChat(EntityPlayer player, String msg) {
 		if (player.worldObj.isRemote) {
 			player.addChatComponentMessage(new ChatComponentText(msg));
 		}
+	}
+	
+	/**
+	 * 
+	 * This Method sends multiple lines to a specified player.
+	 * 
+	 * @param player The player to send to
+	 * @param msg The messages to send
+	 */
+	public static void sendChat(EntityPlayer player, String... mes)
+	{
+		for(String s : mes)
+			sendChat(player, s);
 	}
 	
 	/**
