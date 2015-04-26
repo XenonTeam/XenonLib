@@ -113,6 +113,10 @@ public final class XenonLib implements IXenonMod
 				  "| Version: " + MOD_VERSION + "             |",
 				  "+----------------------------+");
 	}
+	
+	public static void addXenonMod(IXenonMod mod) {
+		XenonLib.INSTANCE.m_plugins.add(mod);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.xenonteam.xenonlib.main.IXenonMod#getRegisterClasses()
