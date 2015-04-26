@@ -5,8 +5,6 @@ package com.xenonteam.xenonlib.config;
 
 import java.io.File;
 
-import net.minecraftforge.fml.relauncher.FMLInjectionData;
-
 
 /**
  * @author tim4242

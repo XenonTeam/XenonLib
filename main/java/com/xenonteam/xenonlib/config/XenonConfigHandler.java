@@ -20,8 +20,15 @@ import net.minecraftforge.common.config.Property;
  */
 public abstract class XenonConfigHandler implements IXenonConfigHandler
 {
+	/**
+	 * All the {@link net.minecraftforge.common.config.Configuration Configurations} handled by this configuration handler.
+	 */
 	protected Configuration[] m_config;
 
+	/**
+	 * 
+	 * @param relPaths Paths to the {@link net.minecraftforge.common.config.Configuration Configurations} that should be handled.
+	 */
 	protected XenonConfigHandler(String... relPaths)
 	{
 		m_config = new Configuration[relPaths.length];
@@ -33,22 +40,40 @@ public abstract class XenonConfigHandler implements IXenonConfigHandler
 		}
 	}
 
+	/**
+	 * Calls {@link net.minecraftforge.common.config.Configuration#load() Configuration.load()} at the specified index of {@link com.xenonteam.xenonlib.config.XenonConfigHandler#m_config m_config}
+	 * 
+	 * @param i The index
+	 */
 	protected void load(int i)
 	{
 		m_config[i].load();
 	}
 
+	/**
+	 * Calls {@link net.minecraftforge.common.config.Configuration#save() Configuration.save()} at the specified index of {@link com.xenonteam.xenonlib.config.XenonConfigHandler#m_config m_config}
+	 * 
+	 * @param i The index
+	 */
 	protected void save(int i)
 	{
 		m_config[i].save();
 	}
 
+	/**
+	 * Calls {@link net.minecraftforge.common.config.Configuration#load() Configuration.save()} in every {@link net.minecraftforge.common.config.Configuration Configuration} in {@link com.xenonteam.xenonlib.config.XenonConfigHandler#m_config m_config}
+	 * 
+	 */
 	protected void load()
 	{
 		for (int i = 0; i < m_config.length; i++)
 			load(i);
 	}
 
+	/**
+	 * Calls {@link net.minecraftforge.common.config.Configuration#save() Configuration.save()} in every {@link net.minecraftforge.common.config.Configuration Configuration} in {@link com.xenonteam.xenonlib.config.XenonConfigHandler#m_config m_config}
+	 * 
+	 */
 	protected void save()
 	{
 		for (int i = 0; i < m_config.length; i++)
