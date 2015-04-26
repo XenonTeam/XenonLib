@@ -5,6 +5,8 @@ package com.xenonteam.xenonlib.client.gui.factory;
 
 import java.awt.Point;
 
+import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+
 /**
  * @author tim4242
  * @author philipas

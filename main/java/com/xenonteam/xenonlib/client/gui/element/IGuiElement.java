@@ -1,11 +1,13 @@
 /**
  * 
  */
-package com.xenonteam.xenonlib.client.gui.factory;
+package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
 import net.minecraft.util.ResourceLocation;
+
+import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
 
 /**
  * @author tim4242

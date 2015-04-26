@@ -11,6 +11,8 @@ import java.util.List;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 
+import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+
 /**
  * @author tim4242
  * @author philipas
@@ -18,13 +20,16 @@ import net.minecraft.inventory.Container;
  */
 public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 
+	
+
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
 	private List old_keys = new ArrayList<String>();
 	protected List keys = new ArrayList<String>();
 
-	public GuiFactory(Container container) {
+	
+	public GuiFactory(Container container)
+	{
 		super(container);
-
 	}
 
 	protected void orderKeys() {
