@@ -3,6 +3,7 @@
  */
 package com.xenonteam.xenonlib.util.java;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -28,6 +29,30 @@ public class ReflectionHelper
 		Field field = getField(temp, fieldName);
 		field.setAccessible(true);
 		return field;
+	}
+
+	public static Constructor<?> getMethodAccesseble(Class<?> temp, Class<?>... parameters)
+	{
+		Constructor<?> constructor = getConstructor(temp, parameters);
+		constructor.setAccessible(true);
+		return constructor;
+	}
+
+	public static Constructor<?> getConstructor(Class<?> temp, Class<?>... parameters)
+	{
+		try
+		{
+			Constructor<?> constructor = temp.getConstructor(parameters);
+			return constructor;
+		} catch (NoSuchMethodException e)
+		{
+			Log.error("There is no constructor for the class : " + temp.toString() + " :");
+			return null;
+		} catch (SecurityException e)
+		{
+			Log.error("you can not access the constructor of this class : " + temp.toString() + " :");
+			return null;
+		}
 	}
 
 	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?>... parameters)
