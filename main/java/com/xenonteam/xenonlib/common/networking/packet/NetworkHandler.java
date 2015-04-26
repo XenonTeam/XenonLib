@@ -21,6 +21,7 @@ import com.xenonteam.xenonlib.config.Refs;
  */
 public final class NetworkHandler
 {
+	
 	private static SimpleNetworkWrapper INSTANCE;
 	private static int lastID = -1;
 	private static boolean hasInit = false;

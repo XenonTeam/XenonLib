@@ -28,7 +28,6 @@ import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
-import com.xenonteam.xenonlib.security.ReflectionBlocker;
 import com.xenonteam.xenonlib.util.Log;
 
 /**
@@ -40,18 +39,6 @@ import com.xenonteam.xenonlib.util.Log;
 @Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = MOD_DEPS)
 public final class XenonLib 
 {
-	
-	static
-	{
-		try
-		{
-			System.setSecurityManager(new ReflectionBlocker());
-		} catch (SecurityException se)
-		{
-			Log.error("SecurityManager already set!");;
-		}
-
-	}
 	
 	@SidedProxy(clientSide = "com.xenonteam.xenonlib.proxy.ClientProxy", serverSide = "com.xenonteam.xenonlib.proxy.ServerProxy")
 	public static IXenonProxy PROXY;
@@ -90,7 +77,6 @@ public final class XenonLib
 		
 		DescriptionHandler.init();
 		NetworkHandler.init();
-		
 		
 	}
 	
