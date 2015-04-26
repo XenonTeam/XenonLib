@@ -3,6 +3,10 @@
  */
 package com.xenonteam.xenonlib.config;
 
+import java.io.File;
+
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
+
 
 /**
  * @author tim4242
@@ -43,6 +47,7 @@ public final class Refs
 	 */
 	public static final String[] MOD_AUTHORS = new String[] {"philipas", "tim4242"};
 	
+	public static File CONFIG_PATH;
 	
 	/**
 	 * If the XenonLib is in debug mode.
