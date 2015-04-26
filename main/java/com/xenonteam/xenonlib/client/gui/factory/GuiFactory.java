@@ -17,9 +17,26 @@ import net.minecraft.inventory.Container;
 public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
+	protected String[] m_orderedKeys;
 
 	public GuiFactory(Container container) {
 		super(container);
+		
+		m_orderedKeys = (String[]) elements.entrySet().toArray();
+	}
+	
+	protected void orderKeys()
+	{
+		String[] m_new = m_orderedKeys;
+		
+		for(String s : elements.keySet())
+		{
+			int imp = elements.get(s).getPriority();
+			for(int i = 0; i < m_orderedKeys.length; i++)
+			{
+				int imp2 = elements.get(m_orderedKeys[i]).getPriority();
+			}
+		}
 	}
 
 	@Override
