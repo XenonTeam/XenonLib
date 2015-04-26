@@ -22,7 +22,7 @@ public class ElementHelper
 		
 		renderer.bindTexture(elm.getResource());
 		
-		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), 0, 0, elm.getXSize(), elm.getYSize());
+		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), 0, 0, elm.getHeight(), elm.getWidth());
 		
 	}
 	
@@ -32,7 +32,7 @@ public class ElementHelper
 		
 		renderer.bindTexture(elm.getResource());
 		
-		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), x, y, elm.getXSize(), elm.getYSize());
+		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), x, y, elm.getHeight(), elm.getWidth());
 	}
 	
 	public static void unloadResourceLocation(ResourceLocation loc)

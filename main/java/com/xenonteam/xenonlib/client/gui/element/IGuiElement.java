@@ -29,9 +29,9 @@ public interface IGuiElement
 	
 	public void setPriority(int priority);
 	
-	public void setXSize(int XSize);
+	public void setHeight(int XSize);
 	
-	public void setYSize(int YSize);
+	public void setWidth(int YSize);
 	
 	public int getXPos();
 	
@@ -39,9 +39,9 @@ public interface IGuiElement
 	
 	public int getPriority();
 	
-	public int getXSize();
+	public int getHeight();
 	
-	public int getYSize();
+	public int getWidth();
 	
 	public ResourceLocation getResource();
 	

@@ -99,7 +99,7 @@ public class SpriteSheet
 		
 		renderer.bindTexture(m_loc);
 		
-		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), s.m_x, s.m_y, elm.getXSize(), elm.getYSize());
+		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
 	}
 	
 }

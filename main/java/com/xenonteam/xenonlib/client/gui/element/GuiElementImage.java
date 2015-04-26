@@ -20,18 +20,22 @@ public class GuiElementImage implements IGuiElement {
 	private int xpos, ypos, priority, with, hight;
 	private ResourceLocation reslocation;
 	private GuiContainer container;
+	private SpriteSheet m_sheet;
+	private String m_spriteID;
 	
 	
 	public GuiElementImage(GuiContainer container, ResourceLocation reslocation, SpriteSheet sheet, String spriteID) {
 		this.container = container;
 		this.setResource(reslocation);
-		this.setHight(sheet.getSprite(spriteID).m_h);
-		this.setWith(sheet.getSprite(spriteID).m_w);
+		this.setHeight(sheet.getSprite(spriteID).m_h);
+		this.setWidth(sheet.getSprite(spriteID).m_w);
+		m_sheet = sheet;
+		m_spriteID = spriteID;
 	}
 	
 	@Override
 	public void draw(IGuiFactory factory) {
-		ElementHelper.drawSprite(this, xpos, ypos, container);
+		m_sheet.drawSprite(this, m_spriteID, container);
 	}
 
 
@@ -62,12 +66,12 @@ public class GuiElementImage implements IGuiElement {
 	}
 
 	@Override
-	public void setWith(int with) {
+	public void setWidth(int with) {
 		this.with = with;
 	}
 
 	@Override
-	public void setHight(int hight) {
+	public void setHeight(int hight) {
 		this.hight = hight;
 	}
 
@@ -87,12 +91,12 @@ public class GuiElementImage implements IGuiElement {
 	}
 
 	@Override
-	public int getWith() {
+	public int getWidth() {
 		return with;
 	}
 
 	@Override
-	public int getHight() {
+	public int getHeight() {
 		return hight;
 	}
 
@@ -105,5 +109,6 @@ public class GuiElementImage implements IGuiElement {
 	public void setResource(ResourceLocation loc) {
 		this.reslocation = loc;
 	}
+
 
 }
