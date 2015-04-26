@@ -11,6 +11,10 @@ import com.xenonteam.xenonlib.config.Refs;
  * @author tim4242
  * @author philipas
  * 
+ * <br>
+ * <br>
+ * 
+ * A generic GUI class to be extended by custom guis.
  */
 public abstract class GenericGui extends GuiContainer{
     private final ResourceLocation guiTexture;
