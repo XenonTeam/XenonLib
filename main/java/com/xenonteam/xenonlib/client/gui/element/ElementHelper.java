@@ -25,4 +25,13 @@ public class ElementHelper
 		
 	}
 	
+	public static void drawSprite(IGuiElement elm, int x, int y, GuiContainer container)
+	{
+		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
+		
+		renderer.bindTexture(elm.getResource());
+		
+		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), x, y, elm.getXSize(), elm.getYSize());
+	}
+	
 }
