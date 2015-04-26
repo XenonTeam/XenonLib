@@ -16,7 +16,9 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
  */
 public interface IGuiElement {
 	
-	public void update(IGuiFactory factory);
+	public void draw(IGuiFactory factory);
+	
+	public void update(int action, Object... args);
 
 	public void setXPos(int XPos);
 	
