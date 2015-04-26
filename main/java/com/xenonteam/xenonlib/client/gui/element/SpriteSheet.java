@@ -91,8 +91,10 @@ public class SpriteSheet
 		return m_loc;
 	}
 	
-	public void drawSprite(IGuiElement elm, Sprite s, GuiContainer container)
+	public void drawSprite(IGuiElement elm, String id, GuiContainer container)
 	{
+		Sprite s = m_sprites.get(id);
+		
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 		
 		renderer.bindTexture(m_loc);
