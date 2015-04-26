@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,7 +19,14 @@ import java.io.ObjectOutputStream;
  */
 public class StorageHelper
 {
-
+	
+	/**
+	 * Serializes an {@link java.lang.Object Object} to a byte[]
+	 * 
+	 * @param obj The {@link java.lang.Object Object}
+	 * @return A byte[] representation of the {@link java.lang.Object Object}
+	 * @throws IOException
+	 */
 	public static byte[] serialize(Object obj) throws IOException 
 	{
 	    ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -35,6 +41,14 @@ public class StorageHelper
 	    return b;
 	}
 	
+	/**
+	 * Deserializes {@link java.lang.Object Objects} serialized by {@link com.xenonteam.xenonlib.util.java.StorageHelper#serialize(java.lang.Object) serialize(Object)}  
+	 * 
+	 * @param data The Object as a byte[]
+	 * @return an
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException 
 	{
 	    ByteArrayInputStream in = new ByteArrayInputStream(data);
@@ -48,6 +62,13 @@ public class StorageHelper
 	    return o;
 	}
 	
+	/**
+	 * Writes an {@link java.lang.Object Object} to the specified {@link java.io.File File}
+	 * 
+	 * @param obj The Object to write
+	 * @param f The {@link java.io.File File}
+	 * @throws IOException
+	 */
 	public static void writeSerialized(Object obj, File f) throws IOException
 	{
 		FileOutputStream out = new FileOutputStream(f);
@@ -65,6 +86,14 @@ public class StorageHelper
 		out.close();
 	}
 	
+	/**
+	 * Reads the {@link java.io.File File} created by {@link com.xenonteam.xenonlib.util.java.StorageHelper#writeSerialized(java.lang.Object, java.io.File) writeSerialized()}
+	 * 
+	 * @param f The {@link java.io.File File}
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public static Object readSearialized(File f) throws ClassNotFoundException, IOException
 	{
 		byte[] lenB = new byte[1];
