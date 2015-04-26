@@ -64,7 +64,10 @@ public class SpriteSheet
 	
 	public void addSprite(String id, Sprite s)
 	{
+		if(!m_sprites.containsKey(id))
 		m_sprites.put(id, s);
+		else
+		return;
 	}
 	
 	public void addSprite(String id, int x, int y, int w, int h)
@@ -74,7 +77,10 @@ public class SpriteSheet
 	
 	public Sprite getSprite(String id)
 	{
+		if(m_sprites.containsKey(id))
 		return m_sprites.get(id);
+		else
+		return null;
 	}
 	
 }
