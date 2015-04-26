@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.xenonteam.xenonlib.util.GenericUtils;
+import com.xenonteam.xenonlib.util.XUtils;
 
 /**
  * @author tim4242
@@ -23,7 +23,7 @@ public abstract class MessageBase<REQ extends IMessage> implements IMessage, IMe
         if(ctx.side == Side.SERVER) {
             handleServerSide(message, ctx.getServerHandler().playerEntity);
         } else {
-            handleClientSide(message, GenericUtils.getClientPlayer());
+            handleClientSide(message, XUtils.getClientPlayer());
         }
         return null;
     }

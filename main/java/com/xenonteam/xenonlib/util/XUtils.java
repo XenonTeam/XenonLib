@@ -1,5 +1,8 @@
 package com.xenonteam.xenonlib.util;
 
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,6 +15,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.lwjgl.BufferUtils;
+
 import com.xenonteam.xenonlib.config.Refs;
 
 /**
@@ -20,7 +25,7 @@ import com.xenonteam.xenonlib.config.Refs;
  *
  */
 
-public class GenericUtils {
+public class XUtils {
 
 	public static boolean isServerSide(World world) {
 		if (world.isRemote == false) {
@@ -65,7 +70,7 @@ public class GenericUtils {
 	public static int getMetaForFacing(float yaw) {
 		int meta = 2;
 
-		switch (GenericUtils.PlayerLookdir(yaw)) {
+		switch (XUtils.PlayerLookdir(yaw)) {
 
 		default:
 			break;
@@ -267,6 +272,35 @@ public class GenericUtils {
 		}
 
 		return null;
+	}
+	
+	public static ByteBuffer convertImageData(BufferedImage image) {
+		
+		int[] pixels = new int[image.getWidth() * image.getHeight()];
+        image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
+        
+        ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * 4);
+        
+        for (int y = 0; y < image.getHeight(); y++) 
+        {
+           for (int x = 0; x < image.getWidth(); x++) 
+           {
+              int pixel = pixels[y * image.getWidth() + x];
+              
+              buffer.put((byte) ((pixel >> 24) & 0xFF)); 
+
+              buffer.put((byte) ((pixel >> 16) & 0xFF)); 
+
+                  buffer.put((byte) ((pixel >> 8) & 0xFF));  
+
+                  buffer.put((byte) (pixel & 0xFF));        
+
+           }
+        }
+        
+        buffer.flip();
+
+	    return buffer;
 	}
 
 }
