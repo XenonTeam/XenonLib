@@ -20,6 +20,7 @@ import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
  */
 public class SpriteSheet
 {
+	private int m_h, m_w;
 
 	public static class Sprite
 	{
@@ -27,7 +28,7 @@ public class SpriteSheet
 		protected int m_y;
 		protected int m_w;
 		protected int m_h;
-		
+
 		public Sprite(int x, int y, int w, int h)
 		{
 			m_x = x;
@@ -35,73 +36,91 @@ public class SpriteSheet
 			m_w = w;
 			m_h = h;
 		}
-		
+
 		public int getX()
 		{
 			return m_x;
 		}
-		
+
 		public int getY()
 		{
 			return m_y;
 		}
-		
+
 		public int getWidth()
 		{
 			return m_w;
 		}
-		
+
 		public int getHeight()
 		{
 			return m_h;
 		}
 	}
-	
+
 	protected ResourceLocation m_loc;
-	
+
 	protected Map<String, Sprite> m_sprites;
-	
-	public SpriteSheet(ResourceLocation loc)
+
+	public SpriteSheet(ResourceLocation loc, int hight, int with)
 	{
 		m_loc = loc;
+		this.m_h = hight;
+		this.m_w = with;
 		m_sprites = new HashMap<String, Sprite>();
 	}
-	
+
 	public void addSprite(String id, Sprite s)
 	{
-		if(!m_sprites.containsKey(id))
-		m_sprites.put(id, s);
+		if (!m_sprites.containsKey(id))
+			m_sprites.put(id, s);
 		else
-		return;
+			return;
 	}
-	
+
 	public void addSprite(String id, int x, int y, int w, int h)
 	{
 		addSprite(id, new Sprite(x, y, w, h));
 	}
-	
+
 	public Sprite getSprite(String id)
 	{
-		if(m_sprites.containsKey(id))
-		return m_sprites.get(id);
+		if (m_sprites.containsKey(id))
+			return m_sprites.get(id);
 		else
-		return null;
+			return null;
 	}
-	
+
 	public ResourceLocation getResource()
 	{
 		return m_loc;
 	}
-	
+
 	public void drawSprite(IGuiElement elm, String id, GuiContainer container)
 	{
 		Sprite s = m_sprites.get(id);
-		
+
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
-		
+
 		renderer.bindTexture(m_loc);
-		
+
 		container.drawTexturedModalRect(elm.getXOff(), elm.getYOff(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
 	}
-	
+
+	public void addAllSprites(String baseID, int hight, int with)
+	{
+		int x_size = m_w / with;
+		int y_size = m_w / hight;
+
+		for (int i = 0; i < x_size; i++)
+		{
+			for (int j = 0; j < y_size; j++)
+			{
+				Sprite temp = new Sprite(0 + with * i, 0 + hight * j, with, hight);
+				this.addSprite(baseID + "_" + i, temp);
+			}
+		}
+
+	}
+
 }
