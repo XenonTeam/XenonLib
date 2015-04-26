@@ -32,6 +32,7 @@ public class ReflectionHelper
 		}
 	}
 
+	@Deprecated
 	public static Method getMethod(Class<?> temp, String methodName)
 	{
 		Method[] methods = temp.getMethods();
@@ -63,6 +64,7 @@ public class ReflectionHelper
 
 	}
 
+	@Deprecated
 	public static boolean hasMethod(Class<?> temp, String methodName)
 	{
 		Method[] methods = temp.getMethods();
