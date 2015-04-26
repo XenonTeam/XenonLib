@@ -16,6 +16,22 @@ import com.xenonteam.xenonlib.util.Log;
 public class ReflectionHelper
 {
 
+	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?> parameters)
+	{
+		try
+		{
+			return temp.getMethod(methodName, parameters);
+		} catch (NoSuchMethodException e)
+		{
+			Log.error("there is no method by this name : " + methodName + " :");
+			return null;
+		} catch (SecurityException e)
+		{
+			Log.error("you can not access the method by this name : " + methodName + " :");
+			return null;
+		}
+	}
+
 	public static Method getMethod(Class<?> temp, String methodName)
 	{
 		Method[] methods = temp.getMethods();
@@ -37,11 +53,11 @@ public class ReflectionHelper
 			return temp.getField(fieldName);
 		} catch (NoSuchFieldException e)
 		{
-			Log.error("there is no field by this name");
+			Log.error("there is no field by this name : " + fieldName + " :");
 			return null;
 		} catch (SecurityException e)
 		{
-			Log.error("you can not access this field");
+			Log.error("you can not access the field by this name : " + fieldName + " :");
 			return null;
 		}
 
@@ -59,6 +75,23 @@ public class ReflectionHelper
 			}
 		}
 		return false;
+	}
+
+	public static boolean hasSpecificMethod(Class<?> temp, String methodName, Class<?> parameters)
+	{
+		try
+		{
+			temp.getMethod(methodName, parameters);
+			return true;
+		} catch (NoSuchMethodException e)
+		{
+			Log.error("there is no method by this name : " + methodName + " :");
+			return false;
+		} catch (SecurityException e)
+		{
+			Log.error("you can not access the method by this name : " + methodName + " :");
+			return false;
+		}
 	}
 
 	public static boolean hasField(Class<?> temp, String fieldName)
