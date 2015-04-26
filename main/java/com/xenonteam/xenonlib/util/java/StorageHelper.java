@@ -71,7 +71,14 @@ public class StorageHelper
 	 */
 	public static void writeSerialized(Object obj, File f) throws IOException
 	{
-		FileOutputStream out = new FileOutputStream(f);
+		File temp = f;
+		
+		if(!f.toString().contains("."))
+		{
+			temp = new File(f + ".jobj");
+		}
+		
+		FileOutputStream out = new FileOutputStream(temp);
 		byte[] ser = serialize(obj);
 		byte[] ba = new byte[ser.length + 1];
 		ba[0] = new Integer(ser.length).byteValue(); 
@@ -96,9 +103,16 @@ public class StorageHelper
 	 */
 	public static Object readSearialized(File f) throws ClassNotFoundException, IOException
 	{
+		File temp = f;
+		
+		if(!f.toString().contains("."))
+		{
+			temp = new File(f + ".jobj");
+		}	
+		
 		byte[] lenB = new byte[1];
 		
-		FileInputStream in = new FileInputStream(f);
+		FileInputStream in = new FileInputStream(temp);
 		
 		in.read(lenB);
 		
