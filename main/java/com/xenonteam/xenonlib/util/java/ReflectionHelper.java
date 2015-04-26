@@ -31,7 +31,7 @@ public class ReflectionHelper
 		return field;
 	}
 
-	public static Constructor<?> getMethodAccesseble(Class<?> temp, Class<?>... parameters)
+	public static Constructor<?> getConstructorAccesseble(Class<?> temp, Class<?>... parameters)
 	{
 		Constructor<?> constructor = getConstructor(temp, parameters);
 		constructor.setAccessible(true);
