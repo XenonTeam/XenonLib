@@ -13,6 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.xenonteam.xenonlib.client.gui.GenericGui;
+import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
+import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
 
 /**
@@ -21,6 +23,7 @@ import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
  * 
  */
 
+@Register(side = XSide.SERVER)
 public final class MessageHandleTextUpdate extends MessageXYZ<MessageHandleTextUpdate>{
     private int id;
     private String text;
