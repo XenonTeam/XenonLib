@@ -48,7 +48,7 @@ public interface IGuiElement
 	public void setResource(ResourceLocation loc);
 	
 	
-	public interface IGuiElementUpdateable
+	public interface Updateable
 	{
 		
 		public void update(int action, Object... args);
