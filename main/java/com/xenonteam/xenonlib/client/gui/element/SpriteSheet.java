@@ -6,6 +6,9 @@ package com.xenonteam.xenonlib.client.gui.element;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -81,6 +84,20 @@ public class SpriteSheet
 		return m_sprites.get(id);
 		else
 		return null;
+	}
+	
+	public ResourceLocation getResource()
+	{
+		return m_loc;
+	}
+	
+	public void drawSprite(IGuiElement elm, Sprite s, GuiContainer container)
+	{
+		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
+		
+		renderer.bindTexture(m_loc);
+		
+		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), s.m_x, s.m_y, elm.getXSize(), elm.getYSize());
 	}
 	
 }
