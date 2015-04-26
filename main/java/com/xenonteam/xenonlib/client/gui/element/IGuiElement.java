@@ -14,11 +14,10 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
  * @author philipas
  * 
  */
-public interface IGuiElement {
+public interface IGuiElement 
+{
 	
 	public void draw(IGuiFactory factory);
-	
-	public void update(int action, Object... args);
 
 	public void setXPos(int XPos);
 	
@@ -48,4 +47,11 @@ public interface IGuiElement {
 	
 	public void setResource(ResourceLocation loc);
 	
+	
+	public interface IGuiElementUpdateable
+	{
+		
+		public void update(int action, Object... args);
+		
+	}
 }
