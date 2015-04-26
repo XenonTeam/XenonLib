@@ -50,7 +50,7 @@ public class XenonLib
 	public static ModMetadata METADATA;
 	
 	private ArrayList<IXenonMod> m_plugins;
-	private ArrayList<Class<?>> m_toRegister;
+	private ArrayList<Class<?>> m_toRegister = ;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

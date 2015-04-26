@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.xenonteam.xenonlib.config.Refs;
+import com.xenonteam.xenonlib.registry.Register;
 
 /**
  * @author tim4242
