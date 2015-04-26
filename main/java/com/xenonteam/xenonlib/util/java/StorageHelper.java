@@ -26,14 +26,26 @@ public class StorageHelper
 	    ByteArrayOutputStream out = new ByteArrayOutputStream();
 	    ObjectOutputStream os = new ObjectOutputStream(out);
 	    os.writeObject(obj);
-	    return out.toByteArray();
+	    
+	    byte[] b = out.toByteArray();
+	    
+	    out.close();
+	    os.close();
+	    
+	    return b;
 	}
 	
 	public static Object deserialize(byte[] data) throws IOException, ClassNotFoundException 
 	{
 	    ByteArrayInputStream in = new ByteArrayInputStream(data);
 	    ObjectInputStream is = new ObjectInputStream(in);
-	    return is.readObject();
+	    
+	    Object o = is.readObject();
+	    
+	    in.close();
+	    is.close();
+	    
+	    return o;
 	}
 	
 	public static void writeSerialized(Object obj, File f) throws IOException
@@ -49,6 +61,8 @@ public class StorageHelper
 		}
 		
 		out.write(ba);
+		
+		out.close();
 	}
 	
 	public static Object readSearialized(File f) throws ClassNotFoundException, IOException
@@ -64,6 +78,8 @@ public class StorageHelper
 		byte[] obj = new byte[len];
 		
 		in.read(obj);
+		
+		in.close();
 		
 		return deserialize(obj);
 	}
