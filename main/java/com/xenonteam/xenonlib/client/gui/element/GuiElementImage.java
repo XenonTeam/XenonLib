@@ -5,10 +5,10 @@ package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
+import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
 /**
  * @author tim4242
@@ -20,34 +20,36 @@ public class GuiElementImage implements IGuiElement
 
 	private int xpos, ypos, priority, with, hight;
 	private ResourceLocation reslocation;
-	private GuiContainer container;
 	private SpriteSheet m_sheet;
 	private String m_spriteID;
+	
+	private IGuiContainer m_parent;
 
-	public GuiElementImage(GuiContainer container, ResourceLocation reslocation, SpriteSheet sheet, String spriteID)
+	public GuiElementImage(IGuiContainer parent, SpriteSheet sheet, String spriteID)
 	{
-		this.container = container;
-		this.setResource(reslocation);
-		this.setHeight(sheet.getSprite(spriteID).m_h);
-		this.setWidth(sheet.getSprite(spriteID).m_w);
+		this.setResource(sheet.getResource());
+		this.setHeight(sheet.getSprite(spriteID).getHeight());
+		this.setWidth(sheet.getSprite(spriteID).getWidth());
 		m_sheet = sheet;
 		m_spriteID = spriteID;
+		
+		m_parent = parent;
 	}
 
 	@Override
 	public void draw(IGuiFactory factory)
 	{
-		m_sheet.drawSprite(this, m_spriteID, container);
+		m_sheet.drawSprite(this, m_spriteID, m_parent.getGuiScreen());
 	}
 
 	@Override
-	public void setXPos(int XPos)
+	public void setXOff(int XPos)
 	{
 		this.xpos = XPos;
 	}
 
 	@Override
-	public void setYPos(int YPos)
+	public void setYOff(int YPos)
 	{
 		this.ypos = YPos;
 	}
@@ -55,8 +57,8 @@ public class GuiElementImage implements IGuiElement
 	@Override
 	public void setPos(int x, int y)
 	{
-		this.setXPos(x);
-		this.setYPos(y);
+		this.setXOff(x);
+		this.setYOff(y);
 	}
 
 	@Override
@@ -84,13 +86,13 @@ public class GuiElementImage implements IGuiElement
 	}
 
 	@Override
-	public int getXPos()
+	public int getXOff()
 	{
 		return xpos;
 	}
 
 	@Override
-	public int getYPos()
+	public int getYOff()
 	{
 		return ypos;
 	}
@@ -123,6 +125,15 @@ public class GuiElementImage implements IGuiElement
 	public void setResource(ResourceLocation loc)
 	{
 		this.reslocation = loc;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getParent()
+	 */
+	@Override
+	public IGuiElement getParent()
+	{
+		return m_parent;
 	}
 
 }

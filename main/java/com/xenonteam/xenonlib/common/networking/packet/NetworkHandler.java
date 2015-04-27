@@ -49,7 +49,7 @@ public final class NetworkHandler
 		lastID++;
 		Class<REQ> requestMessageType = (Class<REQ>) messageHandler;
 		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, side);
-		if (Refs.DEBUG) 
+		//Not necessary already done in Log.debug(Object...)
 		Log.debug("Class "+requestMessageType.toString()+" successfuly registerd");
 	}
 	

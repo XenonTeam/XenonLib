@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.xenonteam.xenonlib.client.gui.element;
+package com.xenonteam.xenonlib.client.render;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
+
+import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 
 /**
  * @author tim4242
@@ -99,7 +101,7 @@ public class SpriteSheet
 		
 		renderer.bindTexture(m_loc);
 		
-		container.drawTexturedModalRect(elm.getXPos(), elm.getYPos(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
+		container.drawTexturedModalRect(elm.getXOff(), elm.getYOff(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
 	}
 	
 }

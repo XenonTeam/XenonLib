@@ -10,7 +10,9 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
 
+import com.xenonteam.xenonlib.client.gui.element.IGuiContainer;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 
 /**
@@ -18,18 +20,22 @@ import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
  * @author philipas
  * 
  */
-public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
+public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer {
 
 	
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
 	private List old_keys = new ArrayList<String>();
 	protected List keys = new ArrayList<String>();
+	
+	protected ResourceLocation m_resLoc;
 
 	
 	public GuiFactory(Container container)
 	{
 		super(container);
+		
+		m_resLoc = new ResourceLocation("xenon_lib:textures/gui/GenBackground.png");
 	}
 
 	protected void orderKeys() {
@@ -45,7 +51,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	}
 
 	@Override
-	public boolean addElement(String ID, IGuiElement element) {
+	public boolean addGuiElement(String ID, IGuiElement element) {
 		if (!elements.containsKey(ID)) {
 			elements.put(ID, element);
 				old_keys.add(ID);
@@ -57,7 +63,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	}
 
 	@Override
-	public boolean removeElement(String ID) {
+	public boolean removeGuiElement(String ID) {
 		if (elements.containsKey(ID)) {
 			elements.remove(ID);
 			
@@ -74,7 +80,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 	}
 
 	@Override
-	public IGuiElement getElement(String ID) {
+	public IGuiElement getGuiElement(String ID) {
 		if (elements.containsKey(ID)) {
 			return elements.get(ID);
 		} else {
@@ -102,5 +108,42 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory {
 			return false;
 		}
 	}
+	
+	public GuiContainer getGuiScreen()
+	{
+		return this;
+	}
+	
+	public void draw(IGuiFactory factory){}
+
+	public void setXOff(int x){}
+	
+	public void setYOff(int y){}
+	
+	public void setPos(int x, int y){}
+	
+	public void setPos(Point p){}
+	
+	public void setPriority(int priority){}
+	
+	public void setHeight(int height){}
+	
+	public void setWidth(int width){}
+	
+	public int getXOff(){return 0;}
+	
+	public int getYOff(){return 0;}
+	
+	public int getPriority(){return 0;}
+	
+	public int getHeight(){return this.height;}
+	
+	public int getWidth(){return this.width;}
+	
+	public IGuiElement getParent(){return this;}
+	
+	public ResourceLocation getResource(){return m_resLoc;}
+	
+	public void setResource(ResourceLocation loc){}
 
 }

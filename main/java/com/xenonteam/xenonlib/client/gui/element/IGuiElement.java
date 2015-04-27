@@ -19,9 +19,9 @@ public interface IGuiElement
 	
 	public void draw(IGuiFactory factory);
 
-	public void setXPos(int XPos);
+	public void setXOff(int x);
 	
-	public void setYPos(int YPos);
+	public void setYOff(int y);
 	
 	public void setPos(int x, int y);
 	
@@ -29,19 +29,21 @@ public interface IGuiElement
 	
 	public void setPriority(int priority);
 	
-	public void setHeight(int XSize);
+	public void setHeight(int height);
 	
-	public void setWidth(int YSize);
+	public void setWidth(int width);
 	
-	public int getXPos();
+	public int getXOff();
 	
-	public int getYPos();
+	public int getYOff();
 	
 	public int getPriority();
 	
 	public int getHeight();
 	
 	public int getWidth();
+	
+	public IGuiElement getParent();
 	
 	public ResourceLocation getResource();
 	
