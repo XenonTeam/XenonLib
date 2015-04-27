@@ -15,9 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 
 import com.xenonteam.xenonlib.blocks.IXenonBlock;
+import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 
 /**
@@ -33,7 +33,14 @@ public class RegistryHelper
 		
 		List<Field> toRegister = Arrays.asList(c.getDeclaredFields());
 		
+		Register cAn = c.getAnnotation(Register.class);
 		
+		if(c.isAssignableFrom(IMessageHandler.class))
+		{
+			XSide side = cAn.side();
+			
+			NetworkHandler.registerMessage0((Class<? extends IMessageHandler<? extends IMessage, ? extends IMessage>>) c, side);
+		}
 		
 		String modid;
 		String unlocName;
@@ -162,15 +169,6 @@ public class RegistryHelper
 				if(f.getType().isAssignableFrom(TileEntity.class))
 				{
 					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
-					
-					continue;
-				}
-				
-				if(f.getType().isAssignableFrom(IMessageHandler.class))
-				{
-					Side s = reg.side();
-					
-					NetworkHandler.registerMessage0((Class<? extends IMessageHandler<? extends IMessage ,? extends IMessage>>) f.getType(), s);
 					
 					continue;
 				}

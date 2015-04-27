@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
+import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.util.Log;
 
@@ -44,11 +45,13 @@ public final class NetworkHandler
 	 * @param side
 	 *            The receiver side
 	 */
-	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Side side)
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, XSide side)
 	{
 		lastID++;
 		Class<REQ> requestMessageType = (Class<REQ>) messageHandler;
-		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, side);
+		
+		for(Side s : side.getSides())
+		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, s);
 		//Not necessary already done in Log.debug(Object...)
 		Log.debug("Class "+requestMessageType.toString()+" successfuly registerd");
 	}
@@ -57,7 +60,7 @@ public final class NetworkHandler
 	 * DO NOT USE THIS METHOD IT'S UNSAFE AND JUST FOR INTERNAL USE!!!
 	 */
 	@Deprecated
-	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler<? extends IMessage ,? extends IMessage>> messageHandler, Side side)
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler<? extends IMessage ,? extends IMessage>> messageHandler, XSide side)
 	{
 		registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) messageHandler, side);
 	}

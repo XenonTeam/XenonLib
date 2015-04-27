@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.tileentity.IGenericTileEntity;
@@ -43,6 +44,23 @@ public class DescriptionHandler extends SimpleChannelInboundHandler<FMLProxyPack
         if(te instanceof IGenericTileEntity) {
             ((IGenericTileEntity)te).readFromPacket(buf);
         }
+    }
+    
+    public static enum XSide
+    {
+    	CLIENT(new Side[] {Side.CLIENT}), SERVER(new Side[] {Side.SERVER}), BOTH(new Side[] {Side.CLIENT, Side.SERVER});
+    	
+    	private Side[] m_sides;
+    	
+    	XSide(Side[] sides)
+    	{
+    		m_sides = sides;
+    	}
+    	
+    	public Side[] getSides()
+    	{
+    		return m_sides;
+    	}
     }
 
 }
