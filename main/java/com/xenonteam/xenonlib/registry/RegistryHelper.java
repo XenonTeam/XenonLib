@@ -12,9 +12,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.xenonteam.xenonlib.blocks.IXenonBlock;
+import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 
 /**
  * @author tim4242
@@ -158,6 +161,15 @@ public class RegistryHelper
 				if(f.getType().isAssignableFrom(TileEntity.class))
 				{
 					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
+					
+					continue;
+				}
+				
+				if(f.getType().isAssignableFrom(IMessageHandler.class))
+				{
+					Side s = reg.side();
+					
+					NetworkHandler.registerMessage0((Class<? extends IMessageHandler>) f.getType(), s);
 					
 					continue;
 				}

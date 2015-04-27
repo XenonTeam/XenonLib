@@ -19,83 +19,115 @@ import com.xenonteam.xenonlib.config.Refs;
  * @author philipas
  * 
  */
-public final class NetworkHandler {
+public final class NetworkHandler
+{
 	private static SimpleNetworkWrapper INSTANCE;
 	private static int lastID = -1;
 	private static boolean hasInit = false;
-	
+
 	/**
 	 * Just the init of the networkWrapper do not use this
 	 */
 	@Deprecated
-	public static void init() {
-		if (!hasInit) INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Refs.MOD_ID);
+	public static void init()
+	{
+		if (!hasInit)
+			INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Refs.MOD_ID);
 	}
 
-	
 	/**
 	 * 
-	 * @param messageHandler class that extends MessegeBase or MessageXYZ
-	 * @param side The receiver side
+	 * @param messageHandler
+	 *            class that extends MessegeBase or MessageXYZ
+	 * @param side
+	 *            The receiver side
 	 */
-	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(
-			Class<? extends IMessageHandler<REQ, REPLY>> messageHandler,
-			Side side) {
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Class<? extends IMessageHandler<REQ, REPLY>> messageHandler, Side side)
+	{
 		lastID++;
 		Class<REQ> requestMessageType = (Class<REQ>) messageHandler;
-		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID,
-				side);
+		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, side);
+	}
+	
+	/**
+	 * DO NOT USE THIS METHOD IT'S UNSAFE AND JUST FOR INTERNAL USE!!!
+	 */
+	@Deprecated
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler> messageHandler, Side side)
+	{
+		registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) messageHandler, side);
 	}
 
 	/**
 	 * Send Message to the server
-	 * @param message An instance of MessageBase or messageXYZ
+	 * 
+	 * @param message
+	 *            An instance of MessageBase or messageXYZ
 	 */
-	public static void sendToServer(IMessage message) {
+	public static void sendToServer(IMessage message)
+	{
 		INSTANCE.sendToServer(message);
 	}
 
 	/**
 	 * Send Message to a Player
-	 * @param message An instance of MessageBase or messageXYZ
-	 * @param player The player you want to send the Message to
+	 * 
+	 * @param message
+	 *            An instance of MessageBase or messageXYZ
+	 * @param player
+	 *            The player you want to send the Message to
 	 */
-	public static void sendTo(IMessage message, EntityPlayerMP player) {
+	public static void sendTo(IMessage message, EntityPlayerMP player)
+	{
 		INSTANCE.sendTo(message, player);
 	}
-	
-    /**
-     * send the given Message to every player within 64 blocks of the XYZ of the XYZ packet.
-     * @param message
-     * @param world
-     */
-	public static void sendToAllAround(MessageXYZ message, World world){
-        INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, 64D));
-    }
+
+	/**
+	 * send the given Message to every player within 64 blocks of the XYZ of the
+	 * XYZ packet.
+	 * 
+	 * @param message
+	 * @param world
+	 */
+	public static void sendToAllAround(MessageXYZ message, World world)
+	{
+		INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, 64D));
+	}
 
 	/**
 	 * Send Message to all in the area
-	 * @param message An instance of MessageBase or messageXYZ
-	 * @param point The area you want to send the Message to
+	 * 
+	 * @param message
+	 *            An instance of MessageBase or messageXYZ
+	 * @param point
+	 *            The area you want to send the Message to
 	 */
-	public static void sendToAllAround(IMessage message, TargetPoint point) {
+	public static void sendToAllAround(IMessage message, TargetPoint point)
+	{
 		INSTANCE.sendToAllAround(message, point);
 	}
-	
+
 	/**
 	 * Send Message to all the players
-	 * @param message An instance of MessageBase or messageXYZ
+	 * 
+	 * @param message
+	 *            An instance of MessageBase or messageXYZ
 	 */
-	public static void sendToAll(IMessage message) {
+	public static void sendToAll(IMessage message)
+	{
 		INSTANCE.sendToAll(message);
 	}
 
 	/**
 	 * Send Message to all the players in the dimension
-	 * @param message An instance of MessageBase or messageXYZ
-	 * @param dimensionId The ID of the dimension you want to send the Message to
+	 * 
+	 * @param message
+	 *            An instance of MessageBase or messageXYZ
+	 * @param dimensionId
+	 *            The ID of the dimension you want to send the Message to
 	 */
-	public static void sendToDimension(IMessage message, int dimensionId) {
+	public static void sendToDimension(IMessage message, int dimensionId)
+	{
 		INSTANCE.sendToDimension(message, dimensionId);
 	}
 

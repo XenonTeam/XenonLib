@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * @author tim4242
@@ -30,6 +31,7 @@ import net.minecraft.tileentity.TileEntity;
  * 	<li> {@link net.minecraft.block.Block Block} </li>
  * 	<li> {@link net.minecraft.item.Item Item} </li>
  * 	<li> {@link net.minecraft.tileentity.TileEntity TileEntity} </li>
+ * 	<li> {@link com.xenonteam.xenonlib.common.networking.packet.MessageBase MessageBase}
  * </ol>
  * 
  * 
@@ -50,9 +52,10 @@ public @interface Register
 	String itemBlock() default DefaultBI;
 	public static final String DefaultBI = "default";
 	
-	
 	Class<?extends TileEntity> tileenity() default DefaultTE.class;
 	public static final class DefaultTE extends TileEntity{}
+	
+	Side side() default Side.SERVER;
 	
 	
 	
