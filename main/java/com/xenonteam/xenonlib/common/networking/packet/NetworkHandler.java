@@ -53,7 +53,7 @@ public final class NetworkHandler
 	 * DO NOT USE THIS METHOD IT'S UNSAFE AND JUST FOR INTERNAL USE!!!
 	 */
 	@Deprecated
-	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler> messageHandler, Side side)
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler<? extends IMessage ,? extends IMessage>> messageHandler, Side side)
 	{
 		registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) messageHandler, side);
 	}
