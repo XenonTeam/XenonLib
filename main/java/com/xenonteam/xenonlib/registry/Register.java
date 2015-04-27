@@ -9,7 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
+
+import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
 
 /**
  * @author tim4242
@@ -38,7 +39,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * The content of the Field will be registered in an appropriate way.<br>
  * But if the Field is equal to null it will be created with default parameters
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Register
 {
@@ -73,7 +74,7 @@ public @interface Register
 	 * Used in: <b>{@link com.xenonteam.xenonlib.common.networking.packet.MessageBase MessageBase}</b>
 	 * 
 	 */
-	Side side() default Side.SERVER;
+	XSide side() default XSide.BOTH;
 	
 	
 	
