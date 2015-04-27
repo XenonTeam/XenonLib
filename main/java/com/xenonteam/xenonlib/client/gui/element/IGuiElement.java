@@ -48,10 +48,10 @@ public interface IGuiElement
 	public void setResource(ResourceLocation loc);
 	
 	
-	public interface Updateable
+	public interface ActionHandler
 	{
 		
-		public void update(int action, Object... args);
+		public void handleAction(int action, Object... args);
 		
 	}
 }

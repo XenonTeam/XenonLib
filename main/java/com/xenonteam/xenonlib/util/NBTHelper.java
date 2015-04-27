@@ -5,10 +5,9 @@ package com.xenonteam.xenonlib.util;
 
 import java.io.IOException;
 
-import com.xenonteam.xenonlib.util.java.StorageHelper;
-
-import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagByteArray;
+
+import com.xenonteam.xenonlib.util.java.StorageHelper;
 
 /**
  * @author tim4242
