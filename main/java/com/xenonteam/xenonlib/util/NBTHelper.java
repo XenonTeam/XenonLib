@@ -6,6 +6,7 @@ package com.xenonteam.xenonlib.util;
 import java.io.IOException;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
@@ -178,6 +179,53 @@ public class NBTHelper
 		}
 
 		return inv;
+	}
+
+	/**
+	 * Returns the value of a {@link net.minecraft.nbt.NBTBase NBTBase} as the correct type
+	 * 
+	 * @param nbt A {@link net.minecraft.nbt.NBTBase NBTBase}
+	 * @return An {@link java.lang.Object Object}
+	 */
+	public static Object getValue(NBTBase nbt)
+	{
+		if (nbt instanceof NBTTagInt)
+		{
+			return ((NBTTagInt) nbt).getInt();
+		} else if (nbt instanceof NBTTagByte)
+		{
+			return ((NBTTagByte) nbt).getByte();
+		} else if (nbt instanceof NBTTagShort)
+		{
+			return ((NBTTagShort) nbt).getShort();
+		} else if (nbt instanceof NBTTagLong)
+		{
+			return ((NBTTagLong) nbt).getLong();
+		} else if (nbt instanceof NBTTagFloat)
+		{
+			return ((NBTTagFloat) nbt).getFloat();
+		} else if (nbt instanceof NBTTagDouble)
+		{
+			return ((NBTTagDouble) nbt).getDouble();
+		} else if (nbt instanceof NBTTagIntArray)
+		{
+			return ((NBTTagIntArray) nbt).getIntArray();
+		} else if (nbt instanceof NBTTagString)
+		{
+			return ((NBTTagString) nbt).getString();
+		} else if (nbt instanceof NBTTagByteArray)
+		{
+			return ((NBTTagByteArray) nbt).getByteArray();
+		} else if (nbt instanceof NBTTagCompound)
+		{
+			return nbt;
+		} else if (nbt instanceof NBTBase)
+		{
+			return nbt;
+		} else
+		{
+			return null;
+		}
 	}
 
 }
