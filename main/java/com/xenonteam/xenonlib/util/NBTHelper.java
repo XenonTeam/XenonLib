@@ -32,26 +32,38 @@ import com.xenonteam.xenonlib.util.java.StorageHelper;
  */
 public class NBTHelper
 {
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagByte NBTTagByte} */
 	public static final int BYTE_ID = new NBTTagByte((byte) 0).getId();
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagByteArray NBTTagByteArray} */
 	public static final int BYTE_ID_A = new NBTTagByteArray(new byte[0]).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagInt NBTTagInt} */
 	public static final int INT_ID = new NBTTagInt(0).getId();
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagIntArray NBTTagIntArray} */
 	public static final int INT_ID_A = new NBTTagIntArray(new int[0]).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagShort NBTTagShort} */
 	public static final int SHORT_ID = new NBTTagShort((short) 0).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagFloat NBTTagFloat} */
 	public static final int FLOAT_ID = new NBTTagFloat(0).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagDouble NBTTagDouble} */
 	public static final int DOUBLE_ID = new NBTTagDouble(0).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagLong NBTTagLong} */
 	public static final int LONG_ID = new NBTTagLong(0).getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagString NBTTagString} */
 	public static final int STRING_ID = new NBTTagString("").getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagList NBTTagList} */
 	public static final int LIST_ID = new NBTTagList().getId();
 
+	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound} */
 	public static final int COMP_ID = new NBTTagCompound().getId();
 
+	/** The end of NBT */
 	public static final int END_ID = 0;
 
 	/**
