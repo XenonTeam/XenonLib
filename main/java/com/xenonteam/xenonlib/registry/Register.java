@@ -46,11 +46,11 @@ public @interface Register
 	 * 
 	 * @return
 	 */
-	String modid();
-	String unlocName();
+	String modid() default DefaultSTRING;
+	String unlocName() default DefaultSTRING;
 	
-	String itemBlock() default DefaultBI;
-	public static final String DefaultBI = "default";
+	String itemBlock() default DefaultSTRING;
+	public static final String DefaultSTRING = "default";
 	
 	Class<?extends TileEntity> tileenity() default DefaultTE.class;
 	public static final class DefaultTE extends TileEntity{}

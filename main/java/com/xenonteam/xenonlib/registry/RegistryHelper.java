@@ -101,7 +101,7 @@ public class RegistryHelper
 							((IXenonBlock) b).setTileEntity(null);
 						}
 						
-						if(reg.itemBlock() != Register.DefaultBI)
+						if(reg.itemBlock() != Register.DefaultSTRING)
 						{
 							((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
 						}
