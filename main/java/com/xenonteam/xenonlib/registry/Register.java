@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * 	<li> {@link net.minecraft.block.Block Block} </li>
  * 	<li> {@link net.minecraft.item.Item Item} </li>
  * 	<li> {@link net.minecraft.tileentity.TileEntity TileEntity} </li>
- * 	<li> {@link com.xenonteam.xenonlib.common.networking.packet.MessageBase MessageBase}
+ * 	<li> {@link com.xenonteam.xenonlib.common.networking.packet.MessageBase MessageBase} </li>
  * </ol>
  * 
  * 
@@ -42,19 +42,37 @@ import net.minecraftforge.fml.relauncher.Side;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Register
 {
+	
 	/**
+	 * Used in: <b>{@link net.minecraft.block.Block Block} and {@link net.minecraft.item.Item Item}</b>
 	 * 
-	 * @return
 	 */
 	String modid() default DefaultSTRING;
+	
+	/**
+	 * Used in: <b>{@link net.minecraft.block.Block Block} and {@link net.minecraft.item.Item Item}</b>
+	 * 
+	 */
 	String unlocName() default DefaultSTRING;
 	
+	/**
+	 * Used in: <b>{@link net.minecraft.block.Block Block}</b>
+	 * 
+	 */
 	String itemBlock() default DefaultSTRING;
 	public static final String DefaultSTRING = "default";
 	
+	/**
+	 * Used in: <b>{@link net.minecraft.block.Block Block}</b>
+	 * 
+	 */
 	Class<?extends TileEntity> tileenity() default DefaultTE.class;
 	public static final class DefaultTE extends TileEntity{}
 	
+	/**
+	 * Used in: <b>{@link com.xenonteam.xenonlib.common.networking.packet.MessageBase MessageBase}</b>
+	 * 
+	 */
 	Side side() default Side.SERVER;
 	
 	
