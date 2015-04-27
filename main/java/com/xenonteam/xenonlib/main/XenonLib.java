@@ -10,10 +10,24 @@ import static com.xenonteam.xenonlib.config.Refs.MOD_ID;
 import static com.xenonteam.xenonlib.config.Refs.MOD_NAME;
 import static com.xenonteam.xenonlib.config.Refs.MOD_VERSION;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
+import net.minecraft.client.resources.model.ModelRotation;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -22,7 +36,19 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.main.IXenonMod;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
@@ -79,6 +105,9 @@ public final class XenonLib implements IXenonMod
 		Refs.CONFIG_PATH = new File(((File)(FMLInjectionData.data()[6])).getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "") + File.separatorChar + "config" + File.separatorChar);
 		
 		
+	
+		
+		
 		DescriptionHandler.init();
 		NetworkHandler.init();
 		
@@ -106,7 +135,23 @@ public final class XenonLib implements IXenonMod
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		
+		final Gson GSON = (new GsonBuilder()).registerTypeAdapter(XenonLib.class, new XenonLib.Deserializer()).create();
+		try
+		{
+			GSON.fromJson(new FileReader(new File("stone.json")), XenonLib.class);
+		} catch (JsonSyntaxException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Log.debug("+----------------------------+",
 				  "| Finished loading " + MOD_ID + " |",
@@ -128,6 +173,75 @@ public final class XenonLib implements IXenonMod
 		Class<?>[] classes = new Class<?>[] {XenonLib.class, MessageHandleTextUpdate.class, MessageHandleGuiButtonPress.class};
 		return classes;
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public static class Deserializer implements JsonDeserializer
+        {
+            private static final String __OBFID = "CL_00002497";
 
+            public ModelBlockDefinition parseModelBlockDefinition(JsonElement p_178336_1_, Type p_178336_2_, JsonDeserializationContext p_178336_3_)
+            {
+                JsonObject jsonobject = p_178336_1_.getAsJsonObject();
+                List list = this.parseVariantsList(p_178336_3_, jsonobject);
+                System.out.println(list);
+                return new ModelBlockDefinition((Collection)list);
+            }
+
+            protected List parseVariantsList(JsonDeserializationContext p_178334_1_, JsonObject p_178334_2_)
+            {
+                JsonObject jsonobject1 = JsonUtils.getJsonObject(p_178334_2_, "variants");
+                ArrayList arraylist = Lists.newArrayList();
+                Iterator iterator = jsonobject1.entrySet().iterator();
+
+                
+                
+                while (iterator.hasNext())
+                {
+                	
+                    Entry entry = (Entry)iterator.next();
+                    //arraylist.add(this.parseVariants(p_178334_1_, entry));
+                    System.out.println(entry);
+                }
+                
+
+                return arraylist;
+            }
+
+            protected ModelBlockDefinition.Variants parseVariants(JsonDeserializationContext p_178335_1_, Entry p_178335_2_)
+            {
+                String s = (String)p_178335_2_.getKey();
+                ArrayList arraylist = Lists.newArrayList();
+                JsonElement jsonelement = (JsonElement)p_178335_2_.getValue();
+
+                if (jsonelement.isJsonArray())
+                {
+                    Iterator iterator = jsonelement.getAsJsonArray().iterator();
+
+                    while (iterator.hasNext())
+                    {
+                        JsonElement jsonelement1 = (JsonElement)iterator.next();
+                        arraylist.add((ModelBlockDefinition.Variant)p_178335_1_.deserialize(jsonelement1, ModelBlockDefinition.Variant.class));
+                    }
+                }
+                else
+                {
+                    arraylist.add((ModelBlockDefinition.Variant)p_178335_1_.deserialize(jsonelement, ModelBlockDefinition.Variant.class));
+                }
+
+                return new ModelBlockDefinition.Variants(s, arraylist);
+            }
+
+            public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+            {
+            	JsonObject jsonobject = p_deserialize_1_.getAsJsonObject();
+                List list = this.parseVariantsList(p_deserialize_3_, jsonobject);
+                System.out.println(list);
+            	
+                return null;
+            }
+        }
+
+
+	
 	
 }
