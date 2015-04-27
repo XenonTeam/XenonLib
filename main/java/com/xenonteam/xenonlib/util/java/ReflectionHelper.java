@@ -16,7 +16,7 @@ import com.xenonteam.xenonlib.util.Log;
 public class ReflectionHelper
 {
 
-	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?> parameters)
+	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?>... parameters)
 	{
 		try
 		{
@@ -77,7 +77,7 @@ public class ReflectionHelper
 		return false;
 	}
 
-	public static boolean hasSpecificMethod(Class<?> temp, String methodName, Class<?> parameters)
+	public static boolean hasSpecificMethod(Class<?> temp, String methodName, Class<?>... parameters)
 	{
 		try
 		{
