@@ -24,12 +24,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
-import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
-import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
-import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.util.Log;
 
@@ -54,12 +51,6 @@ public final class XenonLib implements IXenonMod
 	
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
-	
-	@Register
-	private MessageHandleGuiButtonPress messageHandleGuiButtonPress = new MessageHandleGuiButtonPress();
-	
-	@Register
-	private MessageHandleTextUpdate messageHandleTextUpdate = new MessageHandleTextUpdate();
 	
 	
 	@EventHandler
