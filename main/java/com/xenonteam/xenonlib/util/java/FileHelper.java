@@ -6,6 +6,9 @@ package com.xenonteam.xenonlib.util.java;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +21,7 @@ import java.util.List;
  * 
  *
  */
-public class TextFileHelper
+public class FileHelper
 {
 	
 	public static BufferedReader getReader(File f) throws IOException
@@ -29,6 +32,16 @@ public class TextFileHelper
 	public static BufferedWriter getWriter(File f) throws IOException
 	{
 		return new BufferedWriter(new FileWriter(f));
+	}
+	
+	public static FileOutputStream getOutStream(File f) throws FileNotFoundException
+	{
+		return new FileOutputStream(f);
+	}
+	
+	public static FileInputStream getInStream(File f) throws FileNotFoundException
+	{
+		return new FileInputStream(f);
 	}
 	
 	public static List<String> readFile(File f) throws IOException
