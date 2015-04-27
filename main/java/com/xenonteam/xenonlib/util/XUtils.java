@@ -1,6 +1,7 @@
 package com.xenonteam.xenonlib.util;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.nio.ByteBuffer;
 
 import net.minecraft.block.Block;
@@ -9,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -272,6 +274,11 @@ public class XUtils {
 		}
 
 		return null;
+	}
+	
+	public static File RLToFile(ResourceLocation loc)
+	{
+		return new File("/assets/" + loc.getResourceDomain() + "/" + loc.getResourcePath());
 	}
 	
 	public static ByteBuffer convertImageData(BufferedImage image) {

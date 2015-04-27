@@ -21,7 +21,7 @@ import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
  * 
  * This {@link java.lang.annotation.Annotation Annotation} is used to automatically register everything from <br> 
  * {@link net.minecraft.block.Block Blocks} to {@link net.minecraft.tileentity.TileEntity TileEntitys}.
- * It should be located in a {@link java.lang.Class Class} that is returned by {@link com.xenonteam.xenonlib.main.IXenonMod#getRegisterClasses() IXenonMod.getRegisterClasses()} because otherwise it won't be called
+ * It should be located in a {@link java.lang.Class Class} that is returned by {@link com.xenonteam.xenonlib.api.main.IXenonMod#getRegisterClasses() IXenonMod.getRegisterClasses()} because otherwise it won't be called
  *
  * <br>
  * <br>

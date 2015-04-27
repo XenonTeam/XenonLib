@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
+import com.xenonteam.xenonlib.api.main.IXenonMod;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
