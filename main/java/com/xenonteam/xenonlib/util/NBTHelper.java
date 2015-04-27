@@ -6,6 +6,8 @@ package com.xenonteam.xenonlib.util;
 import java.io.IOException;
 
 import net.minecraft.nbt.NBTTagByteArray;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 
 import com.xenonteam.xenonlib.util.java.StorageHelper;
 
@@ -42,6 +44,27 @@ public class NBTHelper
 	public static Object NBTToObject(NBTTagByteArray b) throws ClassNotFoundException, IOException
 	{
 		return StorageHelper.deserialize(b.getByteArray());
+	}
+	
+	public static NBTTagCompound BlockPosToNBT(BlockPos pos)
+	{
+		NBTTagCompound comp = new NBTTagCompound();
+		
+		comp.setInteger("blockpos_x", pos.getX());
+		comp.setInteger("blockpos_y", pos.getY());
+		comp.setInteger("blockpos_z", pos.getZ());
+		
+		return comp;
+	}
+	
+	public static BlockPos NBTToBlockPos(NBTTagCompound comp)
+	{
+		if(comp.hasKey("blockpos_x") && comp.hasKey("blockpos_y") && comp.hasKey("blockpos_z"))
+		{
+			return new BlockPos(comp.getInteger("blockpos_x"), comp.getInteger("blockpos_y"), comp.getInteger("blockpos_z"));
+		}
+		
+		return null;
 	}
 	
 }
