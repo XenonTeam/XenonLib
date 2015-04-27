@@ -30,150 +30,138 @@ public class RegistryHelper
 
 	public static void registerObjects(Class<?> c)
 	{
-		
+
 		List<Field> toRegister = Arrays.asList(c.getDeclaredFields());
-		
+
 		Register cAn = c.getAnnotation(Register.class);
-		
-		if(c.isAssignableFrom(IMessageHandler.class))
+
+		if (cAn != null)
 		{
-			XSide side = cAn.side();
-			
-			NetworkHandler.registerMessage0((Class<? extends IMessageHandler<? extends IMessage, ? extends IMessage>>) c, side);
+
+			if (c.isAssignableFrom(IMessageHandler.class))
+			{
+				XSide side = cAn.side();
+
+				NetworkHandler.registerMessage0((Class<? extends IMessageHandler<? extends IMessage, ? extends IMessage>>) c, side);
+			}
+
 		}
-		
+
 		String modid;
 		String unlocName;
-		
-		for(Field f : toRegister)
+
+		for (Field f : toRegister)
 		{
 			f.setAccessible(true);
-			
+
 			Annotation an = f.getAnnotation(Register.class);
-			
-			
-			if(an == null)
+
+			if (an == null)
 				continue;
-			
-			
-			
-		
-				Register reg = (Register) an;
-				
-				modid = reg.modid();
-				unlocName = reg.unlocName();
-				
-				
-				
-				if(f.getType().isAssignableFrom(Block.class))
+
+			Register reg = (Register) an;
+
+			modid = reg.modid();
+			unlocName = reg.unlocName();
+
+			if (f.getType().isAssignableFrom(Block.class))
+			{
+				Block b = null;
+				try
 				{
-					Block b = null;
+					b = (Block) f.get(b);
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+
+				if (b != null)
+				{
+
+				} else
+				{
 					try
 					{
-						b = (Block) f.get(b);
-					} 
-					catch (Exception e)
+						b = (Block) f.getType().newInstance();
+					} catch (InstantiationException e)
+					{
+						e.printStackTrace();
+					} catch (IllegalAccessException e)
 					{
 						e.printStackTrace();
 					}
-					
-					if(b != null)
-					{
-						
-					}
-					else
-					{
-						try
-						{
-							b = (Block) f.getType().newInstance();
-						} 
-						catch (InstantiationException e)
-						{
-							e.printStackTrace();
-						} 
-						catch (IllegalAccessException e)
-						{
-							e.printStackTrace();
-						}
-					}
-					
-					
-					if(b instanceof IXenonBlock)
-					{
-						if(reg.tileenity() != Register.DefaultTE.class)
-						{
-							((IXenonBlock) b).setTileEntity(reg.tileenity());
-						}
-						else
-						{
-							((IXenonBlock) b).setTileEntity(null);
-						}
-						
-						if(reg.itemBlock() != Register.DefaultSTRING)
-						{
-							((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
-						}
-						else
-						{
-							((IXenonBlock) b).setItemBlock(null);
-						}
-					}
-					
-					b.setUnlocalizedName(modid + "." + unlocName);
-					
-					GameRegistry.registerBlock(b, modid + "_" + unlocName);
-					
-					continue;
-					
 				}
-				
-				if(f.getType().isAssignableFrom(Item.class))
+
+				if (b instanceof IXenonBlock)
 				{
-					Item b = null;
-					try
+					if (reg.tileenity() != Register.DefaultTE.class)
 					{
-						b = (Item) f.get(b);
-					} 
-					catch (Exception e)
+						((IXenonBlock) b).setTileEntity(reg.tileenity());
+					} else
 					{
-						e.printStackTrace();
+						((IXenonBlock) b).setTileEntity(null);
 					}
-					
-					if(b != null)
+
+					if (reg.itemBlock() != Register.DefaultSTRING)
 					{
-						
-					}
-					else
+						((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
+					} else
 					{
-						try
-						{
-							b = (Item) f.getType().newInstance();
-						} 
-						catch (InstantiationException e)
-						{
-							e.printStackTrace();
-						} 
-						catch (IllegalAccessException e)
-						{
-							e.printStackTrace();
-						}
+						((IXenonBlock) b).setItemBlock(null);
 					}
-					
-					b.setUnlocalizedName(modid + "." + unlocName);
-					
-					GameRegistry.registerItem(b, modid + "_" + unlocName);
-					
-					continue;
 				}
-				
-				if(f.getType().isAssignableFrom(TileEntity.class))
-				{
-					GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
-					
-					continue;
-				}
+
+				b.setUnlocalizedName(modid + "." + unlocName);
+
+				GameRegistry.registerBlock(b, modid + "_" + unlocName);
+
+				continue;
+
 			}
-		
+
+			if (f.getType().isAssignableFrom(Item.class))
+			{
+				Item b = null;
+				try
+				{
+					b = (Item) f.get(b);
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+
+				if (b != null)
+				{
+
+				} else
+				{
+					try
+					{
+						b = (Item) f.getType().newInstance();
+					} catch (InstantiationException e)
+					{
+						e.printStackTrace();
+					} catch (IllegalAccessException e)
+					{
+						e.printStackTrace();
+					}
+				}
+
+				b.setUnlocalizedName(modid + "." + unlocName);
+
+				GameRegistry.registerItem(b, modid + "_" + unlocName);
+
+				continue;
+			}
+
+			if (f.getType().isAssignableFrom(TileEntity.class))
+			{
+				GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
+
+				continue;
+			}
+		}
+
 	}
-	
+
 }
