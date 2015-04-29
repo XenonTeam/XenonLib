@@ -45,7 +45,7 @@ public class LangUtils
 
 	public static HashMap<String, Properties> modLanguageData()
 	{
-		Object obj = ReflectionHelper.getFieldAccesseble(LanguageRegistry.class, "modLanguageData()");
+		Object obj = ReflectionHelper.getFieldAccesseble(LanguageRegistry.class, "modLanguageData");
 		return (HashMap<String, Properties>) obj;
 	}
 
