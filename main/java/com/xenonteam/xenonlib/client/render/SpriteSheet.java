@@ -107,6 +107,12 @@ public class SpriteSheet
 		container.drawTexturedModalRect(elm.getXOff(), elm.getYOff(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
 	}
 
+	/**
+	 * Do not use this unless your sprites are the same size 
+	 * @param baseID The base id you want to use
+	 * @param hight The height of the sprite of the sprites
+	 * @param with The with of the sprite of the sprites
+	 */
 	public void addAllSprites(String baseID, int hight, int with)
 	{
 		int x_size = m_w / with;
