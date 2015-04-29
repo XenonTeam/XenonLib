@@ -80,7 +80,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void addStringLocalization(String key, String value)
 	{
 		addStringLocalization(key, "en_US", value);
@@ -89,7 +89,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void addStringLocalization(String key, String lang, String value)
 	{
 		Properties langPack = modLanguageData().get(lang);
@@ -104,7 +104,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void addStringLocalization(Properties langPackAdditions)
 	{
 		addStringLocalization(langPackAdditions, "en_US");
@@ -113,7 +113,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void addStringLocalization(Properties langPackAdditions, String lang)
 	{
 		Properties langPack = modLanguageData().get(lang);
@@ -131,7 +131,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void addNameForObject(Object objectToName, String lang, String name)
 	{
 		String objectName;
@@ -155,7 +155,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public static void addName(Object objectToName, String name)
 	{
 		instance().addNameForObject(objectToName, "en_US", name);
@@ -165,7 +165,7 @@ public class LangUtils
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
 	@SuppressWarnings("unchecked")
-	@Deprecated
+	
 	public void mergeLanguageTable(@SuppressWarnings("rawtypes") Map properties, String lang)
 	{
 		Properties langPack = modLanguageData().get(lang);
@@ -180,7 +180,7 @@ public class LangUtils
 		}
 	}
 
-	@Deprecated
+	
 	private <K, V> void mergeWithoutOverwrite(Map<? extends K, ? extends V> from, Map<K, V> to)
 	{
 		for (Entry<? extends K, ? extends V> e : from.entrySet())
@@ -195,7 +195,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void loadLocalization(String localizationFile, String lang, boolean isXML)
 	{
 		URL urlResource = this.getClass().getResource(localizationFile);
@@ -218,7 +218,7 @@ public class LangUtils
 	/**
 	 * Deprecated for removal in 1.8. Use the assets lang system
 	 */
-	@Deprecated
+	
 	public void loadLocalization(URL localizationFile, String lang, boolean isXML)
 	{
 		InputStream langStream = null;
