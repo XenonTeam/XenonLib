@@ -9,8 +9,8 @@ It is the groundwork for every mod build by the Xenon Team.
 
 ## Project status
 
-```html
-   <p style="color:red;">Not for human consumption yet!</p>
+```lua
+   not for human consumption yet!
 ```
 
 ## Mods
