@@ -44,10 +44,8 @@ public class FileHelper
 		return new FileInputStream(f);
 	}
 	
-	public static List<String> readFile(File f) throws IOException
+	public static List<String> readFile(BufferedReader reader) throws IOException
 	{
-		BufferedReader reader = getReader(f);
-		
 		List<String> lines = new ArrayList<String>();
 		
 		String line;
@@ -60,6 +58,13 @@ public class FileHelper
 		reader.close();
 		
 		return lines;
+	}
+	
+	public static List<String> readFile(File f) throws IOException
+	{
+		BufferedReader reader = getReader(f);
+		
+		return readFile(reader);
 	}
 	
 	public static void writeToFile(File f, List<String> lines) throws IOException

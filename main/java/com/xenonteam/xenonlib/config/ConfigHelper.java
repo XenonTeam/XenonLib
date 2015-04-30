@@ -3,6 +3,8 @@
  */
 package com.xenonteam.xenonlib.config;
 
+import net.minecraftforge.common.config.Configuration;
+
 /**
  * @author tim4242
  * @author philipas
@@ -10,5 +12,8 @@ package com.xenonteam.xenonlib.config;
  */
 public final class ConfigHelper
 {
-
+	public static String getStringForKey(Configuration config, String key, String category)
+	{
+		return null;
+	}
 }

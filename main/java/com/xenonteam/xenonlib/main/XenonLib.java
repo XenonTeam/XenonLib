@@ -22,6 +22,8 @@ import java.util.Map.Entry;
 
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.JsonUtils;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -96,6 +98,19 @@ public final class XenonLib implements IXenonMod
 		NetworkHandler.init();
 
 		m_plugins.add(INSTANCE);
+		
+		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + "/xenon/xenon.cfg"), "Xenon Config");
+		
+		config.load();
+		
+		config.get("test", "test", false);
+		
+		config.save();
+		
+		for(Entry<String, Property> e : config.getCategory("test").entrySet())
+		{
+			Log.info("Key: " + e.getKey() + " , Value: " + Arrays.asList(e.getValue().getDefaults()));
+		}
 
 	}
 

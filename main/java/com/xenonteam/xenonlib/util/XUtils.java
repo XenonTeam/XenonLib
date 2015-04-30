@@ -2,8 +2,11 @@ package com.xenonteam.xenonlib.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
+import javax.imageio.ImageIO;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.apache.commons.io.IOUtils;
 import org.lwjgl.BufferUtils;
 
 import com.xenonteam.xenonlib.config.Refs;
@@ -239,9 +243,29 @@ public class XUtils {
 	 * @param loc The target {@link net.minecraft.util.ResourceLocation ResourceLocation}
 	 * @return An {@link java.io.InputStream InputStream} to the given target {@link net.minecraft.util.ResourceLocation ResourceLocation}
 	 */
-	public static InputStream getStreamToRL(ResourceLocation loc)
+	public static InputStream getStreamFromRL(ResourceLocation loc)
 	{
 		return XUtils.class.getResourceAsStream("/assets/" + loc.getResourceDomain() + "/" + loc.getResourcePath());
+	}
+	
+	public static int[] getSpriteSheetSize(ResourceLocation loc)
+	{
+		int[] size = new int[2];
+		
+		BufferedImage img = null;
+		
+		try
+		{
+			img = ImageIO.read(getStreamFromRL(loc));
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		size[0] = img.getWidth();
+		size[1] = img.getHeight();
+		
+		return size;
 	}
 	
 	public static ByteBuffer convertImageData(BufferedImage image) {
