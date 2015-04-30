@@ -9,7 +9,7 @@ It is the groundwork for every mod build by the Xenon Team.
 
 ## Project status
 
-<font color="#ffffff">Not ready for human consumption!</font>
+<font color="#000000">Not ready for human consumption!</font>
 
 ## Mods
 
