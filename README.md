@@ -9,9 +9,7 @@ It is the groundwork for every mod build by the Xenon Team.
 
 ## Project status
 
-```lua
-   not for human consumption yet!
-```
+Not for human consumption, yet!
 
 ## Mods
 
