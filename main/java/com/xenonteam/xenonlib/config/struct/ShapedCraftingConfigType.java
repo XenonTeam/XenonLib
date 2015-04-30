@@ -3,13 +3,11 @@
  */
 package com.xenonteam.xenonlib.config.struct;
 
-import com.xenonteam.xenonlib.util.XUtils;
-
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
+
+import com.xenonteam.xenonlib.util.XUtils;
 
 /**
  * @author tim4242

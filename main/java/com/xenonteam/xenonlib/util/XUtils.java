@@ -1,7 +1,6 @@
 package com.xenonteam.xenonlib.util;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.commons.io.IOUtils;
 import org.lwjgl.BufferUtils;
 
 import com.xenonteam.xenonlib.config.Refs;
