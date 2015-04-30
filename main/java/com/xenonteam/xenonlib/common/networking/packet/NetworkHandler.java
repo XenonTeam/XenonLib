@@ -34,8 +34,10 @@ public final class NetworkHandler
 	@Deprecated
 	public static void init()
 	{
-		if (!hasInit)
+		if (!hasInit) {
 			INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Refs.MOD_ID);
+			hasInit = true;
+		}
 	}
 
 	/**
