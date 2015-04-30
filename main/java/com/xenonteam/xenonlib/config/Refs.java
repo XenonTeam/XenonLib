@@ -32,7 +32,7 @@ public final class Refs
 	/**
 	 * The version of the XenonLib.
 	 */
-	public static final String MOD_VERSION = "0.0.1";
+	public static final String MOD_VERSION = "0.0.2";
 	
 	/**
 	 * The dependecies of the XenonLib.

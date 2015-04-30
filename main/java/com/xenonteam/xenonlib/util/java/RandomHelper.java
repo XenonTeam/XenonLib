@@ -22,7 +22,7 @@ public class RandomHelper
 	 * Generates a random {@link java.lang.String String} with the length of len
 	 * 
 	 * @param len The length
-	 * @return
+	 * @return A random {@link java.lang.String String}
 	 */
 	public static String randomString(int len)
 	{

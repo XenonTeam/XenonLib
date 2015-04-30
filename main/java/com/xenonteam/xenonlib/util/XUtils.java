@@ -2,6 +2,7 @@ package com.xenonteam.xenonlib.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import net.minecraft.block.Block;
@@ -232,9 +233,15 @@ public class XUtils {
 		return null;
 	}
 	
-	public static File RLToFile(ResourceLocation loc)
+	/**
+	 * Gives you a {@link java.io.InputStream InputStream} to the given target {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * 
+	 * @param loc The target {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * @return An {@link java.io.InputStream InputStream} to the given target {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 */
+	public static InputStream getStreamToRL(ResourceLocation loc)
 	{
-		return new File("/assets/" + loc.getResourceDomain() + "/" + loc.getResourcePath());
+		return XUtils.class.getResourceAsStream("/assets/" + loc.getResourceDomain() + "/" + loc.getResourcePath());
 	}
 	
 	public static ByteBuffer convertImageData(BufferedImage image) {
