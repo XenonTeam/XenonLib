@@ -46,6 +46,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.main.IXenonMod;
+import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
@@ -53,6 +54,7 @@ import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
+import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.util.Log;
 
@@ -74,6 +76,9 @@ public final class XenonLib implements IXenonMod
 
 	@Mod.Metadata(MOD_ID)
 	private static ModMetadata METADATA;
+	
+	@Register(unlocName = "test", modid = Refs.MOD_ID)
+	public static BlockTest test = new BlockTest();
 
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
@@ -110,7 +115,6 @@ public final class XenonLib implements IXenonMod
 		config.save();
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
-
 	}
 
 	@EventHandler
