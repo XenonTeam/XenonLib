@@ -152,13 +152,19 @@ public class SpriteSheet
 
 		String metaline = lines.get(0);
 
+		Log.debug("Version: " + metaline);
+		
 		String version = metaline;
 
 		lines.remove(0);
 
+		
+		
 		for (String line : lines)
 		{
 
+			Log.debug("Line: " + line);
+			
 			String id = null;
 			int x = 0;
 			int y = 0;
@@ -166,14 +172,29 @@ public class SpriteSheet
 			int h = 0;
 
 			String[] split = line.split(":");
+			
+			for(String deb : split)
+			{
+				Log.debug("Split: " + deb);
+			}
 
-			if (split[1].equals("C"))
+			if (split[1].startsWith("C"))
 			{
 
+				Log.debug("Split: " + split[2]);
+				
 				split = split[2].split(",");
 
+				
+				
+				for(String deb : split)
+				{
+					Log.debug("Split: " + deb);
+				}
+				
 				if (split.length != 5)
 				{
+					Log.debug("errored");
 					continue;
 				}
 
@@ -201,12 +222,19 @@ public class SpriteSheet
 					}
 				}
 
-			} else if(split[1].equals("S"))
+			} else if(split[1].startsWith("S"))
 			{
+				
 				split = split[2].split(",");
 
+				for(String deb : split)
+				{
+					Log.debug("Split: " + deb);
+				}
+				
 				if (split.length != 5)
 				{
+					Log.debug("errored");
 					continue;
 				}
 
@@ -215,8 +243,12 @@ public class SpriteSheet
 				y = Integer.parseInt(split[2]);
 				w = Integer.parseInt(split[3]);
 				h = Integer.parseInt(split[4]);
+				
+				
 			}
 
+			Log.debug("Id: " + id + ", X: " + x + ", Y: " + y + ", Width: " + w + ", Height: " + h);
+			
 			addSprite(id, x, y, w, h);
 
 		}
