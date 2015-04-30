@@ -22,6 +22,7 @@ import java.util.Map.Entry;
 
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.Mod;
@@ -45,6 +46,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.main.IXenonMod;
+import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
@@ -107,9 +109,11 @@ public final class XenonLib implements IXenonMod
 		
 		config.save();
 		
-		for(Entry<String, Property> e : config.getCategory("test").entrySet())
+		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
+		
+		for(String s : test.m_sprites.keySet())
 		{
-			Log.info("Key: " + e.getKey() + " , Value: " + Arrays.asList(e.getValue().getDefaults()));
+			Log.info("Key: " + s);
 		}
 
 	}

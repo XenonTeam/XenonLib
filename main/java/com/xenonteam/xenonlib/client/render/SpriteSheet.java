@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
 import com.xenonteam.xenonlib.util.java.FileHelper;
 
@@ -66,7 +67,7 @@ public class SpriteSheet
 
 	protected ResourceLocation m_loc;
 
-	protected Map<String, Sprite> m_sprites;
+	public Map<String, Sprite> m_sprites;
 
 	public SpriteSheet(ResourceLocation loc, int hight, int with)
 	{
@@ -134,6 +135,9 @@ public class SpriteSheet
 			return;
 		}
 
+
+		
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(XUtils.getStreamFromRL(new ResourceLocation(m_loc.getResourceDomain(), m_loc.getResourcePath() + ".sprites"))));
 
 		ArrayList<String> lines = new ArrayList<String>();
@@ -163,10 +167,10 @@ public class SpriteSheet
 
 			String[] split = line.split(":");
 
-			if (split[0].equals("C"))
+			if (split[1].equals("C"))
 			{
 
-				split = split[1].split(",");
+				split = split[2].split(",");
 
 				if (split.length != 5)
 				{
@@ -197,9 +201,9 @@ public class SpriteSheet
 					}
 				}
 
-			} else
+			} else if(split[1].equals("S"))
 			{
-				split = split[1].split(",");
+				split = split[2].split(",");
 
 				if (split.length != 5)
 				{
@@ -216,6 +220,8 @@ public class SpriteSheet
 			addSprite(id, x, y, w, h);
 
 		}
+		
+		Log.debug("Loaded sprites file at: " + new ResourceLocation(m_loc.getResourceDomain(), m_loc.getResourcePath() + ".sprites"));
 
 	}
 
