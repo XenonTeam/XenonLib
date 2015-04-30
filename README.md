@@ -9,8 +9,8 @@ It is the groundwork for every mod build by the Xenon Team.
 
 ## Project status
 
-```css
-   red
+```css red
+   Not for human consumption, yet!
 ```
 
 ## Mods
