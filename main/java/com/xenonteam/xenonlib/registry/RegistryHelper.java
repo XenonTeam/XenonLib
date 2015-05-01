@@ -16,7 +16,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.xenonteam.xenonlib.blocks.IXenonBlock;
+import com.xenonteam.xenonlib.blocks.IXenonIBP;
+import com.xenonteam.xenonlib.blocks.IXenonTEP;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
 
@@ -95,22 +96,25 @@ public class RegistryHelper
 
 				}
 
-				if (b instanceof IXenonBlock)
+				if (b instanceof IXenonIBP)
+				{
+					if (!reg.itemBlock().equalsIgnoreCase(Register.DefaultSTRING))
+					{
+						((IXenonIBP) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
+					} else
+					{
+						((IXenonIBP) b).setItemBlock(null);
+					}
+				}
+				
+				if(b instanceof IXenonTEP)
 				{
 					if (reg.tileenity() != Register.DefaultTE.class)
 					{
-						((IXenonBlock) b).setTileEntity(reg.tileenity());
+						((IXenonTEP) b).setTileEntity(reg.tileenity());
 					} else
 					{
-						((IXenonBlock) b).setTileEntity(null);
-					}
-
-					if (!reg.itemBlock().equalsIgnoreCase(Register.DefaultSTRING))
-					{
-						((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
-					} else
-					{
-						((IXenonBlock) b).setItemBlock(null);
+						((IXenonTEP) b).setTileEntity(null);
 					}
 				}
 

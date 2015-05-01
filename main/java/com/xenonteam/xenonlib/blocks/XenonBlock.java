@@ -16,7 +16,7 @@ import net.minecraft.world.World;
  * @author philipas
  *
  */
-public class XenonBlock extends Block implements IXenonBlock, ITileEntityProvider
+public class XenonBlock extends Block implements IXenonIBP, IXenonTEP, ITileEntityProvider
 {
 
 	private Class<? extends TileEntity> m_tile;
