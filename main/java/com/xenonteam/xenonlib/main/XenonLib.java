@@ -110,11 +110,6 @@ public final class XenonLib implements IXenonMod
 		config.save();
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
-		
-		for(String s : test.m_sprites.keySet())
-		{
-			Log.info("Key: " + s);
-		}
 
 	}
 
