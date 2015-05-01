@@ -64,8 +64,9 @@ public class RegistryHelper
 			modid = reg.modid();
 			unlocName = reg.unlocName();
 
-			if (f.getType().isAssignableFrom(Block.class))
+			if (Block.class.isAssignableFrom(f.getType()))
 			{
+
 				Block b = null;
 				try
 				{
@@ -83,6 +84,7 @@ public class RegistryHelper
 					try
 					{
 						b = (Block) f.getType().newInstance();
+						f.set(null, b);
 					} catch (InstantiationException e)
 					{
 						e.printStackTrace();
@@ -90,6 +92,7 @@ public class RegistryHelper
 					{
 						e.printStackTrace();
 					}
+
 				}
 
 				if (b instanceof IXenonBlock)
@@ -102,7 +105,7 @@ public class RegistryHelper
 						((IXenonBlock) b).setTileEntity(null);
 					}
 
-					if (reg.itemBlock() != Register.DefaultSTRING)
+					if (!reg.itemBlock().equalsIgnoreCase(Register.DefaultSTRING))
 					{
 						((IXenonBlock) b).setItemBlock((ItemBlock) GameRegistry.findItem(reg.itemBlock().split(":")[0], reg.itemBlock().split(":")[1]));
 					} else
@@ -119,7 +122,7 @@ public class RegistryHelper
 
 			}
 
-			if (f.getType().isAssignableFrom(Item.class))
+			if (Item.class.isAssignableFrom(f.getType()))
 			{
 				Item b = null;
 				try
@@ -138,6 +141,7 @@ public class RegistryHelper
 					try
 					{
 						b = (Item) f.getType().newInstance();
+						f.set(null, b);
 					} catch (InstantiationException e)
 					{
 						e.printStackTrace();
@@ -154,7 +158,7 @@ public class RegistryHelper
 				continue;
 			}
 
-			if (f.getType().isAssignableFrom(TileEntity.class))
+			if (TileEntity.class.isAssignableFrom(f.getType()))
 			{
 				GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
 
