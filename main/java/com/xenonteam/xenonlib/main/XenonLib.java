@@ -31,6 +31,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,6 +48,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.main.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
+import com.xenonteam.xenonlib.client.gui.GuiHandler;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
@@ -55,6 +58,7 @@ import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
 import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
+import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
 
 /**
@@ -102,7 +106,8 @@ public final class XenonLib implements IXenonMod
 
 		DescriptionHandler.init();
 		NetworkHandler.init();
-
+		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
+		
 		m_plugins.add(INSTANCE);
 		
 		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + "/xenon/xenon.cfg"), "Xenon Config");
@@ -114,6 +119,7 @@ public final class XenonLib implements IXenonMod
 		config.save();
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
+		GameRegistry.registerTileEntity(TETest.class, "test");
 	}
 
 	@EventHandler
