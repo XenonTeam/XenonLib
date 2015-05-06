@@ -31,18 +31,18 @@ public class ReflectionHelper
 		return field;
 	}
 
-	public static Constructor<?> getConstructorAccesseble(Class<?> temp, Class<?>... parameters)
+	public static Constructor getConstructorAccesseble(Class<?> temp, Class<?>... parameters)
 	{
-		Constructor<?> constructor = getConstructor(temp, parameters);
+		Constructor constructor = getConstructor(temp, parameters);
 		constructor.setAccessible(true);
 		return constructor;
 	}
 
-	public static Constructor<?> getConstructor(Class<?> temp, Class<?>... parameters)
+	public static Constructor getConstructor(Class<?> temp, Class<?>... parameters)
 	{
 		try
 		{
-			Constructor<?> constructor = temp.getConstructor(parameters);
+			Constructor constructor = temp.getConstructor(parameters);
 			return constructor;
 		} catch (NoSuchMethodException e)
 		{
