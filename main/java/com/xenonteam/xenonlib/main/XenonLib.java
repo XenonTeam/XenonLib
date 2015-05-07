@@ -16,11 +16,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.vecmath.Vector3f;
+
+import net.minecraft.client.renderer.block.model.BlockPart;
+import net.minecraft.client.renderer.block.model.BlockPartRotation;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
+import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
@@ -39,6 +46,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -61,6 +69,7 @@ import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
+import com.xenonteam.xenonlib.util.XUtils;
 
 /**
  * @author tim4242
@@ -121,9 +130,6 @@ public final class XenonLib implements IXenonMod
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
 		GameRegistry.registerTileEntity(TETest.class, "test");
-		
-		
-		FMLCommonHandler.instance().exitJava(0, true);
 	}
 
 	@EventHandler
@@ -162,6 +168,22 @@ public final class XenonLib implements IXenonMod
 		}
 
 		Log.debug("+----------------------------+", "| Finished loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "            |", "| Version: " + MOD_VERSION + "             |", "+----------------------------+");
+	
+		ResourceLocation key = new ResourceLocation("xenon_lib:models/selfmade/test");
+		
+		ArrayList<BlockPart> parts = new ArrayList<BlockPart>();
+		
+		HashMap<String, String> texes = new HashMap<String, String>();
+		
+		parts.add(new BlockPart(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), new Vector3f(1, 1, 1), Maps.newHashMap(), new BlockPartRotation(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), Axis.X, 1, true), true));
+		
+		try
+		{
+			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public static void addXenonMod(IXenonMod mod)
