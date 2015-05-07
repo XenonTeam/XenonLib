@@ -10,11 +10,14 @@ import javax.imageio.ImageIO;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -293,6 +296,26 @@ public class XUtils {
         buffer.flip();
 
 	    return buffer;
+	}
+	
+	public static void logNBTCompound(String id, NBTTagCompound comp)
+	{
+		if(comp == null || comp.hasNoTags())
+			return;
+		
+		for(Object key : comp.getKeySet())
+		{
+			NBTBase nbt = comp.getTag((String) key);
+			
+			if(nbt.getId() == NBTHelper.COMP_ID)
+			{
+				logNBTCompound(id + "/" + key, (NBTTagCompound) nbt);
+			}
+			else
+			{
+				Log.info(id + "/" + key + "[" + NBTHelper.getIdAsString(nbt.getId()) + "]" + ":" + nbt);
+			}
+		}
 	}
 
 }

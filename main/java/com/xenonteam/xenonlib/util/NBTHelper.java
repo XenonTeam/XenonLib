@@ -19,6 +19,7 @@ import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.BlockPos;
+import net.minecraftforge.common.util.Constants.NBT;
 
 import com.xenonteam.xenonlib.util.java.StorageHelper;
 
@@ -65,6 +66,26 @@ public class NBTHelper
 
 	/** The end of NBT */
 	public static final int END_ID = 0;
+	
+	public static String getIdAsString(byte id)
+	{
+		switch(id)
+		{
+			case NBT.TAG_BYTE: return "Byte";
+			case NBT.TAG_BYTE_ARRAY: return "Byte Array";
+			case NBT.TAG_INT: return "Int";
+			case NBT.TAG_INT_ARRAY: return "Int Array";
+			case NBT.TAG_SHORT: return "Short";
+			case NBT.TAG_FLOAT: return "Float";
+			case NBT.TAG_DOUBLE: return "Double";
+			case NBT.TAG_LONG: return "Long";
+			case NBT.TAG_STRING: return "String";
+			case NBT.TAG_LIST: return "List";
+			case NBT.TAG_COMPOUND: return "Compound";
+			case NBT.TAG_END: return "End";
+			default: return "NULL/" + id;
+		}
+	}
 
 	/**
 	 * Encodes an {@link java.lang.Object Object} into a
