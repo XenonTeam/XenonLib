@@ -193,10 +193,15 @@ public final class XenonLib implements IXenonMod
 		
 		try
 		{
-			Constructor[] constructs = ModelBlock.class.getConstructors();
+			Constructor[] constructs = ModelBlock.class.getDeclaredConstructors();
+			
 			
 			for(Constructor c : constructs)
-			Log.info(c);
+			{
+				c.setAccessible(true);
+				Log.info(c);
+			}
+			
 			
 			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
 		} catch (Exception e)
