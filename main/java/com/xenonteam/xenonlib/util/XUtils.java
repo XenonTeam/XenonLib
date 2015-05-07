@@ -379,7 +379,7 @@ public class XUtils
 		}
 	}
 
-	public static boolean injectBlockModel(ResourceLocation key, List<BlockPart> parts, Map<String, String> textures, boolean ambientOcclusion, ItemCameraTransforms camTrans) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+	public static boolean injectBlockModel(ResourceLocation key, List<BlockPart> parts, Map<String, String> textures, boolean ambientOcclusion, ItemCameraTransforms camTrans) throws Exception
 	{
 		Constructor MBConstruct = ModelBlock.class.getConstructor(List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
 		Constructor VMWConstruct = ModelLoader.class.getDeclaredClasses()[1].getConstructor(ResourceLocation.class, ModelBlock.class);
