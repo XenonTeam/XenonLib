@@ -56,4 +56,8 @@ public interface IGuiElement
 		public void handleAction(int action, Object... args);
 		
 	}
+	
+	public interface IGuiSpriteHandler extends IGuiElement{
+		public void setSpriteID(int ID);
+	}
 }
