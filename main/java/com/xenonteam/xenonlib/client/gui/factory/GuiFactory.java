@@ -20,28 +20,28 @@ import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
  * @author philipas
  * 
  */
-public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer {
-
-	
+public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer
+{
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
 	private List old_keys = new ArrayList<String>();
 	protected List keys = new ArrayList<String>();
-	
+
 	protected ResourceLocation m_resLoc;
 
-	
 	public GuiFactory(Container container)
 	{
 		super(container);
-		
+
 		m_resLoc = new ResourceLocation("xenon_lib:textures/gui/GenBackground.png");
 	}
 
-	protected void orderKeys() {
+	protected void orderKeys()
+	{
 		keys = old_keys;
 
-		for (int i = 0; i < keys.size(); i++) {
+		for (int i = 0; i < keys.size(); i++)
+		{
 			int priority = elements.get(old_keys.get(i)).getPriority();
 			keys.set(priority, old_keys.get(i));
 		}
@@ -51,99 +51,195 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	}
 
 	@Override
-	public boolean addGuiElement(String ID, IGuiElement element) {
-		if (!elements.containsKey(ID)) {
+	public boolean addGuiElement(String ID, IGuiElement element)
+	{
+		if (!elements.containsKey(ID))
+		{
 			elements.put(ID, element);
-				old_keys.add(ID);
+			old_keys.add(ID);
 			orderKeys();
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
 
 	@Override
-	public boolean removeGuiElement(String ID) {
-		if (elements.containsKey(ID)) {
+	public boolean removeGuiElement(String ID)
+	{
+		if (elements.containsKey(ID))
+		{
 			elements.remove(ID);
-			
-			for (int i = 0; i < old_keys.size(); i++) {
-				if (old_keys.get(i).equals(ID)) {
+
+			for (int i = 0; i < old_keys.size(); i++)
+			{
+				if (old_keys.get(i).equals(ID))
+				{
 					old_keys.remove(i);
 				}
 			}
 			orderKeys();
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
 
 	@Override
-	public IGuiElement getGuiElement(String ID) {
-		if (elements.containsKey(ID)) {
+	public IGuiElement getGuiElement(String ID)
+	{
+		if (elements.containsKey(ID))
+		{
 			return elements.get(ID);
-		} else {
+		}
+		else
+		{
 			return null;
 		}
 	}
 
 	@Override
-	public boolean setElementPos(String id, int x, int y) {
-		if (elements.containsKey(id)) {
+	public boolean setElementPos(String id, int x, int y)
+	{
+		if (elements.containsKey(id))
+		{
 			IGuiElement element = elements.get(id);
 			element.setPos(x, y);
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
 
 	@Override
-	public boolean setElementPos(String id, Point p) {
-		if (elements.containsKey(id)) {
+	public boolean setElementPos(String id, Point p)
+	{
+		if (elements.containsKey(id))
+		{
 			setElementPos(id, p.x, p.y);
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
-	
+
 	public GuiContainer getGuiScreen()
 	{
 		return this;
 	}
-	
-	public void draw(IGuiFactory factory){}
 
-	public void setXOff(int x){}
-	
-	public void setYOff(int y){}
-	
-	public void setPos(int x, int y){}
-	
-	public void setPos(Point p){}
-	
-	public void setPriority(int priority){}
-	
-	public void setHeight(int height){}
-	
-	public void setWidth(int width){}
-	
-	public int getXOff(){return 0;}
-	
-	public int getYOff(){return 0;}
-	
-	public int getPriority(){return 0;}
-	
-	public int getHeight(){return this.height;}
-	
-	public int getWidth(){return this.width;}
-	
-	public IGuiElement getParent(){return this;}
-	
-	public ResourceLocation getResource(){return m_resLoc;}
-	
-	public void setResource(ResourceLocation loc){}
+	@Override
+	public boolean addElement(String ID, IGuiElement element)
+	{
+
+		if (!elements.containsKey(ID))
+		{
+			elements.put(ID, element);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removeElement(String ID)
+	{
+		if (elements.containsKey(ID))
+		{
+			elements.remove(ID);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public IGuiElement getElement(String ID)
+	{
+		return elements.get(ID);
+	}
+
+	public void draw(IGuiFactory factory)
+	{
+	}
+
+	public void setXOff(int x)
+	{
+	}
+
+	public void setYOff(int y)
+	{
+	}
+
+	public void setPos(int x, int y)
+	{
+	}
+
+	public void setPos(Point p)
+	{
+	}
+
+	public void setPriority(int priority)
+	{
+	}
+
+	public void setHeight(int height)
+	{
+	}
+
+	public void setWidth(int width)
+	{
+	}
+
+	public int getXOff()
+	{
+		return 0;
+	}
+
+	public int getYOff()
+	{
+		return 0;
+	}
+
+	public int getPriority()
+	{
+		return 0;
+	}
+
+	public int getHeight()
+	{
+		return this.height;
+	}
+
+	public int getWidth()
+	{
+		return this.width;
+	}
+
+	public IGuiElement getParent()
+	{
+		return this;
+	}
+
+	public ResourceLocation getResource()
+	{
+		return m_resLoc;
+	}
+
+	public void setResource(ResourceLocation loc)
+	{
+	}
 
 }

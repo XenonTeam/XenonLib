@@ -44,29 +44,8 @@ public class GuiTest extends GuiFactory
 	@Override
 	public void generate(Object obj)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public boolean addElement(String ID, IGuiElement element)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeElement(String ID)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public IGuiElement getElement(String ID)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
