@@ -13,6 +13,7 @@ import com.xenonteam.xenonlib.client.gui.factory.GuiFactory;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.server.inventory.container.TestContainer;
 import com.xenonteam.xenonlib.tileentity.TETest;
+import com.xenonteam.xenonlib.util.Log;
 
 /**
  * @author tim4242
@@ -37,6 +38,7 @@ public class GuiTest extends GuiFactory
 		GuiElementImage image = new GuiElementImage(this, SpriteSheet.spritesheets.get("test"), "test1");
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		image.setPos(100, 100);
+		image.draw(this);
 	}
 
 	@Override

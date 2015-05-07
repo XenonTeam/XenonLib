@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -121,11 +123,10 @@ public class SpriteSheet
 	{
 		Sprite s = m_sprites.get(id);
 
-		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 
-		renderer.bindTexture(m_loc);
+		container.mc.renderEngine.bindTexture(getResource());
 
-		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getYOff(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
+		container.drawModalRectWithCustomSizedTexture(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, 64, 16);
 	}
 
 	public void loadSpritesByFile()
