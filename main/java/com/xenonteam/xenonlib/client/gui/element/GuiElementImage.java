@@ -15,7 +15,7 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
  * @author philipas
  * 
  */
-public class GuiElementImage implements IGuiElement
+public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandler
 {
 
 	private int xpos, ypos, priority, with, hight;
@@ -134,6 +134,12 @@ public class GuiElementImage implements IGuiElement
 	public IGuiElement getParent()
 	{
 		return m_parent;
+	}
+
+	@Override
+	public void setSpriteID(String ID)
+	{
+		this.m_spriteID = ID;
 	}
 
 }

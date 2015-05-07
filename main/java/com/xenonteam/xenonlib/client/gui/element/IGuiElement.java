@@ -58,6 +58,6 @@ public interface IGuiElement
 	}
 	
 	public interface IGuiSpriteHandler extends IGuiElement{
-		public void setSpriteID(int ID);
+		public void setSpriteID(String ID);
 	}
 }
