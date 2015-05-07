@@ -38,6 +38,8 @@ public class GuiTest extends GuiFactory
 		GuiElementImage image = new GuiElementImage(this, SpriteSheet.spritesheets.get("test"), "test1");
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		image.setPos(100, 100);
+		image.setWidth(32);
+		image.setHeight(32);
 		image.draw(this);
 	}
 
