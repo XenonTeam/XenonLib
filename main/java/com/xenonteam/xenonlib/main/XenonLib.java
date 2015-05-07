@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -120,6 +121,9 @@ public final class XenonLib implements IXenonMod
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
 		GameRegistry.registerTileEntity(TETest.class, "test");
+		
+		
+		FMLCommonHandler.instance().exitJava(0, true);
 	}
 
 	@EventHandler
