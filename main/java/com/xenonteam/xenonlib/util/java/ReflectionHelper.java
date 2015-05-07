@@ -59,7 +59,7 @@ public class ReflectionHelper
 	{
 		try
 		{
-			return temp.getMethod(methodName, parameters);
+			return temp.getDeclaredMethod(methodName, parameters);
 		} catch (NoSuchMethodException e)
 		{
 			Log.error("there is no method by this name : " + methodName + " :");
@@ -90,7 +90,7 @@ public class ReflectionHelper
 	{
 		try
 		{
-			return temp.getField(fieldName);
+			return temp.getDeclaredField(fieldName);
 		} catch (NoSuchFieldException e)
 		{
 			Log.error("there is no field by this name : " + fieldName + " :");
@@ -106,7 +106,7 @@ public class ReflectionHelper
 	@Deprecated
 	public static boolean hasMethod(Class<?> temp, String methodName)
 	{
-		Method[] methods = temp.getMethods();
+		Method[] methods = temp.getDeclaredMethods();
 
 		for (int i = 0; i < methods.length; i++)
 		{
@@ -122,7 +122,7 @@ public class ReflectionHelper
 	{
 		try
 		{
-			temp.getMethod(methodName, parameters);
+			temp.getDeclaredMethod(methodName, parameters);
 			return true;
 		} catch (NoSuchMethodException e)
 		{
@@ -139,7 +139,7 @@ public class ReflectionHelper
 	{
 		try
 		{
-			temp.getField(fieldName);
+			temp.getDeclaredField(fieldName);
 			return true;
 		} catch (NoSuchFieldException e)
 		{

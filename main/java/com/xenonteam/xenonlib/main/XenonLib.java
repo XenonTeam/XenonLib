@@ -33,6 +33,7 @@ import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -193,13 +194,17 @@ public final class XenonLib implements IXenonMod
 		
 		try
 		{
-			Constructor[] constructs = ModelBlock.class.getDeclaredConstructors();
+			Class[] subs = ModelLoader.class.getDeclaredClasses();
 			
-			
-			for(Constructor c : constructs)
+			for(Class clazz : subs)
 			{
-				c.setAccessible(true);
-				Log.info(c);
+				Constructor[] constructs = clazz.getConstructors();
+				
+				for(Constructor c : constructs)
+				{
+					c.setAccessible(true);
+					Log.info(c);
+				}
 			}
 			
 			

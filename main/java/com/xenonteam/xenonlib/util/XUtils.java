@@ -382,16 +382,20 @@ public class XUtils
 	public static boolean injectBlockModel(ResourceLocation key, List<BlockPart> parts, Map<String, String> textures, boolean ambientOcclusion, ItemCameraTransforms camTrans) throws Exception
 	{
 		Constructor MBConstruct = ReflectionHelper.getConstructorAccesseble(ModelBlock.class, ResourceLocation.class, List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
-		Constructor VMWConstruct = ReflectionHelper.getConstructorAccesseble(ModelLoader.class.getDeclaredClasses()[1], ResourceLocation.class, ModelBlock.class);
+		Constructor VMWConstruct = ReflectionHelper.getConstructorAccesseble(ModelLoader.class.getDeclaredClasses()[6], ModelLoader.class, ResourceLocation.class, ModelBlock.class);
+		 
 		
+		ModelBlock model = (ModelBlock) MBConstruct.newInstance(null, parts, textures, ambientOcclusion, true, camTrans);
+
+		IRegistry modelbakery = (IRegistry) ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelRegistry").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft()));
 		
-		ModelBlock model = (ModelBlock) MBConstruct.newInstance(null, parts, textures, ambientOcclusion, camTrans);
+		Log.info("VMWArgCount: " + VMWConstruct.getParameterCount());
+		
+		IModel output = (IModel) VMWConstruct.newInstance(new ModelLoader(null, null, null), key, model);
 
-		IModel output = (IModel) VMWConstruct.newInstance(key, model);
+		
 
-		IRegistry modelRegistry = (IRegistry) ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelRegistry").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft()));
-
-		modelRegistry.putObject(key, output);
+		modelbakery.putObject(key, output);
 
 		return false;
 	}
