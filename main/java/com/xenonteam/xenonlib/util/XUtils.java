@@ -381,10 +381,11 @@ public class XUtils
 
 	public static boolean injectBlockModel(ResourceLocation key, List<BlockPart> parts, Map<String, String> textures, boolean ambientOcclusion, ItemCameraTransforms camTrans) throws Exception
 	{
-		Constructor MBConstruct = ModelBlock.class.getConstructor(List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
-		Constructor VMWConstruct = ModelLoader.class.getDeclaredClasses()[1].getConstructor(ResourceLocation.class, ModelBlock.class);
-
-		ModelBlock model = (ModelBlock) MBConstruct.newInstance(parts, textures, ambientOcclusion, camTrans);
+		Constructor MBConstruct = ReflectionHelper.getConstructorAccesseble(ModelBlock.class, ResourceLocation.class, List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
+		Constructor VMWConstruct = ReflectionHelper.getConstructorAccesseble(ModelLoader.class.getDeclaredClasses()[1], ResourceLocation.class, ModelBlock.class);
+		
+		
+		ModelBlock model = (ModelBlock) MBConstruct.newInstance(null, parts, textures, ambientOcclusion, camTrans);
 
 		IModel output = (IModel) VMWConstruct.newInstance(key, model);
 
