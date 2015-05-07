@@ -42,7 +42,7 @@ public class ReflectionHelper
 	{
 		try
 		{
-			Constructor constructor = temp.getConstructor(parameters);
+			Constructor constructor = temp.getDeclaredConstructor(parameters);
 			return constructor;
 		} catch (NoSuchMethodException e)
 		{
