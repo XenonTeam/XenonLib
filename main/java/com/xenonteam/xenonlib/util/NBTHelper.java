@@ -33,57 +33,103 @@ import com.xenonteam.xenonlib.util.java.StorageHelper;
  */
 public class NBTHelper
 {
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagByte NBTTagByte} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagByte NBTTagByte}
+	 */
 	public static final int BYTE_ID = new NBTTagByte((byte) 0).getId();
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagByteArray NBTTagByteArray} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagByteArray NBTTagByteArray}
+	 */
 	public static final int BYTE_ID_A = new NBTTagByteArray(new byte[0]).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagInt NBTTagInt} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagInt NBTTagInt}
+	 */
 	public static final int INT_ID = new NBTTagInt(0).getId();
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagIntArray NBTTagIntArray} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagIntArray NBTTagIntArray}
+	 */
 	public static final int INT_ID_A = new NBTTagIntArray(new int[0]).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagShort NBTTagShort} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagShort NBTTagShort}
+	 */
 	public static final int SHORT_ID = new NBTTagShort((short) 0).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagFloat NBTTagFloat} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagFloat NBTTagFloat}
+	 */
 	public static final int FLOAT_ID = new NBTTagFloat(0).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagDouble NBTTagDouble} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagDouble NBTTagDouble}
+	 */
 	public static final int DOUBLE_ID = new NBTTagDouble(0).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagLong NBTTagLong} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagLong NBTTagLong}
+	 */
 	public static final int LONG_ID = new NBTTagLong(0).getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagString NBTTagString} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagString NBTTagString}
+	 */
 	public static final int STRING_ID = new NBTTagString("").getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagList NBTTagList} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagList NBTTagList}
+	 */
 	public static final int LIST_ID = new NBTTagList().getId();
 
-	/** Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound} */
+	/**
+	 * Returned by {@link net.minecraft.nbt.NBTBase#getId() NBTBase.getID()} in
+	 * {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound}
+	 */
 	public static final int COMP_ID = new NBTTagCompound().getId();
 
 	/** The end of NBT */
 	public static final int END_ID = 0;
-	
+
 	public static String getIdAsString(byte id)
 	{
-		switch(id)
+		switch (id)
 		{
-			case NBT.TAG_BYTE: return "Byte";
-			case NBT.TAG_BYTE_ARRAY: return "Byte Array";
-			case NBT.TAG_INT: return "Int";
-			case NBT.TAG_INT_ARRAY: return "Int Array";
-			case NBT.TAG_SHORT: return "Short";
-			case NBT.TAG_FLOAT: return "Float";
-			case NBT.TAG_DOUBLE: return "Double";
-			case NBT.TAG_LONG: return "Long";
-			case NBT.TAG_STRING: return "String";
-			case NBT.TAG_LIST: return "List";
-			case NBT.TAG_COMPOUND: return "Compound";
-			case NBT.TAG_END: return "End";
-			default: return "NULL/" + id;
+		case NBT.TAG_BYTE:
+			return "Byte";
+		case NBT.TAG_BYTE_ARRAY:
+			return "Byte Array";
+		case NBT.TAG_INT:
+			return "Int";
+		case NBT.TAG_INT_ARRAY:
+			return "Int Array";
+		case NBT.TAG_SHORT:
+			return "Short";
+		case NBT.TAG_FLOAT:
+			return "Float";
+		case NBT.TAG_DOUBLE:
+			return "Double";
+		case NBT.TAG_LONG:
+			return "Long";
+		case NBT.TAG_STRING:
+			return "String";
+		case NBT.TAG_LIST:
+			return "List";
+		case NBT.TAG_COMPOUND:
+			return "Compound";
+		case NBT.TAG_END:
+			return "End";
+		default:
+			return "NULL/" + id;
 		}
 	}
 
@@ -168,6 +214,7 @@ public class NBTHelper
 	 */
 	public static NBTTagCompound InventoryToNBT(ItemStack[] inv)
 	{
+
 		NBTTagCompound comp = new NBTTagCompound();
 
 		NBTTagList nbttaglist = new NBTTagList();
@@ -215,9 +262,11 @@ public class NBTHelper
 	}
 
 	/**
-	 * Returns the value of a {@link net.minecraft.nbt.NBTBase NBTBase} as the correct type
+	 * Returns the value of a {@link net.minecraft.nbt.NBTBase NBTBase} as the
+	 * correct type
 	 * 
-	 * @param nbt A {@link net.minecraft.nbt.NBTBase NBTBase}
+	 * @param nbt
+	 *            A {@link net.minecraft.nbt.NBTBase NBTBase}
 	 * @return An {@link java.lang.Object Object}
 	 */
 	public static Object getValue(NBTBase nbt)
