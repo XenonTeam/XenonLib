@@ -1,4 +1,4 @@
-/**
+/**est
  * 
  */
 package com.xenonteam.xenonlib.client.gui;
@@ -33,7 +33,7 @@ public class GuiTest extends GuiFactory
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		this.drawCenteredString(fontRendererObj, "test", this.width / 2, this.height / 2, 1);
-		GuiElementImage image = new GuiElementImage(this, SpriteSheet.spritesheets.get("test"), "test1");
+		GuiElementImage image = new GuiElementImage(this, "test", "test1");
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		image.setPos(100, 100);
 		image.setWidth(32);

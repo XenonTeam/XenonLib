@@ -15,20 +15,20 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
  * @author philipas
  * 
  */
-public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandler
+public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSpriteHandler
 {
 
 	private int xpos, ypos, priority, with, hight;
-	private String m_sheet;
+	private String m_sheetID;
 	private String m_spriteID;
 	
 	private IGuiContainer m_parent;
 
-	public GuiElementImage(IGuiContainer parent, SpriteSheet sheet, String spriteID)
+	public GuiElementImage(IGuiContainer parent, String spriteSheetID, String spriteID)
 	{
-		this.setHeight(sheet.getSprite(spriteID).getHeight());
-		this.setWidth(sheet.getSprite(spriteID).getWidth());
-		m_sheet = sheet;
+		this.setHeight(SpriteSheet.getSpriteSheet(spriteSheetID).getSprite(spriteID).getHeight());
+		this.setWidth(SpriteSheet.getSpriteSheet(spriteSheetID).getSprite(spriteID).getWidth());
+		m_sheetID = spriteSheetID;
 		m_spriteID = spriteID;
 		
 		m_parent = parent;
@@ -37,90 +37,10 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 	@Override
 	public void draw(IGuiFactory factory)
 	{
-		m_sheet.drawSprite(this, m_spriteID, m_parent.getGuiScreen());
+		SpriteSheet.getSpriteSheet(m_sheetID).drawSprite(this, m_spriteID, m_parent.getGuiScreen());
 	}
 
-	@Override
-	public void setXOff(int XPos)
-	{
-		this.xpos = XPos;
-	}
-
-	@Override
-	public void setYOff(int YPos)
-	{
-		this.ypos = YPos;
-	}
-
-	@Override
-	public void setPos(int x, int y)
-	{
-		this.setXOff(x);
-		this.setYOff(y);
-	}
-
-	@Override
-	public void setPos(Point p)
-	{
-		this.setPos(p.x, p.y);
-	}
-
-	@Override
-	public void setPriority(int priority)
-	{
-		this.priority = priority;
-	}
-
-	@Override
-	public void setWidth(int with)
-	{
-		this.with = with;
-	}
-
-	@Override
-	public void setHeight(int hight)
-	{
-		this.hight = hight;
-	}
-
-	@Override
-	public int getXOff()
-	{
-		return xpos;
-	}
-
-	@Override
-	public int getYOff()
-	{
-		return ypos;
-	}
-
-	@Override
-	public int getPriority()
-	{
-		return priority;
-	}
-
-	@Override
-	public int getWidth()
-	{
-		return with;
-	}
-
-	@Override
-	public int getHeight()
-	{
-		return hight;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getParent()
-	 */
-	@Override
-	public IGuiElement getParent()
-	{
-		return m_parent;
-	}
+	
 
 	/* (non-Javadoc)
 	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String, int)
@@ -146,7 +66,7 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 	@Override
 	public void setSpriteSheet(String sheetId)
 	{
-		setSpriteSheet(SpriteSheet.getSpriteSheet(sheetId));
+		this.m_sheetID = sheetId;
 	}
 
 	/* (non-Javadoc)
@@ -155,7 +75,7 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 	@Override
 	public String getSpriteSheet()
 	{
-		return m_sheet;
+		return m_sheetID;
 	}
 
 }
