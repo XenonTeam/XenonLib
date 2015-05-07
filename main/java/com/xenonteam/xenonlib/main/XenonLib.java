@@ -12,6 +12,8 @@ import static com.xenonteam.xenonlib.config.Refs.MOD_VERSION;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +28,7 @@ import javax.vecmath.Vector3f;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
@@ -70,6 +73,7 @@ import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
+import com.xenonteam.xenonlib.util.java.ReflectionHelper;
 
 /**
  * @author tim4242
@@ -97,7 +101,7 @@ public final class XenonLib implements IXenonMod
 	private ArrayList<Class<?>> m_toRegister;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		Refs.DEBUG = true;
 
@@ -130,6 +134,14 @@ public final class XenonLib implements IXenonMod
 		
 		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
 		GameRegistry.registerTileEntity(TETest.class, "test");
+		
+		Constructor constr = ReflectionHelper.getConstructorAccesseble(SpriteSheet.class, ResourceLocation.class);
+		
+		Log.info(constr.getParameterCount());
+		
+		test = (SpriteSheet) constr.newInstance(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
+		
+			
 	}
 
 	@EventHandler
@@ -177,8 +189,15 @@ public final class XenonLib implements IXenonMod
 		
 		parts.add(new BlockPart(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), new Vector3f(1, 1, 1), Maps.newHashMap(), new BlockPartRotation(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), Axis.X, 1, true), true));
 		
+		
+		
 		try
 		{
+			Constructor[] constructs = ModelBlock.class.getConstructors();
+			
+			for(Constructor c : constructs)
+			Log.info(c);
+			
 			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
 		} catch (Exception e)
 		{
