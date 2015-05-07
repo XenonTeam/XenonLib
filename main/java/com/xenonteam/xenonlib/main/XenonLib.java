@@ -101,6 +101,7 @@ public final class XenonLib implements IXenonMod
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
 
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
@@ -133,14 +134,11 @@ public final class XenonLib implements IXenonMod
 		
 		config.save();
 		
-		SpriteSheet test = new SpriteSheet(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
+		SpriteSheet test = new SpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/cmd.png"));
+		
 		GameRegistry.registerTileEntity(TETest.class, "test");
 		
-		Constructor constr = ReflectionHelper.getConstructorAccesseble(SpriteSheet.class, ResourceLocation.class);
 		
-		Log.info(constr.getParameterCount());
-		
-		test = (SpriteSheet) constr.newInstance(new ResourceLocation("xenon_lib:textures/gui/sprites/testsheet.png"));
 		
 			
 	}

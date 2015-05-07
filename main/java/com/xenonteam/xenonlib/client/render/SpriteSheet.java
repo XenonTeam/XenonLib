@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
 import com.xenonteam.xenonlib.util.java.FileHelper;
 
@@ -27,6 +28,8 @@ import com.xenonteam.xenonlib.util.java.FileHelper;
 public class SpriteSheet
 {
 	private int m_h, m_w;
+
+	public static HashMap<String, SpriteSheet> spritesheets = new HashMap<String, SpriteSheet>();
 
 	public static class Sprite
 	{
@@ -68,26 +71,24 @@ public class SpriteSheet
 
 	public Map<String, Sprite> m_sprites;
 
-	public SpriteSheet(ResourceLocation loc, int hight, int with)
+	public SpriteSheet(String MapId, ResourceLocation loc)
 	{
-		m_loc = loc;
-		this.m_h = hight;
-		this.m_w = with;
-		m_sprites = new HashMap<String, Sprite>();
 
-		loadSpritesByFile();
-	}
+		if (!spritesheets.containsKey(MapId))
+		{
+			int[] size = XUtils.getSpriteSheetSize(loc);
 
-	public SpriteSheet(ResourceLocation loc)
-	{
-		int[] size = XUtils.getSpriteSheetSize(loc);
+			m_loc = loc;
+			this.m_h = size[1];
+			this.m_w = size[0];
+			m_sprites = new HashMap<String, Sprite>();
 
-		m_loc = loc;
-		this.m_h = size[1];
-		this.m_w = size[0];
-		m_sprites = new HashMap<String, Sprite>();
-
-		loadSpritesByFile();
+			loadSpritesByFile();
+			spritesheets.put(MapId, this);
+		} else
+		{
+			Log.error("There is allready a spritesheet that has the ID : " + MapId + " :");
+		}
 	}
 
 	public void addSprite(String id, Sprite s)
@@ -127,16 +128,13 @@ public class SpriteSheet
 		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getYOff(), s.m_x, s.m_y, elm.getHeight(), elm.getWidth());
 	}
 
-	private void loadSpritesByFile()
+	public void loadSpritesByFile()
 	{
 		if (XUtils.getStreamFromRL(new ResourceLocation(m_loc.getResourceDomain(), m_loc.getResourcePath() + ".sprites")) == null)
 		{
 			return;
 		}
 
-
-		
-		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(XUtils.getStreamFromRL(new ResourceLocation(m_loc.getResourceDomain(), m_loc.getResourcePath() + ".sprites"))));
 
 		ArrayList<String> lines = new ArrayList<String>();
@@ -150,17 +148,14 @@ public class SpriteSheet
 		}
 
 		String metaline = lines.get(0);
-		
+
 		String version = metaline;
 
 		lines.remove(0);
 
-		
-		
 		for (String line : lines)
 		{
 
-			
 			String id = null;
 			int x = 0;
 			int y = 0;
@@ -171,9 +166,9 @@ public class SpriteSheet
 
 			if (split[0].startsWith("C"))
 			{
-				
+
 				String[] splitI = split[1].split(",");
-				
+
 				if (splitI.length != 5)
 				{
 					continue;
@@ -184,7 +179,7 @@ public class SpriteSheet
 					String s1 = s.replaceAll("[\\s]", "");
 
 					String[] sarr = s1.split("=");
-					
+
 					if (sarr[0].equals("id"))
 					{
 						id = sarr[1];
@@ -203,11 +198,11 @@ public class SpriteSheet
 					}
 				}
 
-			} else if(split[0].startsWith("S"))
+			} else if (split[0].startsWith("S"))
 			{
-				
+
 				String[] splitI = split[1].split(",");
-				
+
 				if (splitI.length != 5)
 				{
 					continue;
@@ -218,14 +213,12 @@ public class SpriteSheet
 				y = Integer.parseInt(splitI[2]);
 				w = Integer.parseInt(splitI[3]);
 				h = Integer.parseInt(splitI[4]);
-				
-				
+
 			}
-			
+
 			addSprite(id, x, y, w, h);
 
 		}
-		
 
 	}
 
