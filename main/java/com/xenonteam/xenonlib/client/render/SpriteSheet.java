@@ -29,7 +29,7 @@ public class SpriteSheet
 {
 	private int m_h, m_w;
 
-	public static HashMap<String, SpriteSheet> spritesheets = new HashMap<String, SpriteSheet>();
+	protected static HashMap<String, SpriteSheet> spritesheets = new HashMap<String, SpriteSheet>();
 
 	/**
 	 * 
@@ -112,7 +112,12 @@ public class SpriteSheet
 			Log.error("There is allready a spritesheet that has the ID : " + MapId + " :");
 		}
 	}
-
+	
+	public static SpriteSheet getSpriteSheet(String id)
+	{
+		return spritesheets.get(id);
+	}
+	
 	/**
 	 * Adds a {@link Sprite} to this spritesheet
 	 * 

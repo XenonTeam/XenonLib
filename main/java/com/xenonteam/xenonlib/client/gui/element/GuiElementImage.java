@@ -19,15 +19,13 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 {
 
 	private int xpos, ypos, priority, with, hight;
-	private ResourceLocation reslocation;
-	private SpriteSheet m_sheet;
+	private String m_sheet;
 	private String m_spriteID;
 	
 	private IGuiContainer m_parent;
 
 	public GuiElementImage(IGuiContainer parent, SpriteSheet sheet, String spriteID)
 	{
-		this.setResource(sheet.getResource());
 		this.setHeight(sheet.getSprite(spriteID).getHeight());
 		this.setWidth(sheet.getSprite(spriteID).getWidth());
 		m_sheet = sheet;
@@ -115,18 +113,6 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 		return hight;
 	}
 
-	@Override
-	public ResourceLocation getResource()
-	{
-		return reslocation;
-	}
-
-	@Override
-	public void setResource(ResourceLocation loc)
-	{
-		this.reslocation = loc;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getParent()
 	 */
@@ -136,10 +122,40 @@ public class GuiElementImage implements IGuiElement, IGuiElement.IGuiSpriteHandl
 		return m_parent;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String, int)
+	 */
+	@Override
+	public void setSpriteID(String ID, int i)
+	{
+		this.m_spriteID = ID;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String)
+	 */
 	@Override
 	public void setSpriteID(String ID)
 	{
 		this.m_spriteID = ID;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiSpriteHandler#setSpriteSheet(java.lang.String)
+	 */
+	@Override
+	public void setSpriteSheet(String sheetId)
+	{
+		setSpriteSheet(SpriteSheet.getSpriteSheet(sheetId));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiSpriteHandler#getSpriteSheet()
+	 */
+	@Override
+	public String getSpriteSheet()
+	{
+		return m_sheet;
 	}
 
 }

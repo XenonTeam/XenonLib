@@ -10,13 +10,14 @@ import net.minecraft.util.ResourceLocation;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionHandler;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionProvider;
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
+import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
 /**
  * @author tim4242
  * @author philipas
  *
  */
-public class GuiElementButton implements IGuiActionProvider
+public class GuiElementButton implements IGuiActionProvider, IGuiElement.IGuiSpriteHandler
 {
 
 	/* (non-Javadoc)
@@ -25,7 +26,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void draw(IGuiFactory factory)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -35,7 +36,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setXOff(int x)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -45,7 +46,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setYOff(int y)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -55,7 +56,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setPos(int x, int y)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -65,7 +66,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setPos(Point p)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -75,7 +76,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setPriority(int priority)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -85,7 +86,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setHeight(int height)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -95,7 +96,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public void setWidth(int width)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
@@ -105,7 +105,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public int getXOff()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -115,7 +114,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public int getYOff()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -125,7 +123,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public int getPriority()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -135,7 +132,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public int getHeight()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -145,7 +141,6 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public int getWidth()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -155,28 +150,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public IGuiElement getParent()
 	{
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getResource()
-	 */
-	@Override
-	public ResourceLocation getResource()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setResource(net.minecraft.util.ResourceLocation)
-	 */
-	@Override
-	public void setResource(ResourceLocation loc)
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	/* (non-Javadoc)
@@ -185,7 +159,7 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public boolean addActionHandler(IGuiActionHandler handler)
 	{
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -195,8 +169,44 @@ public class GuiElementButton implements IGuiActionProvider
 	@Override
 	public boolean removeActionHandler(IGuiActionHandler handler)
 	{
-		// TODO Auto-generated method stub
+		
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String, int)
+	 */
+	@Override
+	public void setSpriteID(String ID, int i)
+	{
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String)
+	 */
+	@Override
+	public void setSpriteID(String ID)
+	{
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiSpriteHandler#setSpriteSheet(com.xenonteam.xenonlib.client.render.SpriteSheet)
+	 */
+	@Override
+	public void setSpriteSheet(SpriteSheet sheet)
+	{
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiSpriteHandler#setSpriteSheet(java.lang.String)
+	 */
+	@Override
+	public void setSpriteSheet(String sheetId)
+	{
+		
 	}
 
 }

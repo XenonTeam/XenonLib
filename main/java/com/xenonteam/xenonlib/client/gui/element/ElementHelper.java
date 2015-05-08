@@ -3,6 +3,8 @@
  */
 package com.xenonteam.xenonlib.client.gui.element;
 
+import com.xenonteam.xenonlib.client.render.SpriteSheet;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -16,21 +18,21 @@ import net.minecraft.util.ResourceLocation;
 public class ElementHelper
 {
 
-	public static void draw(IGuiElement elm, GuiContainer container)
+	public static void draw(IGuiElement.IGuiSpriteHandler elm, GuiContainer container)
 	{
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 		
-		renderer.bindTexture(elm.getResource());
+		renderer.bindTexture(SpriteSheet.getSpriteSheet(elm.getSpriteSheet()).getResource());
 		
 		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), 0, 0, elm.getHeight(), elm.getWidth());
 		
 	}
 	
-	public static void drawSprite(IGuiElement elm, int x, int y, GuiContainer container)
+	public static void drawSprite(IGuiElement.IGuiSpriteHandler elm, int x, int y, GuiContainer container)
 	{
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 		
-		renderer.bindTexture(elm.getResource());
+		renderer.bindTexture(SpriteSheet.getSpriteSheet(elm.getSpriteSheet()).getResource());
 		
 		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), x, y, elm.getHeight(), elm.getWidth());
 	}

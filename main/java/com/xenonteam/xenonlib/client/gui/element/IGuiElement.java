@@ -8,6 +8,7 @@ import java.awt.Point;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
+import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
 /**
  * The core interface for all drawable gui elements
@@ -114,21 +115,7 @@ public interface IGuiElement
 	 * @return {@link IGuiElement} the is the parent
 	 */
 	public IGuiElement getParent();
-
-	/**
-	 * @return The {@link net.minecraft.util.ResourceLocation ResourceLocation}
-	 */
-	public ResourceLocation getResource();
-
-	/**
-	 * Sets the {@link net.minecraft.util.ResourceLocation ResourceLocation}
-	 * 
-	 * @param loc
-	 *            new {@link net.minecraft.util.ResourceLocation
-	 *            ResourceLocation}
-	 */
-	public void setResource(ResourceLocation loc);
-
+	
 	/**
 	 * A version of {@link IGuiElement} meant to be interactive
 	 * 
@@ -175,22 +162,39 @@ public interface IGuiElement
 		 */
 		public void handleAction(int action, Object... args);
 	}
-
-	/**
-	 * A version of {@link IGuiElement} meant for static pictures
-	 * 
-	 * @author tim4242
-	 * @author philipas
-	 *
-	 */
+	
 	public interface IGuiSpriteHandler extends IGuiElement
 	{
+		
 		/**
 		 * Sets the sprite id
 		 * 
 		 * @param ID
 		 *            The sprite id
+		 * @param i
+		 *            The index of the sprite (default is 0)
+		 */
+		public void setSpriteID(String ID, int i);
+
+		/**
+		 * Sets the sprite id at index 0
+		 * 
+		 * @param ID
+		 *            The sprite id
 		 */
 		public void setSpriteID(String ID);
+		
+		/**
+		 * Sets the {@link com.xenonteam.xenonlib.client.render.SpriteSheet SpriteSheet} id
+		 * 
+		 * @param sheet new {@link com.xenonteam.xenonlib.client.render.SpriteSheet SpriteSheet} id
+		 */
+		public void setSpriteSheet(String sheetId);
+		
+		/**
+		 * @return The {@link com.xenonteam.xenonlib.client.render.SpriteSheet SpriteSheet} id
+		 */
+		public String getSpriteSheet();
 	}
+
 }
