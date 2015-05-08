@@ -17,11 +17,20 @@ import com.xenonteam.xenonlib.util.Log;
 public class ReflectionHelper
 {
 	/**
-	 * Get a accessible {@link java.lang.reflect.Method Method} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Method Method} form.
-	 * @param methodName The {@link java.lang.String String} that is the name of {@link java.lang.reflect.Method Method} you want to get.
-	 * @param parameters The parameters of the {@link java.lang.reflect.Method Method} that you want to get.
-	 * @return The {@link java.lang.reflect.Method Method} that you requested and makes them accessible.
+	 * Get a accessible {@link java.lang.reflect.Method Method} from a
+	 * {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Method Method} form.
+	 * @param methodName
+	 *            The {@link java.lang.String String} that is the name of
+	 *            {@link java.lang.reflect.Method Method} you want to get.
+	 * @param parameters
+	 *            The parameters of the {@link java.lang.reflect.Method Method}
+	 *            that you want to get.
+	 * @return The {@link java.lang.reflect.Method Method} that you requested
+	 *         and makes them accessible.
 	 */
 	public static Method getMethodAccesseble(Class<?> temp, String methodName, Class<?>... parameters)
 	{
@@ -31,10 +40,17 @@ public class ReflectionHelper
 	}
 
 	/**
-	 * Get an accessible {@link java.lang.reflect.Field Field} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Field Field} form.
-	 * @param fieldName The {@link java.lang.String String} that is the name of {@link java.lang.reflect.Field Field} you want to get.
-	 * @return The {@link java.lang.reflect.Field Field} that you requested and makes them accessible.
+	 * Get an accessible {@link java.lang.reflect.Field Field} from a
+	 * {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Field Field} form.
+	 * @param fieldName
+	 *            The {@link java.lang.String String} that is the name of
+	 *            {@link java.lang.reflect.Field Field} you want to get.
+	 * @return The {@link java.lang.reflect.Field Field} that you requested and
+	 *         makes them accessible.
 	 */
 	public static Field getFieldAccesseble(Class<?> temp, String fieldName)
 	{
@@ -44,10 +60,17 @@ public class ReflectionHelper
 	}
 
 	/**
-	 * Get an accessible {@link java.lang.reflect.Constructor Constructor} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Constructor Constructor} form.
-	 * @param parameters The parameters of the {@link java.lang.reflect.Constructor Constructor} that you want to get.
-	 * @return The {@link java.lang.reflect.Constructor Constructor} that you requested and makes them accessible.
+	 * Get an accessible {@link java.lang.reflect.Constructor Constructor} from
+	 * a {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Constructor Constructor} form.
+	 * @param parameters
+	 *            The parameters of the {@link java.lang.reflect.Constructor
+	 *            Constructor} that you want to get.
+	 * @return The {@link java.lang.reflect.Constructor Constructor} that you
+	 *         requested and makes them accessible.
 	 */
 	public static Constructor getConstructorAccesseble(Class<?> temp, Class... parameters)
 	{
@@ -57,10 +80,17 @@ public class ReflectionHelper
 	}
 
 	/**
-	 * Get a {@link java.lang.reflect.Constructor Constructor} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Constructor Constructor} form.
-	 * @param parameters The parameters of the {@link java.lang.reflect.Constructor Constructor} that you want to get.
-	 * @return The {@link java.lang.reflect.Constructor Constructor} that you requested and makes them accessible.
+	 * Get a {@link java.lang.reflect.Constructor Constructor} from a
+	 * {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Constructor Constructor} form.
+	 * @param parameters
+	 *            The parameters of the {@link java.lang.reflect.Constructor
+	 *            Constructor} that you want to get.
+	 * @return The {@link java.lang.reflect.Constructor Constructor} that you
+	 *         requested and makes them accessible.
 	 */
 	public static Constructor getConstructor(Class<?> temp, Class... parameters)
 	{
@@ -78,12 +108,19 @@ public class ReflectionHelper
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Get a {@link java.lang.reflect.Method Method} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Method Method} form.
-	 * @param parameters The parameters of the {@link java.lang.reflect.Method Method} that you want to get.
-	 * @return The {@link java.lang.reflect.Method Method} that you requested and makes them accessible.
+	 * Get a {@link java.lang.reflect.Method Method} from a
+	 * {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Method Method} form.
+	 * @param parameters
+	 *            The parameters of the {@link java.lang.reflect.Method Method}
+	 *            that you want to get.
+	 * @return The {@link java.lang.reflect.Method Method} that you requested
+	 *         and makes them accessible.
 	 */
 	public static Method getSpecificMethod(Class<?> temp, String methodName, Class<?>... parameters)
 	{
@@ -120,10 +157,17 @@ public class ReflectionHelper
 	}
 
 	/**
-	 * Get a {@link java.lang.reflect.Field Field} from a {@link java.lang.Class Class} that you normally can't use.
-	 * @param temp The {@link java.lang.Class Class} that you want to get the {@link java.lang.reflect.Field Field} form.
-	 * @param parameters The parameters of the {@link java.lang.reflect.Field Field} that you want to get.
-	 * @return The {@link java.lang.reflect.Field Field} that you requested and makes them accessible.
+	 * Get a {@link java.lang.reflect.Field Field} from a
+	 * {@link java.lang.Class Class} that you normally can't use.
+	 * 
+	 * @param temp
+	 *            The {@link java.lang.Class Class} that you want to get the
+	 *            {@link java.lang.reflect.Field Field} form.
+	 * @param parameters
+	 *            The parameters of the {@link java.lang.reflect.Field Field}
+	 *            that you want to get.
+	 * @return The {@link java.lang.reflect.Field Field} that you requested and
+	 *         makes them accessible.
 	 */
 	public static Field getField(Class<?> temp, String fieldName)
 	{
@@ -141,6 +185,5 @@ public class ReflectionHelper
 		}
 
 	}
-
 
 }
