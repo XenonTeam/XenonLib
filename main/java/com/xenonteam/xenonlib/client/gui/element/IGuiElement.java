@@ -22,57 +22,66 @@ public interface IGuiElement
 	/**
 	 * Draws the element to the provided {@link IGuiFactory}.
 	 * 
-	 * @param factory The {@link IGuiFactory}
+	 * @param factory
+	 *            The {@link IGuiFactory}
 	 */
 	public void draw(IGuiFactory factory);
 
 	/**
 	 * Sets the x offset
 	 * 
-	 * @param x new offset
+	 * @param x
+	 *            new offset
 	 */
 	public void setXOff(int x);
 
 	/**
 	 * Sets the y offset
 	 * 
-	 * @param y new y offset
+	 * @param y
+	 *            new y offset
 	 */
 	public void setYOff(int y);
 
 	/**
 	 * Sets the position
 	 * 
-	 * @param x new x offset
-	 * @param y new y offset
+	 * @param x
+	 *            new x offset
+	 * @param y
+	 *            new y offset
 	 */
 	public void setPos(int x, int y);
 
 	/**
 	 * Sets the position
 	 * 
-	 * @param p new position
+	 * @param p
+	 *            new position
 	 */
 	public void setPos(Point p);
 
 	/**
 	 * Sets the priority (z order)
 	 * 
-	 * @param priority new priority
+	 * @param priority
+	 *            new priority
 	 */
 	public void setPriority(int priority);
 
 	/**
 	 * Sets the height
 	 * 
-	 * @param height new height
+	 * @param height
+	 *            new height
 	 */
 	public void setHeight(int height);
 
 	/**
 	 * sets the width
 	 * 
-	 * @param width new width
+	 * @param width
+	 *            new width
 	 */
 	public void setWidth(int width);
 
@@ -114,7 +123,9 @@ public interface IGuiElement
 	/**
 	 * Sets the {@link net.minecraft.util.ResourceLocation ResourceLocation}
 	 * 
-	 * @param loc new {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * @param loc
+	 *            new {@link net.minecraft.util.ResourceLocation
+	 *            ResourceLocation}
 	 */
 	public void setResource(ResourceLocation loc);
 
@@ -130,7 +141,8 @@ public interface IGuiElement
 		/**
 		 * Registers a {@link IGuiActionHandler}
 		 * 
-		 * @param handler The handler to register
+		 * @param handler
+		 *            The handler to register
 		 * @return If it was successful
 		 */
 		public boolean addActionHandler(IGuiActionHandler handler);
@@ -156,8 +168,10 @@ public interface IGuiElement
 		/**
 		 * The method that gets called when an action occurs
 		 * 
-		 * @param action The action
-		 * @param args The action specific arguments
+		 * @param action
+		 *            The action
+		 * @param args
+		 *            The action specific arguments
 		 */
 		public void handleAction(int action, Object... args);
 	}
@@ -174,7 +188,8 @@ public interface IGuiElement
 		/**
 		 * Sets the sprite id
 		 * 
-		 * @param ID The sprite id
+		 * @param ID
+		 *            The sprite id
 		 */
 		public void setSpriteID(String ID);
 	}
