@@ -126,7 +126,7 @@ public class SpriteSheet
 
 		container.mc.renderEngine.bindTexture(getResource());
 
-		container.drawModalRectWithCustomSizedTexture(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, 64, 16);
+		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), 64, 16);
 	}
 
 	public void loadSpritesByFile()
