@@ -123,10 +123,9 @@ public class SpriteSheet
 	{
 		Sprite s = m_sprites.get(id);
 
-
 		container.mc.renderEngine.bindTexture(getResource());
 
-		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), 64, 16);
+		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), this.m_w, this.m_h);
 	}
 
 	public void loadSpritesByFile()
