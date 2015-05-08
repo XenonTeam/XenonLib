@@ -23,6 +23,8 @@ import com.xenonteam.xenonlib.util.XUtils;
 import com.xenonteam.xenonlib.util.java.FileHelper;
 
 /**
+ * This class stores all the information needed to draw images to a gui
+ * 
  * @author tim4242
  * @author philipas
  *
@@ -33,6 +35,14 @@ public class SpriteSheet
 
 	public static HashMap<String, SpriteSheet> spritesheets = new HashMap<String, SpriteSheet>();
 
+	/**
+	 * 
+	 * This class contains the information about the coordinates of a sprite on a {@link SpriteSheet}
+	 * 
+	 * @author tim4242
+	 * @author philipas
+	 *
+	 */
 	public static class Sprite
 	{
 		protected int m_x;
@@ -69,10 +79,24 @@ public class SpriteSheet
 		}
 	}
 
+	/**
+	 * 
+	 * This stores the {@link net.minecraft.util.ResourceLocation ResourceLocation} that this spritesheet represenets
+	 * 
+	 */
 	protected ResourceLocation m_loc;
+	
+	/**
+	 * This Map stored all the {@link SpriteSheet.Sprite Sprites} in this Spritesheet
+	 */
+	protected Map<String, Sprite> m_sprites;
 
-	public Map<String, Sprite> m_sprites;
-
+	/**
+	 * The default constructor to this class, you can either store a {@link SpriteSheet} you're self or use the method of getting the spritesheet from the internal registry with the id you provide.
+	 * 
+	 * @param MapId The id of this spritesheet 
+	 * @param loc The {@link net.minecraft.util.ResourceLocation ResourceLocation} this spritesheet should represent.
+	 */
 	public SpriteSheet(String MapId, ResourceLocation loc)
 	{
 
@@ -93,6 +117,12 @@ public class SpriteSheet
 		}
 	}
 
+	/**
+	 * Adds a {@link Sprite} to this spritesheet
+	 * 
+	 * @param id The id
+	 * @param s The {@link Sprite}
+	 */
 	public void addSprite(String id, Sprite s)
 	{
 		if (!m_sprites.containsKey(id))
@@ -100,12 +130,27 @@ public class SpriteSheet
 		else
 			return;
 	}
-
+	
+	/**
+	 * Adds a {@link Sprite} to this spritesheet
+	 * 
+	 * @param id The id
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 * @param w The width
+	 * @param h The height
+	 */
 	public void addSprite(String id, int x, int y, int w, int h)
 	{
 		addSprite(id, new Sprite(x, y, w, h));
 	}
 
+	/**
+	 * Gets a {@link Sprite} by it's id
+	 * 
+	 * @param id The id
+	 * @return A {@link Sprite}
+	 */
 	public Sprite getSprite(String id)
 	{
 		if (m_sprites.containsKey(id))
@@ -114,11 +159,21 @@ public class SpriteSheet
 			return null;
 	}
 
+	/**
+	 * @return This spritesheets {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 */
 	public ResourceLocation getResource()
 	{
 		return m_loc;
 	}
 
+	/**
+	 * Draws a sprite to the provided {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer} 
+	 * 
+	 * @param elm The {@link com.xenonteam.xenonlib.client.gui.element.IGuiElement IGuiElement} to be drawn
+	 * @param id The id of the {@link Sprite} to be drawn
+	 * @param container The {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer} to be drawn in
+	 */
 	public void drawSprite(IGuiElement elm, String id, GuiContainer container)
 	{
 		Sprite s = m_sprites.get(id);
@@ -127,8 +182,18 @@ public class SpriteSheet
 
 		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), this.m_w, this.m_h);
 	}
-
-	public void loadSpritesByFile()
+	
+	/**
+	 * 
+	 * <b><u>This method should only be called from inside this class</u></b>
+	 * 
+	 * <br>
+	 * <br>
+	 * 
+	 * This method collects all sprites from the .sprites file connected to the spritesheet and puts them into the internal Map {@link SpriteSheet#m_sprites m_sprites}. 
+	 * 
+	 */
+	protected void loadSpritesByFile()
 	{
 		if (XUtils.getStreamFromRL(new ResourceLocation(m_loc.getResourceDomain(), m_loc.getResourcePath() + ".sprites")) == null)
 		{
