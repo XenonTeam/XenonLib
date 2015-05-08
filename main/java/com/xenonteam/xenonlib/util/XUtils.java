@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
@@ -310,6 +309,15 @@ public class XUtils
 		return XUtils.class.getResourceAsStream("/assets/" + loc.getResourceDomain() + "/" + loc.getResourcePath());
 	}
 
+	/**
+	 * Gives you the size of the image provided as a
+	 * {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * 
+	 * @param loc
+	 *            The {@link net.minecraft.util.ResourceLocation
+	 *            ResourceLocation} of the image
+	 * @return The size in the format [width, height]
+	 */
 	public static int[] getSpriteSheetSize(ResourceLocation loc)
 	{
 		int[] size = new int[2];
@@ -360,7 +368,17 @@ public class XUtils
 		return buffer;
 	}
 
-	public static void logNBTCompound(String id, NBTTagCompound comp)
+	/**
+	 * Logs a complete {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound}
+	 * in a tree structure to the console
+	 * 
+	 * @param name
+	 *            The compound name for logging purposes
+	 * @param comp
+	 *            The {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound} to
+	 *            log
+	 */
+	public static void logNBTCompound(String name, NBTTagCompound comp)
 	{
 		if (comp == null || comp.hasNoTags())
 			return;
@@ -371,10 +389,10 @@ public class XUtils
 
 			if (nbt.getId() == NBTHelper.COMP_ID)
 			{
-				logNBTCompound(id + "/" + key, (NBTTagCompound) nbt);
+				logNBTCompound(name + "/" + key, (NBTTagCompound) nbt);
 			} else
 			{
-				Log.info(id + "/" + key + "[" + NBTHelper.getIdAsString(nbt.getId()) + "]" + ":" + nbt);
+				Log.info(name + "/" + key + "[" + NBTHelper.getIdAsString(nbt.getId()) + "]" + ":" + nbt);
 			}
 		}
 	}
@@ -383,17 +401,14 @@ public class XUtils
 	{
 		Constructor MBConstruct = ReflectionHelper.getConstructorAccesseble(ModelBlock.class, ResourceLocation.class, List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
 		Constructor VMWConstruct = ReflectionHelper.getConstructorAccesseble(ModelLoader.class.getDeclaredClasses()[6], ModelLoader.class, ResourceLocation.class, ModelBlock.class);
-		 
-		
+
 		ModelBlock model = (ModelBlock) MBConstruct.newInstance(null, parts, textures, ambientOcclusion, true, camTrans);
 
 		IRegistry modelbakery = (IRegistry) ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelRegistry").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft()));
-		
-		Log.info("VMWArgCount: " + VMWConstruct.getParameterCount());
-		
-		IModel output = (IModel) VMWConstruct.newInstance(new ModelLoader(null, null, null), key, model);
 
-		
+		Log.info("VMWArgCount: " + VMWConstruct.getParameterCount());
+
+		IModel output = (IModel) VMWConstruct.newInstance(new ModelLoader(null, null, null), key, model);
 
 		modelbakery.putObject(key, output);
 

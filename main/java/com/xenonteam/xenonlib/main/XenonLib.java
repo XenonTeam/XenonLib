@@ -28,14 +28,12 @@ import javax.vecmath.Vector3f;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -74,7 +72,6 @@ import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
-import com.xenonteam.xenonlib.util.java.ReflectionHelper;
 
 /**
  * @author tim4242

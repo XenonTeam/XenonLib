@@ -3,7 +3,6 @@
  */
 package com.xenonteam.xenonlib.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -13,7 +12,6 @@ import com.xenonteam.xenonlib.client.gui.factory.GuiFactory;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.server.inventory.container.TestContainer;
 import com.xenonteam.xenonlib.tileentity.TETest;
-import com.xenonteam.xenonlib.util.Log;
 
 /**
  * @author tim4242
