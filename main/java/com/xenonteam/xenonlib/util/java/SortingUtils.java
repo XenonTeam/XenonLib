@@ -72,7 +72,7 @@ public class SortingUtils
 		
 		for(int i = 0; i < elms2.length; i++)
 		{
-			temp[i] = elms2[i].getValue().getInt() + "=:=" + elms2[i].getKey();
+			temp[i] = elms2[i].getValue().getPriority() + "=:=" + elms2[i].getKey();
 		}
 		
 		List<String> sortedGuiList = new ArrayList<String>();

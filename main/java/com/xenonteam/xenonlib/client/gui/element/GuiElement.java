@@ -5,8 +5,6 @@ package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
-import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
-
 /**
  * @author tim4242
  * @author philipas
@@ -14,16 +12,26 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
  */
 public abstract class GuiElement implements IGuiElement
 {
-	private int xpos, ypos, priority, with, hight;
+	protected int xpos, ypos, priority, width, height;
 	
-	private IGuiContainer m_parent;
+	protected IGuiContainer m_parent;
 
-
-	@Override
-	public void draw(IGuiFactory factory)
+	protected GuiElement(IGuiContainer parent, int x, int y, int w, int h, int prio)
 	{
+		m_parent = parent;
+		
+		xpos = x;
+		ypos = y;
+		width = w;
+		height = h;
+		priority = prio;
 	}
-
+	
+	protected GuiElement(IGuiContainer parent)
+	{
+		this(parent, 0, 0, 0, 0, 0);
+	}
+	
 	@Override
 	public void setXOff(int XPos)
 	{
@@ -58,13 +66,13 @@ public abstract class GuiElement implements IGuiElement
 	@Override
 	public void setWidth(int with)
 	{
-		this.with = with;
+		this.width = with;
 	}
 
 	@Override
 	public void setHeight(int hight)
 	{
-		this.hight = hight;
+		this.height = hight;
 	}
 
 	@Override
@@ -88,13 +96,13 @@ public abstract class GuiElement implements IGuiElement
 	@Override
 	public int getWidth()
 	{
-		return with;
+		return width;
 	}
 
 	@Override
 	public int getHeight()
 	{
-		return hight;
+		return height;
 	}
 
 	@Override

@@ -25,8 +25,8 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
-	private List old_keys = new ArrayList<String>();
-	protected List keys = new ArrayList<String>();
+	private List<String> old_keys = new ArrayList<String>();
+	protected List<String> keys = new ArrayList<String>();
 
 	protected ResourceLocation m_resLoc;
 
@@ -35,6 +35,8 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 		super(container);
 
 		m_resLoc = new ResourceLocation("xenon_lib:textures/gui/GenBackground.png");
+		
+		generate(null);
 	}
 
 	protected void orderKeys()
@@ -165,6 +167,10 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	public void draw(IGuiFactory factory)
 	{
+		for(String s : keys)
+		{
+			elements.get(s).draw(factory);
+		}
 	}
 
 	public void setXOff(int x)
@@ -232,6 +238,12 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	public void setResource(ResourceLocation loc)
 	{
+		
+	}
+	
+	public GuiContainer getContainer()
+	{
+		return this;
 	}
 
 }

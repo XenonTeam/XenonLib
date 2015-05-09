@@ -6,7 +6,6 @@ package com.xenonteam.xenonlib.client.gui.element;
 import java.awt.Point;
 
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
-import com.xenonteam.xenonlib.util.java.SortingUtils.ISortable;
 
 /**
  * The core interface for all drawable gui elements
@@ -15,7 +14,7 @@ import com.xenonteam.xenonlib.util.java.SortingUtils.ISortable;
  * @author philipas
  * 
  */
-public interface IGuiElement extends ISortable
+public interface IGuiElement
 {
 
 	/**
@@ -113,8 +112,6 @@ public interface IGuiElement extends ISortable
 	 * @return {@link IGuiElement} the is the parent
 	 */
 	public IGuiElement getParent();
-	
-	public int getInt();
 	
 	/**
 	 * A version of {@link IGuiElement} meant to be interactive

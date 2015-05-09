@@ -5,6 +5,8 @@ package com.xenonteam.xenonlib.client.gui.factory;
 
 import java.awt.Point;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 
 /**
@@ -22,6 +24,7 @@ public interface IGuiFactory {
 
 	public IGuiElement getElement(String ID);
 	
+	public GuiContainer getContainer();
 	
 	public boolean setElementPos(String id, int x, int y);
 	

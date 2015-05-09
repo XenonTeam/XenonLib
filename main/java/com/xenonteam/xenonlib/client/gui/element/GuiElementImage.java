@@ -14,26 +14,24 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
 public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSpriteHandler
 {
 
-	private int xpos, ypos, priority, with, hight;
 	private String m_sheetID;
 	private String m_spriteID;
-	
-	private IGuiContainer m_parent;
 
 	public GuiElementImage(IGuiContainer parent, String spriteSheetID, String spriteID)
 	{
+		super(parent);
+		
 		this.setHeight(SpriteSheet.getSpriteSheet(spriteSheetID).getSprite(spriteID).getHeight());
 		this.setWidth(SpriteSheet.getSpriteSheet(spriteSheetID).getSprite(spriteID).getWidth());
 		m_sheetID = spriteSheetID;
 		m_spriteID = spriteID;
 		
-		m_parent = parent;
 	}
 
 	@Override
 	public void draw(IGuiFactory factory)
 	{
-		SpriteSheet.getSpriteSheet(m_sheetID).drawSprite(this, m_spriteID, m_parent.getGuiScreen());
+		SpriteSheet.drawSprite(m_sheetID, this, m_spriteID, m_parent.getGuiScreen());
 	}
 
 	
@@ -72,15 +70,6 @@ public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSprit
 	public String getSpriteSheet()
 	{
 		return m_sheetID;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getInt()
-	 */
-	@Override
-	public int getInt()
-	{
-		return this.getPriority();
 	}
 
 }

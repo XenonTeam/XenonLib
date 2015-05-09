@@ -34,7 +34,6 @@ import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -225,8 +224,6 @@ public final class XenonLib implements IXenonMod
 
 		for (String s : testList)
 			Log.info(s + ":" + elements.get(s).getPriority());
-
-		FMLCommonHandler.instance().exitJava(0, true);
 	}
 
 	public static void addXenonMod(IXenonMod mod)

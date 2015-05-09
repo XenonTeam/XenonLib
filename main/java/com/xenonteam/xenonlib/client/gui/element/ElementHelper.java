@@ -37,6 +37,11 @@ public class ElementHelper
 		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), x, y, elm.getHeight(), elm.getWidth());
 	}
 	
+	public static void drawString(IGuiElement elm, int x, int y, GuiContainer container, String text, int color)
+	{
+		container.drawString(Minecraft.getMinecraft().fontRendererObj, text, elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), color);
+	}
+	
 	public static void unloadResourceLocation(ResourceLocation loc)
 	{
 		Minecraft.getMinecraft().renderEngine.deleteTexture(loc);

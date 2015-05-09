@@ -183,13 +183,15 @@ public class SpriteSheet
 	 * @param id The id of the {@link Sprite} to be drawn
 	 * @param container The {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer} to be drawn in
 	 */
-	public void drawSprite(IGuiElement elm, String id, GuiContainer container)
+	public static void drawSprite(String spritesheet, IGuiElement elm, String id, GuiContainer container)
 	{
-		Sprite s = m_sprites.get(id);
+		SpriteSheet sheet = getSpriteSheet(spritesheet);
+		
+		Sprite s = sheet.m_sprites.get(id);
 
-		container.mc.renderEngine.bindTexture(getResource());
+		container.mc.renderEngine.bindTexture(sheet.getResource());
 
-		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), this.m_w, this.m_h);
+		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 	
 	/**
