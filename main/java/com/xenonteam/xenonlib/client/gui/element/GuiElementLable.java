@@ -27,7 +27,7 @@ public class GuiElementLable extends GuiElement
 	@Override
 	public void draw(IGuiFactory factory)
 	{
-		ElementHelper.drawString(this, this.getXOff(), this.getYOff(), factory.getContainer(), getLable(), 4210752);
+		ElementHelper.drawString(this, this.getXOff(), this.getYOff(), factory.getContainer(), getLable(), ElementHelper.COLOR_WHITE);
 	}
 	
 	public String getLable()

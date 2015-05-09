@@ -18,6 +18,20 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
 public class ElementHelper
 {
 
+	public static final int COLOR_WHITE = 0xFFFFFF;
+	public static final int COLOR_DBLUE = 0x0000AA;
+	public static final int COLOR_DAQUA = 0x00AAAA;
+	public static final int COLOR_DGREEN = 0x00AA00;
+	public static final int COLOR_DRED = 0xAA0000;
+	public static final int COLOR_BLACK = 0x000000;
+	public static final int COLOR_DPURPLE = 0xAA00AA;
+	public static final int COLOR_DGRAY = 0x555555;
+	public static final int COLOR_GOLD = 0xFFAA00;
+	public static final int COLOR_GRAY = 0xAAAAAA;
+	public static final int COLOR_BLUE = 0x5555FF;
+	public static final int COLOR_GREEN = 0x55FF55;
+	public static final int COLOR_RED = 0xFF5555;
+	
 	public static void draw(IGuiElement.IGuiSpriteHandler elm, GuiContainer container)
 	{
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
