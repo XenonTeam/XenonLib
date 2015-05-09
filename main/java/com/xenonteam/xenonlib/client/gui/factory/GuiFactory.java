@@ -4,16 +4,22 @@
 package com.xenonteam.xenonlib.client.gui.factory;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiContainer;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
+import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
+import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
+import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.java.SortingUtils;
 
 /**
@@ -29,17 +35,17 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	protected List<String> keys = new ArrayList<String>();
 
 	protected ResourceLocation m_resLoc;
-	
-	protected int m_mouseX, m_mouseY, m_mouseButton;
-	
-	
 
-	public GuiFactory(Container container)
+	protected int m_mouseX, m_mouseY, m_mouseButton;
+
+	private TileEntity tile;
+
+	public GuiFactory(Container container, TileEntity tile)
 	{
 		super(container);
 
 		m_resLoc = new ResourceLocation("xenon_lib:textures/gui/GenBackground.png");
-		
+		this.tile = tile;
 		generate(null);
 	}
 
@@ -171,7 +177,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	public void draw(IGuiFactory factory)
 	{
-		for(String s : keys)
+		for (String s : keys)
 		{
 			elements.get(s).draw(factory);
 		}
@@ -242,40 +248,62 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	public void setResource(ResourceLocation loc)
 	{
-		
+
 	}
-	
+
 	public GuiContainer getContainer()
 	{
 		return this;
 	}
-	
+
 	public int getMouseX()
 	{
 		return m_mouseX;
 	}
-	
+
 	public int getMouseY()
 	{
 		return m_mouseY;
 	}
-	
+
 	public boolean getMouseClicked()
 	{
 		return (m_mouseButton != -1 ? true : false);
 	}
-	
+
 	public void mouseClicked(int mX, int mY, int button)
 	{
+		try
+		{
+			super.mouseClicked(mX, mY, button);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		m_mouseX = mX;
 		m_mouseY = mY;
-		
+
 		m_mouseButton = button;
 	}
-	
+
 	public void mouseReleased(int mX, int mY, int mouseButton)
 	{
+		super.mouseReleased(mX, mY, mouseButton);
 		m_mouseButton = -1;
+	}
+
+	@Override
+	public void handleAction(int action, Object... args)
+	{
+		if (tile instanceof GenericTileEntity)
+		{
+			MessageHandleGuiButtonPress msg = new MessageHandleGuiButtonPress((GenericTileEntity) tile, action);
+			NetworkHandler.sendToServer(msg);
+		}
+		else
+		{
+			Log.debug("You are not overiding the Method handleAction in the : " + this.getClass().toString() + " :");
+		}
 	}
 
 }

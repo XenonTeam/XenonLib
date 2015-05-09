@@ -17,7 +17,7 @@ import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
  * @author philipas
  * 
  */
-public class GenericTileEntity extends TileEntity implements IGenericTileEntity{
+public class GenericTileEntity extends TileEntity{
 
     @Override
     public Packet getDescriptionPacket(){
@@ -30,22 +30,18 @@ public class GenericTileEntity extends TileEntity implements IGenericTileEntity{
     }
     
 
-	@Override
 	public void writeToPacket(ByteBuf buf) {
 		
 	}
 
-	@Override
 	public void readFromPacket(ByteBuf buf) {
 		
 	}
 
-	@Override
 	public void onGuiButtonPress(int id) {
 		
 	}
 
-	@Override
 	public void onGuiTextfieldUpdate(int id, String text) {
 		
 	}

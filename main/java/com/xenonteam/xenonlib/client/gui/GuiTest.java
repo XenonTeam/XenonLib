@@ -28,7 +28,7 @@ public class GuiTest extends GuiFactory
 	 */
 	public GuiTest(InventoryPlayer inv, TETest test)
 	{
-		super(new TestContainer(inv, test));
+		super(new TestContainer(inv, test), test);
 	}
 
 	@Override
@@ -57,14 +57,5 @@ public class GuiTest extends GuiFactory
 		super.addGuiElement("button", button);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionHandler#handleAction(int, java.lang.Object[])
-	 */
-	@Override
-	public void handleAction(int action, Object... args)
-	{
-		Log.info("ID: " + action + ":");
-		Log.info(args);
-	}
 
 }
