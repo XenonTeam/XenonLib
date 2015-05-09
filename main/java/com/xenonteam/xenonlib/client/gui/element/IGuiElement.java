@@ -5,10 +5,8 @@ package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
-import net.minecraft.util.ResourceLocation;
-
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
-import com.xenonteam.xenonlib.client.render.SpriteSheet;
+import com.xenonteam.xenonlib.util.java.SortingUtils.ISortable;
 
 /**
  * The core interface for all drawable gui elements
@@ -17,7 +15,7 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
  * @author philipas
  * 
  */
-public interface IGuiElement
+public interface IGuiElement extends ISortable
 {
 
 	/**
@@ -115,6 +113,8 @@ public interface IGuiElement
 	 * @return {@link IGuiElement} the is the parent
 	 */
 	public IGuiElement getParent();
+	
+	public int getInt();
 	
 	/**
 	 * A version of {@link IGuiElement} meant to be interactive

@@ -6,7 +6,6 @@ package com.xenonteam.xenonlib.client.gui.element;
 import java.awt.Point;
 
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
-import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
 /**
  * @author tim4242

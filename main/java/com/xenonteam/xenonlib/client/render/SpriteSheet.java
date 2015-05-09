@@ -93,7 +93,7 @@ public class SpriteSheet
 	 * @param MapId The id of this spritesheet 
 	 * @param loc The {@link net.minecraft.util.ResourceLocation ResourceLocation} this spritesheet should represent.
 	 */
-	public SpriteSheet(String MapId, ResourceLocation loc)
+	private SpriteSheet(String MapId, ResourceLocation loc)
 	{
 
 		if (!spritesheets.containsKey(MapId))
@@ -118,6 +118,11 @@ public class SpriteSheet
 		return spritesheets.get(id);
 	}
 	
+	public static void addSpriteSheet(String mapID, ResourceLocation loc)
+	{
+		new SpriteSheet(mapID, loc);
+	}
+	
 	/**
 	 * Adds a {@link Sprite} to this spritesheet
 	 * 
@@ -127,7 +132,10 @@ public class SpriteSheet
 	public void addSprite(String id, Sprite s)
 	{
 		if (!m_sprites.containsKey(id))
+		{
+			Log.debug("Added sprite " + id);
 			m_sprites.put(id, s);
+		}
 		else
 			return;
 	}

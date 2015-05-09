@@ -3,14 +3,7 @@
  */
 package com.xenonteam.xenonlib.client.gui.element;
 
-import java.awt.Point;
-
-import net.minecraft.util.ResourceLocation;
-
-import com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionHandler;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionProvider;
-import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
-import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
 /**
  * @author tim4242
@@ -19,7 +12,6 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet;
  */
 public class GuiElementButton extends GuiElement implements IGuiActionProvider
 {
-
 
 	@Override
 	public boolean addActionHandler(IGuiActionHandler handler)
@@ -35,8 +27,15 @@ public class GuiElementButton extends GuiElement implements IGuiActionProvider
 		return false;
 	}
 
-	
-	
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getInt()
+	 */
+	@Override
+	public int getInt()
+	{
+		return this.getPriority();
+	}
 
 }

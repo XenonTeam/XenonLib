@@ -3,10 +3,6 @@
  */
 package com.xenonteam.xenonlib.client.gui.element;
 
-import java.awt.Point;
-
-import net.minecraft.util.ResourceLocation;
-
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 
@@ -76,6 +72,15 @@ public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSprit
 	public String getSpriteSheet()
 	{
 		return m_sheetID;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#getInt()
+	 */
+	@Override
+	public int getInt()
+	{
+		return this.getPriority();
 	}
 
 }

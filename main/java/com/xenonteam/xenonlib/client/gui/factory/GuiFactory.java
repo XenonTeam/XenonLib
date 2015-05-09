@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiContainer;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+import com.xenonteam.xenonlib.util.java.SortingUtils;
 
 /**
  * @author tim4242
@@ -38,16 +39,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	protected void orderKeys()
 	{
-		keys = old_keys;
-
-		for (int i = 0; i < keys.size(); i++)
-		{
-			int priority = elements.get(old_keys.get(i)).getPriority();
-			keys.set(priority, old_keys.get(i));
-		}
-
-		old_keys = keys;
-
+		keys = SortingUtils.sortGuiElements(elements);
 	}
 
 	@Override

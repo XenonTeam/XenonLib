@@ -34,6 +34,7 @@ import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -42,7 +43,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,6 +60,8 @@ import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.main.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
+import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
+import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
@@ -69,9 +71,9 @@ import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
 import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
-import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
+import com.xenonteam.xenonlib.util.java.SortingUtils;
 
 /**
  * @author tim4242
@@ -91,14 +93,13 @@ public final class XenonLib implements IXenonMod
 
 	@Mod.Metadata(MOD_ID)
 	private static ModMetadata METADATA;
-	
+
 	@Register(unlocName = "test", modid = Refs.MOD_ID)
 	public static BlockTest test = new BlockTest();
 
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
 
-	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
@@ -120,24 +121,17 @@ public final class XenonLib implements IXenonMod
 		DescriptionHandler.init();
 		NetworkHandler.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-		
+
 		m_plugins.add(INSTANCE);
-		
+
 		Configuration config = new Configuration(new File(event.getModConfigurationDirectory() + "/xenon/xenon.cfg"), "Xenon Config");
-		
+
 		config.load();
-		
+
 		config.get("test", "test", false);
-		
+
 		config.save();
-		
-		SpriteSheet test = new SpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/cmd.png"));
-		
-		GameRegistry.registerTileEntity(TETest.class, "test");
-		
-		
-		
-			
+
 	}
 
 	@EventHandler
@@ -154,6 +148,8 @@ public final class XenonLib implements IXenonMod
 			RegistryHelper.registerObjects(c);
 			Log.debug("Registered " + c.toString());
 		}
+
+		SpriteSheet.addSpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/cmd.png"));
 
 	}
 
@@ -176,38 +172,61 @@ public final class XenonLib implements IXenonMod
 		}
 
 		Log.debug("+----------------------------+", "| Finished loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "            |", "| Version: " + MOD_VERSION + "             |", "+----------------------------+");
-	
+
 		ResourceLocation key = new ResourceLocation("xenon_lib:models/selfmade/test");
-		
+
 		ArrayList<BlockPart> parts = new ArrayList<BlockPart>();
-		
+
 		HashMap<String, String> texes = new HashMap<String, String>();
-		
+
 		parts.add(new BlockPart(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), new Vector3f(1, 1, 1), Maps.newHashMap(), new BlockPartRotation(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), Axis.X, 1, true), true));
-		
-		
-		
+
 		try
 		{
 			Class[] subs = ModelLoader.class.getDeclaredClasses();
-			
-			for(Class clazz : subs)
+
+			for (Class clazz : subs)
 			{
 				Constructor[] constructs = clazz.getConstructors();
-				
-				for(Constructor c : constructs)
+
+				for (Constructor c : constructs)
 				{
 					c.setAccessible(true);
 					Log.info(c);
 				}
 			}
-			
-			
+
 			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+
+		HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
+
+		for (int i = 0; i < 11; i++)
+		{
+			elements.put("test_" + i, new GuiElementImage(null, "test", "test1"));
+		}
+
+		elements.get("test_0").setPriority(3);
+		elements.get("test_1").setPriority(77);
+		elements.get("test_2").setPriority(4);
+		elements.get("test_3").setPriority(0);
+		elements.get("test_4").setPriority(344);
+		elements.get("test_5").setPriority(9);
+		elements.get("test_6").setPriority(4);
+		elements.get("test_7").setPriority(4);
+		elements.get("test_8").setPriority(7);
+		elements.get("test_9").setPriority(1895);
+		elements.get("test_10").setPriority(12);
+
+		List<String> testList = SortingUtils.sortGuiElements(elements);
+
+		for (String s : testList)
+			Log.info(s + ":" + elements.get(s).getPriority());
+
+		FMLCommonHandler.instance().exitJava(0, true);
 	}
 
 	public static void addXenonMod(IXenonMod mod)
