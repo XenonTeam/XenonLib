@@ -45,8 +45,8 @@ public class GuiElementLable extends GuiElement
 	{
 		FontRenderer font = ElementHelper.getFontRenderer();
 		
-		setWidth(font.getStringWidth(getLable()) + 4);
-		setHeight(font.FONT_HEIGHT + 4);
+		setWidth(font.getStringWidth(getLable()) + 8);
+		setHeight(font.FONT_HEIGHT + 8);
 	}
 
 	/* (non-Javadoc)
@@ -58,7 +58,7 @@ public class GuiElementLable extends GuiElement
 		if(getShouldRenderBackground())
 			SpriteSheet.drawSprite("test", this, "button_off", factory.getContainer());
 		
-		ElementHelper.drawString(this, 2, 2, factory.getContainer(), getLable(), getColor());
+		ElementHelper.drawString(this, 4, 4, factory.getContainer(), getLable(), getColor());
 		
 	}
 	

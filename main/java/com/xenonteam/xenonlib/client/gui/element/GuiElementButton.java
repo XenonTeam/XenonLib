@@ -71,7 +71,7 @@ public class GuiElementButton extends GuiElementLable implements IGuiActionProvi
 
 		SpriteSheet.drawSprite("test", this, spriteID, factory.getContainer());
 
-		ElementHelper.drawString(this, 2, 2, factory.getContainer(), getLable(), getColor());
+		ElementHelper.drawString(this, 4, 4, factory.getContainer(), getLable(), getColor());
 	}
 
 	@Override
