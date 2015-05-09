@@ -153,7 +153,7 @@ public final class XenonLib implements IXenonMod
 			Log.debug("Registered " + c.toString());
 		}
 
-		SpriteSheet.addSpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/cmd.png"));
+		SpriteSheet.addSpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/test.png"));
 
 	}
 

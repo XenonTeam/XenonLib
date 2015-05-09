@@ -4,7 +4,9 @@
 package com.xenonteam.xenonlib.client.gui.element;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
@@ -34,6 +36,8 @@ public class ElementHelper
 	
 	public static void draw(IGuiElement.IGuiSpriteHandler elm, GuiContainer container)
 	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 		
 		renderer.bindTexture(SpriteSheet.getSpriteSheet(elm.getSpriteSheet()).getResource());
@@ -44,6 +48,8 @@ public class ElementHelper
 	
 	public static void drawSprite(IGuiElement.IGuiSpriteHandler elm, int x, int y, GuiContainer container)
 	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		
 		TextureManager renderer = Minecraft.getMinecraft().getTextureManager();
 		
 		renderer.bindTexture(SpriteSheet.getSpriteSheet(elm.getSpriteSheet()).getResource());
@@ -51,9 +57,16 @@ public class ElementHelper
 		container.drawTexturedModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), x, y, elm.getHeight(), elm.getWidth());
 	}
 	
+	public static FontRenderer getFontRenderer()
+	{
+		return Minecraft.getMinecraft().fontRendererObj;
+	}
+	
 	public static void drawString(IGuiElement elm, int x, int y, GuiContainer container, String text, int color)
 	{
-		container.drawString(Minecraft.getMinecraft().fontRendererObj, text, elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), color);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		
+		container.drawString(getFontRenderer(), text, elm.getXOff() + elm.getParent().getXOff() + x, elm.getYOff() + elm.getParent().getYOff() + y, color);
 	}
 	
 	public static void unloadResourceLocation(ResourceLocation loc)

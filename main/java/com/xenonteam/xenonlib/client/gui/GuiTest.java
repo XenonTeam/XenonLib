@@ -5,6 +5,8 @@ package com.xenonteam.xenonlib.client.gui;
 
 import net.minecraft.entity.player.InventoryPlayer;
 
+import com.xenonteam.xenonlib.client.gui.element.ElementHelper;
+import com.xenonteam.xenonlib.client.gui.element.GuiElementButton;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementLable;
 import com.xenonteam.xenonlib.client.gui.factory.GuiFactory;
@@ -43,12 +45,26 @@ public class GuiTest extends GuiFactory
 		
 		super.addGuiElement("image1", image);
 		
-		GuiElementLable lable = new GuiElementLable(this, "Test String");
+		GuiElementLable lable = new GuiElementLable(this, "Test String", ElementHelper.COLOR_GREEN, true);
 		lable.setPos(100, 50);
 		
-		super.addGuiElement("lable1", lable);
+		lable.setPriority(0);
 		
-		Log.info("Added image1 and lable1");
+		GuiElementButton button = new GuiElementButton(this, "Button text", ElementHelper.COLOR_WHITE, this);
+		button.setPos(150, 75);
+		
+		super.addGuiElement("lable1", lable);
+		super.addGuiElement("button", button);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiActionHandler#handleAction(int, java.lang.Object[])
+	 */
+	@Override
+	public void handleAction(int action, Object... args)
+	{
+		Log.info("ID: " + action + ":");
+		Log.info(args);
 	}
 
 }

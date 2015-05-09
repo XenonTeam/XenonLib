@@ -30,4 +30,10 @@ public interface IGuiFactory {
 	
 	public boolean setElementPos(String id, Point p);
 	
+	public int getMouseX();
+	
+	public int getMouseY();
+	
+	public boolean getMouseClicked();
+	
 }

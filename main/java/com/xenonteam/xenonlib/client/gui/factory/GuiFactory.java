@@ -21,7 +21,7 @@ import com.xenonteam.xenonlib.util.java.SortingUtils;
  * @author philipas
  * 
  */
-public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer
+public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer, IGuiElement.IGuiActionHandler
 {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
@@ -29,6 +29,10 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	protected List<String> keys = new ArrayList<String>();
 
 	protected ResourceLocation m_resLoc;
+	
+	protected int m_mouseX, m_mouseY, m_mouseButton;
+	
+	
 
 	public GuiFactory(Container container)
 	{
@@ -244,6 +248,34 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	public GuiContainer getContainer()
 	{
 		return this;
+	}
+	
+	public int getMouseX()
+	{
+		return m_mouseX;
+	}
+	
+	public int getMouseY()
+	{
+		return m_mouseY;
+	}
+	
+	public boolean getMouseClicked()
+	{
+		return (m_mouseButton != -1 ? true : false);
+	}
+	
+	public void mouseClicked(int mX, int mY, int button)
+	{
+		m_mouseX = mX;
+		m_mouseY = mY;
+		
+		m_mouseButton = button;
+	}
+	
+	public void mouseReleased(int mX, int mY, int mouseButton)
+	{
+		m_mouseButton = -1;
 	}
 
 }

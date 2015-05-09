@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
@@ -185,6 +186,8 @@ public class SpriteSheet
 	 */
 	public static void drawSprite(String spritesheet, IGuiElement elm, String id, GuiContainer container)
 	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		
 		SpriteSheet sheet = getSpriteSheet(spritesheet);
 		
 		Sprite s = sheet.m_sprites.get(id);

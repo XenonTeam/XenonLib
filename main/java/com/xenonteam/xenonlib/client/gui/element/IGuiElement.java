@@ -168,13 +168,13 @@ public interface IGuiElement
 		 * 
 		 * @param ID
 		 *            The sprite id
-		 * @param i
-		 *            The index of the sprite (default is 0)
+		 * @param key
+		 *            The key of the {@link com.xenonteam.xenonlib.client.render.SpriteSheet#Sprite SpriteSheet#Sprite}
 		 */
-		public void setSpriteID(String ID, int i);
+		public void setSpriteID(String ID, String key);
 
 		/**
-		 * Sets the sprite id at index 0
+		 * Sets the sprite id with the key default
 		 * 
 		 * @param ID
 		 *            The sprite id

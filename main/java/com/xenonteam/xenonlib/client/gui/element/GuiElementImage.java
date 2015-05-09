@@ -40,7 +40,7 @@ public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSprit
 	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String, int)
 	 */
 	@Override
-	public void setSpriteID(String ID, int i)
+	public void setSpriteID(String ID, String key)
 	{
 		this.m_spriteID = ID;
 	}
