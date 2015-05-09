@@ -18,8 +18,6 @@ import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IRegistry;
@@ -369,34 +367,16 @@ public class XUtils
 	}
 
 	/**
-	 * Logs a complete {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound}
-	 * in a tree structure to the console
+	 * Injects a model into the {@link net.minecraft.client.Minecraft#modelRegistry Minecraft.modelRegistry}.
 	 * 
-	 * @param name
-	 *            The compound name for logging purposes
-	 * @param comp
-	 *            The {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound} to
-	 *            log
+	 * @param key The {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * @param parts The different {@link net.minecraft.client.renderer.block.model.BlockPart BlockParts}
+	 * @param textures The different textures
+	 * @param ambientOcclusion If it should have ambient occlusion
+	 * @param camTrans The {@link net.minecraft.client.renderer.block.model.ItemCameraTransforms ItemCameraTransform}
+	 * @return If it was successful
+	 * @throws Exception
 	 */
-	public static void logNBTCompound(String name, NBTTagCompound comp)
-	{
-		if (comp == null || comp.hasNoTags())
-			return;
-
-		for (Object key : comp.getKeySet())
-		{
-			NBTBase nbt = comp.getTag((String) key);
-
-			if (nbt.getId() == NBTHelper.COMP_ID)
-			{
-				logNBTCompound(name + "/" + key, (NBTTagCompound) nbt);
-			} else
-			{
-				Log.info(name + "/" + key + "[" + NBTHelper.getIdAsString(nbt.getId()) + "]" + ":" + nbt);
-			}
-		}
-	}
-
 	public static boolean injectBlockModel(ResourceLocation key, List<BlockPart> parts, Map<String, String> textures, boolean ambientOcclusion, ItemCameraTransforms camTrans) throws Exception
 	{
 		Constructor MBConstruct = ReflectionHelper.getConstructorAccesseble(ModelBlock.class, ResourceLocation.class, List.class, Map.class, boolean.class, boolean.class, ItemCameraTransforms.class);
@@ -405,8 +385,6 @@ public class XUtils
 		ModelBlock model = (ModelBlock) MBConstruct.newInstance(null, parts, textures, ambientOcclusion, true, camTrans);
 
 		IRegistry modelbakery = (IRegistry) ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelRegistry").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft()));
-
-		Log.info("VMWArgCount: " + VMWConstruct.getParameterCount());
 
 		IModel output = (IModel) VMWConstruct.newInstance(new ModelLoader(null, null, null), key, model);
 

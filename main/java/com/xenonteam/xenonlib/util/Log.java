@@ -1,5 +1,8 @@
 package com.xenonteam.xenonlib.util;
 
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -72,5 +75,33 @@ public final class Log {
 		}
 	}
 
+	/**
+	 * Logs a complete {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound}
+	 * in a tree structure to the console
+	 * 
+	 * @param name
+	 *            The compound name for logging purposes
+	 * @param comp
+	 *            The {@link net.minecraft.nbt.NBTTagCompound NBTTagCompound} to
+	 *            log
+	 */
+	public static void logNBTCompound(String name, NBTTagCompound comp)
+	{
+		if (comp == null || comp.hasNoTags())
+			return;
+
+		for (Object key : comp.getKeySet())
+		{
+			NBTBase nbt = comp.getTag((String) key);
+
+			if (nbt.getId() == NBTHelper.COMP_ID)
+			{
+				logNBTCompound(name + "/" + key, (NBTTagCompound) nbt);
+			} else
+			{
+				Log.info(name + "/" + key + "[" + NBTHelper.getIdAsString(nbt.getId()) + "]" + ":" + nbt);
+			}
+		}
+	}
 	
 }

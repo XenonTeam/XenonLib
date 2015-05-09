@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -25,10 +26,13 @@ import java.util.Map.Entry;
 
 import javax.vecmath.Vector3f;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
+import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
@@ -72,6 +76,7 @@ import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
+import com.xenonteam.xenonlib.util.java.ReflectionHelper;
 import com.xenonteam.xenonlib.util.java.SortingUtils;
 
 /**
@@ -196,10 +201,19 @@ public final class XenonLib implements IXenonMod
 			}
 
 			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
+			
+			Field mmanager_field = ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager");
+			Log.info(mmanager_field);
+			
+			ModelManager mmanager = (ModelManager) mmanager_field.get(Minecraft.getMinecraft());
+			
+			Log.info(mmanager.getModel(new ModelResourceLocation("xenon_lib:models/selfmade/test")));
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		
 
 		HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
 

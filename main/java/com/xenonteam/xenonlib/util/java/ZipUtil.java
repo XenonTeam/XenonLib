@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -156,47 +155,6 @@ public class ZipUtil
 	      ex.printStackTrace(); 
 	      return false;
 	    }
-	}
-	
-	public static void checkSysloader()
-	{
-		if(m_addURL == null || m_sysloader == null)
-		{
-			m_sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-			
-			try
-			{
-				m_addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-			} 
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			
-			m_addURL.setAccessible(true);
-		}
-	}
-	
-	public static boolean addToBuildpath(File loc) throws Exception
-	{
-		checkSysloader();
-		
-		if(loc != null)
-		{
-			
-			m_addURL.invoke(m_sysloader, loc.toURI().toURL());
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public static Class<?> loadClass(String name) throws ClassNotFoundException
-	{
-		checkSysloader();
-		
-		return m_sysloader.loadClass(name);
 	}
 	
 }

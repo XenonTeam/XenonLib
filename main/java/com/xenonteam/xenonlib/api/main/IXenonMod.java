@@ -15,6 +15,9 @@ package com.xenonteam.xenonlib.api.main;
 public interface IXenonMod
 {
 
+	/**
+	 * @return All the classes to be registered
+	 */
 	public Class<?>[] getRegisterClasses();
 	
 }
