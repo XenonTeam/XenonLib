@@ -11,12 +11,13 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelBlock;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -395,18 +396,25 @@ public class XUtils
 		return false;
 	}
 	
-	public static void associateStateWithModel(Block block, IStateMapper mapper)
+	public static void associateStateWithModel(IBlockState state, IBakedModel model)
 	{
-		BlockModelShapes shapes = null;
+		Map<IBlockState, IBakedModel> models = null;
 		try
 		{
-			shapes = (BlockModelShapes) ReflectionHelper.getFieldAccesseble(ModelLoader.class, "modelProvider").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft()));
+			 models = (Map) ReflectionHelper.getFieldAccesseble(BlockModelShapes.class, "bakedModelStore").get(ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelProvider").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft())));
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		models.put(state, model);
+		
+		Log.info(models.get(state));
+	}
 	
-		shapes.registerBlockWithStateMapper(block, mapper);
+	public static void injectBlockState(Block block, IBlockState state)
+	{
+		
 	}
 
 }

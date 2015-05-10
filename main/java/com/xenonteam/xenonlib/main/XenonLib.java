@@ -22,17 +22,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.vecmath.Vector3f;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
@@ -46,6 +50,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -154,7 +159,7 @@ public final class XenonLib implements IXenonMod
 		}
 
 		SpriteSheet.addSpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/test.png"));
-
+		
 	}
 
 	@EventHandler
@@ -238,6 +243,22 @@ public final class XenonLib implements IXenonMod
 
 		for (String s : testList)
 			Log.info(s + ":" + elements.get(s).getPriority());
+		
+		Field mmanager_field = ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager");
+		
+		ModelManager mmanager = null;
+		try
+		{
+			mmanager = (ModelManager) mmanager_field.get(Minecraft.getMinecraft());
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		Log.info("State: " + Blocks.cobblestone.getDefaultState(),
+				 "Model: " + mmanager.getModel(new ModelResourceLocation("quartz_block", "normal")));
+		
+		XUtils.associateStateWithModel(test.getDefaultState(), mmanager.getModel(new ModelResourceLocation("quartz_block", "normal")));
 	}
 
 	public static void addXenonMod(IXenonMod mod)
