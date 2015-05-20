@@ -21,11 +21,16 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 public class XenonModelRegistry implements ICustomModelLoader
 {
 
+	private static boolean m_init = false;
 	private static HashMap<ResourceLocation, IModel> m_models;
 
 	public static void initRegistry()
 	{
-		ModelLoaderRegistry.registerLoader(new XenonModelRegistry());
+		if(!m_init)
+		{
+			ModelLoaderRegistry.registerLoader(new XenonModelRegistry());
+			m_init = true;
+		}
 	}
 
 	public static boolean addModel(ResourceLocation loc, IModel model)
