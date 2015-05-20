@@ -5,6 +5,8 @@ package com.xenonteam.xenonlib.client.model;
 
 import java.util.HashMap;
 
+import com.google.common.collect.Maps;
+
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
@@ -38,7 +40,7 @@ public class XenonModelRegistry implements ICustomModelLoader
 
 	private XenonModelRegistry()
 	{
-
+		m_models = Maps.newHashMap();
 	}
 
 	/*
