@@ -34,7 +34,8 @@ public class SpriteSheet
 
 	/**
 	 * 
-	 * This class contains the information about the coordinates of a sprite on a {@link SpriteSheet}
+	 * This class contains the information about the coordinates of a sprite on
+	 * a {@link SpriteSheet}
 	 * 
 	 * @author tim4242
 	 * @author philipas
@@ -78,21 +79,28 @@ public class SpriteSheet
 
 	/**
 	 * 
-	 * This stores the {@link net.minecraft.util.ResourceLocation ResourceLocation} that this spritesheet represenets
+	 * This stores the {@link net.minecraft.util.ResourceLocation
+	 * ResourceLocation} that this spritesheet represenets
 	 * 
 	 */
 	protected ResourceLocation m_loc;
-	
+
 	/**
-	 * This Map stored all the {@link SpriteSheet.Sprite Sprites} in this Spritesheet
+	 * This Map stored all the {@link SpriteSheet.Sprite Sprites} in this
+	 * Spritesheet
 	 */
 	protected Map<String, Sprite> m_sprites;
 
 	/**
-	 * The default constructor to this class, you can either store a {@link SpriteSheet} you're self or use the method of getting the spritesheet from the internal registry with the id you provide.
+	 * The default constructor to this class, you can either store a
+	 * {@link SpriteSheet} you're self or use the method of getting the
+	 * spritesheet from the internal registry with the id you provide.
 	 * 
-	 * @param MapId The id of this spritesheet 
-	 * @param loc The {@link net.minecraft.util.ResourceLocation ResourceLocation} this spritesheet should represent.
+	 * @param MapId
+	 *            The id of this spritesheet
+	 * @param loc
+	 *            The {@link net.minecraft.util.ResourceLocation
+	 *            ResourceLocation} this spritesheet should represent.
 	 */
 	private SpriteSheet(String MapId, ResourceLocation loc)
 	{
@@ -108,27 +116,30 @@ public class SpriteSheet
 
 			loadSpritesByFile();
 			spritesheets.put(MapId, this);
-		} else
+		}
+		else
 		{
 			Log.error("There is allready a spritesheet that has the ID : " + MapId + " :");
 		}
 	}
-	
+
 	public static SpriteSheet getSpriteSheet(String id)
 	{
 		return spritesheets.get(id);
 	}
-	
+
 	public static void addSpriteSheet(String mapID, ResourceLocation loc)
 	{
 		new SpriteSheet(mapID, loc);
 	}
-	
+
 	/**
 	 * Adds a {@link Sprite} to this spritesheet
 	 * 
-	 * @param id The id
-	 * @param s The {@link Sprite}
+	 * @param id
+	 *            The id
+	 * @param s
+	 *            The {@link Sprite}
 	 */
 	public void addSprite(String id, Sprite s)
 	{
@@ -140,15 +151,20 @@ public class SpriteSheet
 		else
 			return;
 	}
-	
+
 	/**
 	 * Adds a {@link Sprite} to this spritesheet
 	 * 
-	 * @param id The id
-	 * @param x The x coordinate
-	 * @param y The y coordinate
-	 * @param w The width
-	 * @param h The height
+	 * @param id
+	 *            The id
+	 * @param x
+	 *            The x coordinate
+	 * @param y
+	 *            The y coordinate
+	 * @param w
+	 *            The width
+	 * @param h
+	 *            The height
 	 */
 	public void addSprite(String id, int x, int y, int w, int h)
 	{
@@ -158,7 +174,8 @@ public class SpriteSheet
 	/**
 	 * Gets a {@link Sprite} by it's id
 	 * 
-	 * @param id The id
+	 * @param id
+	 *            The id
 	 * @return A {@link Sprite}
 	 */
 	public Sprite getSprite(String id)
@@ -170,7 +187,8 @@ public class SpriteSheet
 	}
 
 	/**
-	 * @return This spritesheets {@link net.minecraft.util.ResourceLocation ResourceLocation}
+	 * @return This spritesheets {@link net.minecraft.util.ResourceLocation
+	 *         ResourceLocation}
 	 */
 	public ResourceLocation getResource()
 	{
@@ -178,25 +196,53 @@ public class SpriteSheet
 	}
 
 	/**
-	 * Draws a sprite to the provided {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer} 
+	 * Draws a sprite to the provided
+	 * {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer}
 	 * 
-	 * @param elm The {@link com.xenonteam.xenonlib.client.gui.element.IGuiElement IGuiElement} to be drawn
-	 * @param id The id of the {@link Sprite} to be drawn
-	 * @param container The {@link net.minecraft.client.gui.inventory.GuiContainer GuiContainer} to be drawn in
+	 * @param elm
+	 *            The
+	 *            {@link com.xenonteam.xenonlib.client.gui.element.IGuiElement
+	 *            IGuiElement} to be drawn
+	 * @param id
+	 *            The id of the {@link Sprite} to be drawn
+	 * @param container
+	 *            The {@link net.minecraft.client.gui.inventory.GuiContainer
+	 *            GuiContainer} to be drawn in
 	 */
 	public static void drawSprite(String spritesheet, IGuiElement elm, String id, GuiContainer container)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		
+
 		SpriteSheet sheet = getSpriteSheet(spritesheet);
-		
+
 		Sprite s = sheet.m_sprites.get(id);
 
 		container.mc.renderEngine.bindTexture(sheet.getResource());
 
 		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
-	
+
+	public static void drawSpritePart(String spritesheet, IGuiElement elm, String id, GuiContainer container, boolean vertical_horizontal, boolean reversed, int currentAmunt, int maxAmunt)
+	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+		SpriteSheet sheet = getSpriteSheet(spritesheet);
+
+		Sprite s = sheet.m_sprites.get(id);
+
+		container.mc.renderEngine.bindTexture(sheet.getResource());
+
+		if (vertical_horizontal && !reversed)
+		{
+			container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getParent().getYOff() + elm.getYOff() - elm.getYOff() * currentAmunt / maxAmunt, s.m_x, s.m_y - currentAmunt, s.m_w, s.m_h / currentAmunt * maxAmunt, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
+		}
+		else if (!vertical_horizontal && !reversed)
+		{
+			container.drawScaledCustomSizeModalRect(elm.getParent().getXOff() + elm.getXOff() * currentAmunt / maxAmunt, elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w / currentAmunt * maxAmunt, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
+		}
+
+	}
+
 	/**
 	 * 
 	 * <b><u>This method should only be called from inside this class</u></b>
@@ -204,7 +250,9 @@ public class SpriteSheet
 	 * <br>
 	 * <br>
 	 * 
-	 * This method collects all sprites from the .sprites file connected to the spritesheet and puts them into the internal Map {@link SpriteSheet#m_sprites m_sprites}. 
+	 * This method collects all sprites from the .sprites file connected to the
+	 * spritesheet and puts them into the internal Map
+	 * {@link SpriteSheet#m_sprites m_sprites}.
 	 * 
 	 */
 	protected void loadSpritesByFile()
@@ -262,22 +310,27 @@ public class SpriteSheet
 					if (sarr[0].equals("id"))
 					{
 						id = sarr[1];
-					} else if (sarr[0].equals("x"))
+					}
+					else if (sarr[0].equals("x"))
 					{
 						x = Integer.parseInt(sarr[1]);
-					} else if (sarr[0].equals("y"))
+					}
+					else if (sarr[0].equals("y"))
 					{
 						y = Integer.parseInt(sarr[1]);
-					} else if (sarr[0].equals("w"))
+					}
+					else if (sarr[0].equals("w"))
 					{
 						w = Integer.parseInt(sarr[1]);
-					} else if (sarr[0].equals("h"))
+					}
+					else if (sarr[0].equals("h"))
 					{
 						h = Integer.parseInt(sarr[1]);
 					}
 				}
 
-			} else if (split[0].startsWith("S"))
+			}
+			else if (split[0].startsWith("S"))
 			{
 
 				String[] splitI = split[1].split(",");
