@@ -256,7 +256,7 @@ public class SpriteSheet
 		if (maxY < s.m_h)
 			maxY = s.m_h;
 
-		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), minX, minY, maxX, maxX, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
+		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), minX, minY, maxX, maxY, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
 	public static void drawSpritePartWithRelativePos(String spritesheet, IGuiElement elm, String id, GuiContainer container, int minX, int minY, int maxX, int maxY)
@@ -293,7 +293,7 @@ public class SpriteSheet
 		if (maxY < s.m_h)
 			maxY = s.m_h;
 
-		container.drawScaledCustomSizeModalRect(elm.getParent().getXOff() + elm.getXOff() - elm.getXOff() * minX / maxX, elm.getParent().getYOff() + elm.getYOff() - elm.getYOff() * minY / maxY, minX, minY, maxX, maxX, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
+		container.drawScaledCustomSizeModalRect(elm.getParent().getXOff() + elm.getXOff() - elm.getXOff() * minX / maxX, elm.getParent().getYOff() + elm.getYOff() - elm.getYOff() * minY / maxY, minX, minY, maxX, maxY, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
 	/**
