@@ -222,7 +222,7 @@ public class SpriteSheet
 		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
-	public static void drawSpritePart(String spritesheet, IGuiElement elm, String id, GuiContainer container, boolean vertical_horizontal, boolean reversed, int currentAmunt, int maxAmunt)
+	public static void drawSpritePart(String spritesheet, IGuiElement elm, String id, GuiContainer container, int minX, int minY, int maxX, int maxY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -232,15 +232,68 @@ public class SpriteSheet
 
 		container.mc.renderEngine.bindTexture(sheet.getResource());
 
-		if (vertical_horizontal && !reversed)
-		{
-			container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getParent().getYOff() + elm.getYOff() - elm.getYOff() * currentAmunt / maxAmunt, s.m_x, s.m_y - currentAmunt, s.m_w, s.m_h / currentAmunt * maxAmunt, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
-		}
-		else if (!vertical_horizontal && !reversed)
-		{
-			container.drawScaledCustomSizeModalRect(elm.getParent().getXOff() + elm.getXOff() * currentAmunt / maxAmunt, elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w / currentAmunt * maxAmunt, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
-		}
+		if (minX > 0)
+			minX = 0;
 
+		if (minX > s.m_x)
+			minX = s.m_x;
+
+		if (minY > 0)
+			minY = 0;
+
+		if (minY > s.m_y)
+			minY = s.m_y;
+
+		if (maxX <= 0)
+			maxX = s.m_w;
+
+		if (maxX < s.m_w)
+			maxX = s.m_w;
+
+		if (maxY <= 0)
+			maxY = s.m_h;
+
+		if (maxY < s.m_h)
+			maxY = s.m_h;
+
+		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), minX, minY, maxX, maxX, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
+	}
+
+	public static void drawSpritePartWithRelativePos(String spritesheet, IGuiElement elm, String id, GuiContainer container, int minX, int minY, int maxX, int maxY)
+	{
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+		SpriteSheet sheet = getSpriteSheet(spritesheet);
+
+		Sprite s = sheet.m_sprites.get(id);
+
+		container.mc.renderEngine.bindTexture(sheet.getResource());
+
+		if (minX > 0)
+			minX = 0;
+
+		if (minX > s.m_x)
+			minX = s.m_x;
+
+		if (minY > 0)
+			minY = 0;
+
+		if (minY > s.m_y)
+			minY = s.m_y;
+
+		if (maxX <= 0)
+			maxX = s.m_w;
+
+		if (maxX < s.m_w)
+			maxX = s.m_w;
+
+		if (maxY <= 0)
+			maxY = s.m_h;
+
+		if (maxY < s.m_h)
+			maxY = s.m_h;
+
+		container.drawScaledCustomSizeModalRect(elm.getParent().getXOff() + elm.getXOff() - elm.getXOff() * minX / maxX, elm.getParent().getYOff() + elm.getYOff() - elm.getYOff() * minY / maxY, minX, minY, maxX, maxX, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
 	/**
