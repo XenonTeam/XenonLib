@@ -9,6 +9,8 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
  * @author tim4242
  * @author philipas
  * 
+ * 
+ * 					!!!!!!!!!!!!!!!!!!!!!!!! 	 WIP  	!!!!!!!!!!!!!!!!!!!!!!!
  */
 public class GuiElementProgressBar extends GuiElementImage
 {
