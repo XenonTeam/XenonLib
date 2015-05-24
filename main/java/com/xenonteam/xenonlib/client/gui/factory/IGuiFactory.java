@@ -26,10 +26,6 @@ public interface IGuiFactory {
 	
 	public GuiContainer getContainer();
 	
-	public boolean setElementPos(String id, int x, int y);
-	
-	public boolean setElementPos(String id, Point p);
-	
 	public int getMouseX();
 	
 	public int getMouseY();

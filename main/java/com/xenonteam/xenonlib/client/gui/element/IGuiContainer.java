@@ -3,6 +3,8 @@
  */
 package com.xenonteam.xenonlib.client.gui.element;
 
+import java.awt.Point;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 
 /**
@@ -19,5 +21,9 @@ public interface IGuiContainer extends IGuiElement
 	public boolean removeGuiElement(String id);
 	
 	public IGuiElement getGuiElement(String id);
+	
+	public boolean setElementPos(String id, int x, int y);
+	
+	public boolean setElementPos(String id, Point p);
 	
 }

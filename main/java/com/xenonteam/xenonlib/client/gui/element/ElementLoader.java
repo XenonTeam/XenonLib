@@ -116,6 +116,8 @@ public class ElementLoader
 		
 			String name = elm.getAttribute("name");	
 			String type = elm.getAttribute("type");
+			
+			
 		
 		return res;
 	}
