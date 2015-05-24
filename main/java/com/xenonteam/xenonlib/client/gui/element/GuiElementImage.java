@@ -34,7 +34,10 @@ public class GuiElementImage extends GuiElement implements IGuiElement.IGuiSprit
 		SpriteSheet.drawSprite(m_sheetID, this, m_spriteID, m_parent.getGuiScreen());
 	}
 
-	
+	public String getType()
+	{
+		return "image";
+	}
 
 	/* (non-Javadoc)
 	 * @see com.xenonteam.xenonlib.client.gui.element.IGuiElement#setSpriteID(java.lang.String, int)

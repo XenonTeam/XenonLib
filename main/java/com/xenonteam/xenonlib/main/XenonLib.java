@@ -244,21 +244,6 @@ public final class XenonLib implements IXenonMod
 		for (String s : testList)
 			Log.info(s + ":" + elements.get(s).getPriority());
 		
-		Field mmanager_field = ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager");
-		
-		ModelManager mmanager = null;
-		try
-		{
-			mmanager = (ModelManager) mmanager_field.get(Minecraft.getMinecraft());
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		Log.info("State: " + Blocks.cobblestone.getDefaultState(),
-				 "Model: " + mmanager.getModel(new ModelResourceLocation("quartz_block", "normal")));
-		
-		XUtils.associateStateWithModel(test.getDefaultState(), mmanager.getModel(new ModelResourceLocation("quartz_block", "normal")));
 	}
 
 	public static void addXenonMod(IXenonMod mod)

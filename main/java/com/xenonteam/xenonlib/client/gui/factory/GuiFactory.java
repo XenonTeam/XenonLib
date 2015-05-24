@@ -48,6 +48,11 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 		this.tile = tile;
 		generate(null);
 	}
+	
+	public String getType()
+	{
+		return "factory";
+	}
 
 	protected void orderKeys()
 	{

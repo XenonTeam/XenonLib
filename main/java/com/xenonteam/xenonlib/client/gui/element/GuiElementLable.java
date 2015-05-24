@@ -41,6 +41,11 @@ public class GuiElementLable extends GuiElement
 		this(parent, lable, ElementHelper.COLOR_WHITE);
 	}
 	
+	public String getType()
+	{
+		return "lable";
+	}
+	
 	private void calcSize()
 	{
 		FontRenderer font = ElementHelper.getFontRenderer();

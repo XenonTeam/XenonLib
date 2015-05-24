@@ -339,6 +339,12 @@ public class XUtils
 		return size;
 	}
 
+	/**
+	 * Converts a {@link java.awt.image.BufferedImage BufferedImage} to a {@link java.nio.ByteBuffer ByteBuffer} usable by OpenGL
+	 * 
+	 * @param The {@link java.awt.image.BufferedImage BufferedImage} to transform
+	 * @return A {@link java.nio.ByteBuffer ByteBuffer} usable by OpenGL
+	 */
 	public static ByteBuffer convertImageData(BufferedImage image)
 	{
 
@@ -396,25 +402,5 @@ public class XUtils
 		return false;
 	}
 	
-	public static void associateStateWithModel(IBlockState state, IBakedModel model)
-	{
-		Map<IBlockState, IBakedModel> models = null;
-		try
-		{
-			 models = (Map) ReflectionHelper.getFieldAccesseble(BlockModelShapes.class, "bakedModelStore").get(ReflectionHelper.getFieldAccesseble(ModelManager.class, "modelProvider").get(ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager").get(Minecraft.getMinecraft())));
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		models.put(state, model);
-		
-		Log.info(models.get(state));
-	}
-	
-	public static void injectBlockState(Block block, IBlockState state)
-	{
-		
-	}
 
 }

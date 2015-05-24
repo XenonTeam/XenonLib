@@ -40,6 +40,12 @@ public class GuiElementButton extends GuiElementLable implements IGuiActionProvi
 	{
 		this(parent, lable, ElementHelper.COLOR_WHITE);
 	}
+	
+	@Override
+	public String getType()
+	{
+		return "button";
+	}
 
 	/*
 	 * (non-Javadoc)

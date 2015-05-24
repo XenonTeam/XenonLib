@@ -5,6 +5,8 @@ package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
+import org.w3c.dom.Element;
+
 import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
 
 /**
@@ -17,6 +19,13 @@ import com.xenonteam.xenonlib.client.gui.factory.IGuiFactory;
 public interface IGuiElement
 {
 
+	/**
+	 * Returns the type of this {@link IGuiElement} 
+	 * 
+	 * @return The type of the {@link IGuiElement}
+	 */
+	public String getType();
+	
 	/**
 	 * Draws the element to the provided {@link IGuiFactory}.
 	 * 
@@ -120,7 +129,7 @@ public interface IGuiElement
 	 * @author philipas
 	 *
 	 */
-	public interface IGuiActionProvider extends IGuiElement
+	public interface IGuiActionProvider
 	{
 		/**
 		 * Registers a {@link IGuiActionHandler}
@@ -147,7 +156,7 @@ public interface IGuiElement
 	 * @author philipas
 	 *
 	 */
-	public interface IGuiActionHandler
+	public interface IGuiActionHandler extends IGuiElement
 	{
 		/**
 		 * The method that gets called when an action occurs
@@ -192,6 +201,18 @@ public interface IGuiElement
 		 * @return The {@link com.xenonteam.xenonlib.client.render.SpriteSheet SpriteSheet} id
 		 */
 		public String getSpriteSheet();
+	}
+	
+	public static interface IGuiElementParsable<SELF extends IGuiElement> extends IGuiElement
+	{
+		/**
+		 * 
+		 * Returns a new instance of of this {@link IGuiElement} according to the given {@link org.w3c.dom.Element}
+		 * 
+		 * @param elm The {@link org.w3c.dom.Element Element} to load from
+		 * @return A new instance of of this {@link IGuiElement}
+		 */
+		public SELF parseXML(Element elm);
 	}
 
 }
