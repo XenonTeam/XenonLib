@@ -203,7 +203,7 @@ public interface IGuiElement
 		public String getSpriteSheet();
 	}
 	
-	public static interface IGuiElementParsable<SELF extends IGuiElement> extends IGuiElement
+	public static interface IGuiElementParser<T extends IGuiElement>
 	{
 		/**
 		 * 
@@ -212,7 +212,9 @@ public interface IGuiElement
 		 * @param elm The {@link org.w3c.dom.Element Element} to load from
 		 * @return A new instance of of this {@link IGuiElement}
 		 */
-		public SELF parseXML(Element elm);
+		public T parseXML(Element elm, int x, int y, int prio, int w, int h);
+		
+		public Class<T> getType();
 	}
 
 }

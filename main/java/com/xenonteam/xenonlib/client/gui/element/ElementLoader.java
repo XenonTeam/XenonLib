@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -25,6 +26,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.xenonteam.xenonlib.client.gui.element.IGuiElement.IGuiElementParser;
 import com.xenonteam.xenonlib.util.XUtils;
 
 /**
@@ -35,18 +37,25 @@ import com.xenonteam.xenonlib.util.XUtils;
 public class ElementLoader
 {
 
-	public static List<GuiElement> getElements(LoaderType type, ResourceLocation loc)
+	private static HashMap<String, IGuiElementParser<?>> m_parsers = new HashMap<String, IGuiElementParser<?>>();
+
+	public static void addTypeToParse(String type, IGuiElementParser<?> elm)
+	{
+		m_parsers.put(type, elm);
+	}
+
+	public static List<IGuiElement> getElements(LoaderType type, ResourceLocation loc)
 	{
 		try
 		{
-		
-		switch(type)
-		{
-			case XML:
-				return getElementsFromXML(loc);
-		}
-		
-		}catch(Exception e)
+
+			switch(type)
+			{
+				case XML:
+					return getElementsFromXML(loc);
+			}
+
+		} catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -54,71 +63,98 @@ public class ElementLoader
 		return null;
 	}
 
-	public static List<GuiElement> getElementsFromXML(ResourceLocation loc) throws Exception
+	public static List<IGuiElement> getElementsFromXML(ResourceLocation loc) throws Exception
 	{
-		List<GuiElement> res = new ArrayList<GuiElement>();
+		List<IGuiElement> res = new ArrayList<IGuiElement>();
 
 		InputStream stream = XUtils.getStreamFromRL(loc);
-		
+
 		if (stream == null)
 			return null;
-		
-		      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-		      dbf.setValidating(false);
-		      dbf.setIgnoringComments(false);
-		      dbf.setIgnoringElementContentWhitespace(true);
-		      dbf.setNamespaceAware(true);
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-		      DocumentBuilder db = null;
-		      db = dbf.newDocumentBuilder();
+		dbf.setValidating(false);
+		dbf.setIgnoringComments(false);
+		dbf.setIgnoringElementContentWhitespace(true);
+		dbf.setNamespaceAware(true);
 
-		      Document doc =  db.parse(stream);
-		      
-		      NodeList root = doc.getChildNodes();
-		      
-		      for(int i = 0; i < root.getLength(); i++)
-		      {
-		    	  
-		    	  Node node = root.item(i);
-		    	  
-		    	  if(node.getNodeType() != Node.ELEMENT_NODE)
-		    	  {
-		    		  return null;
-		    	  }
-		    	  
-		    	  Element XMLElm = (Element) node;
-		    	  
-		    	  if(!XMLElm.getNodeName().equalsIgnoreCase("element"))
-		    	  {
-		    		  return null;
-		    	  }
-		    	  
-		    	  GuiElement elm = parseFromXML(XMLElm);
-		    	  
-		    	  if(elm == null)
-		    		  return null;
-		    	  
-		    	  res.add(elm);
-		      }
+		DocumentBuilder db = null;
+		db = dbf.newDocumentBuilder();
 
-		return res;
-	}
-	
-	public static GuiElement parseFromXML(Element elm)
-	{
-		GuiElement res = null;
-		
-			if(!elm.hasAttribute("name") || !elm.hasAttribute("type"))
+		Document doc = db.parse(stream);
+
+		NodeList root = doc.getChildNodes();
+
+		for (int i = 0; i < root.getLength(); i++)
+		{
+
+			Node node = root.item(i);
+
+			if (node.getNodeType() != Node.ELEMENT_NODE)
 			{
 				return null;
 			}
-		
-			String name = elm.getAttribute("name");	
-			String type = elm.getAttribute("type");
-			
-			
-		
+
+			Element XMLElm = (Element) node;
+
+			if (!XMLElm.getNodeName().equalsIgnoreCase("element"))
+			{
+				return null;
+			}
+
+			IGuiElement elm = parseFromXML(XMLElm);
+
+			if (elm == null)
+				return null;
+
+			res.add(elm);
+		}
+
+		return res;
+	}
+
+	public static IGuiElement parseFromXML(Element elm)
+	{
+		IGuiElement res = null;
+
+		String name = null;
+		String type = null;
+		int x = 0;
+		int y = 0;
+		int w = 0;
+		int h = 0;
+		int prio = 0;
+
+		if (!elm.hasAttribute("name"))
+		{
+			return null;
+		} else
+		{
+			name = elm.getAttribute("name");
+		}
+
+		if (!elm.hasAttribute("type"))
+		{
+			return null;
+		} else
+		{
+			name = elm.getAttribute("type");
+		}
+
+		if (elm.hasAttribute("x"))
+			x = Integer.parseInt(elm.getAttribute("x"));
+		if (elm.hasAttribute("y"))
+			x = Integer.parseInt(elm.getAttribute("y"));
+		if (elm.hasAttribute("w"))
+			x = Integer.parseInt(elm.getAttribute("w"));
+		if (elm.hasAttribute("h"))
+			x = Integer.parseInt(elm.getAttribute("h"));
+		if (elm.hasAttribute("prio"))
+			x = Integer.parseInt(elm.getAttribute("prio"));
+
+		res = m_parsers.get(type).parseXML(elm, x, y, prio, w, h);
+
 		return res;
 	}
 
