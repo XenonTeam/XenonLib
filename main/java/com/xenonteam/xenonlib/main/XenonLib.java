@@ -65,11 +65,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.xenonteam.xenonlib.api.main.IXenonMod;
+import com.xenonteam.xenonlib.api.interfaces.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
+import com.xenonteam.xenonlib.client.model.XenonModelRegistry;
 import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
@@ -79,6 +80,8 @@ import com.xenonteam.xenonlib.config.Refs;
 import com.xenonteam.xenonlib.proxy.IXenonProxy;
 import com.xenonteam.xenonlib.registry.Register;
 import com.xenonteam.xenonlib.registry.RegistryHelper;
+import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
+import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
 import com.xenonteam.xenonlib.util.XUtils;
 import com.xenonteam.xenonlib.util.java.ReflectionHelper;
@@ -140,7 +143,8 @@ public final class XenonLib implements IXenonMod
 		config.get("test", "test", false);
 
 		config.save();
-
+		
+		PROXY.preInit(event);
 	}
 
 	@EventHandler
@@ -155,95 +159,22 @@ public final class XenonLib implements IXenonMod
 		for (Class<?> c : m_toRegister)
 		{
 			RegistryHelper.registerObjects(c);
-			Log.debug("Registered " + c.toString());
 		}
 
-		SpriteSheet.addSpriteSheet("test", new ResourceLocation("xenon_lib:textures/gui/sprites/test.png"));
+		XenonModelRegistry.initRegistry();
 		
+		PROXY.init(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		final Gson GSON = (new GsonBuilder()).registerTypeAdapter(XenonLib.class, new XenonLib.Deserializer()).create();
-		try
-		{
-			GSON.fromJson(new FileReader(new File("stone.json")), XenonLib.class);
-		} catch (JsonSyntaxException e)
-		{
-			e.printStackTrace();
-		} catch (JsonIOException e)
-		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 
 		Log.debug("+----------------------------+", "| Finished loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "            |", "| Version: " + MOD_VERSION + "             |", "+----------------------------+");
 
 		ResourceLocation key = new ResourceLocation("xenon_lib:models/selfmade/test");
 
-		ArrayList<BlockPart> parts = new ArrayList<BlockPart>();
-
-		HashMap<String, String> texes = new HashMap<String, String>();
-
-		parts.add(new BlockPart(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), new Vector3f(1, 1, 1), Maps.newHashMap(), new BlockPartRotation(new Vector3f((float) 0.5, (float) 0.5, (float) 0.5), Axis.X, 1, true), true));
-
-		try
-		{
-			Class[] subs = ModelLoader.class.getDeclaredClasses();
-
-			for (Class clazz : subs)
-			{
-				Constructor[] constructs = clazz.getConstructors();
-
-				for (Constructor c : constructs)
-				{
-					c.setAccessible(true);
-					Log.info(c);
-				}
-			}
-
-			XUtils.injectBlockModel(key, parts, texes, true, ItemCameraTransforms.DEFAULT);
-			
-			Field mmanager_field = ReflectionHelper.getFieldAccesseble(Minecraft.class, "modelManager");
-			Log.info(mmanager_field);
-			
-			ModelManager mmanager = (ModelManager) mmanager_field.get(Minecraft.getMinecraft());
-			
-			Log.info(mmanager.getModel(new ModelResourceLocation("xenon_lib:models/selfmade/test")));
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		
-
-		HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
-
-		for (int i = 0; i < 11; i++)
-		{
-			elements.put("test_" + i, new GuiElementImage(null, "test", "test1"));
-		}
-
-		elements.get("test_0").setPriority(3);
-		elements.get("test_1").setPriority(77);
-		elements.get("test_2").setPriority(4);
-		elements.get("test_3").setPriority(0);
-		elements.get("test_4").setPriority(344);
-		elements.get("test_5").setPriority(9);
-		elements.get("test_6").setPriority(4);
-		elements.get("test_7").setPriority(4);
-		elements.get("test_8").setPriority(7);
-		elements.get("test_9").setPriority(1895);
-		elements.get("test_10").setPriority(12);
-
-		List<String> testList = SortingUtils.sortGuiElements(elements);
-
-		for (String s : testList)
-			Log.info(s + ":" + elements.get(s).getPriority());
-		
+		PROXY.postInit(event);
 	}
 
 	public static void addXenonMod(IXenonMod mod)
@@ -259,71 +190,8 @@ public final class XenonLib implements IXenonMod
 	@Override
 	public Class<?>[] getRegisterClasses()
 	{
-		Class<?>[] classes = new Class<?>[] { XenonLib.class, MessageHandleTextUpdate.class, MessageHandleGuiButtonPress.class };
+		Class<?>[] classes = new Class<?>[] { XenonLib.class, TETest.class, GenericTileEntity.class, MessageHandleTextUpdate.class, MessageHandleGuiButtonPress.class };
 		return classes;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static class Deserializer implements JsonDeserializer
-	{
-		private static final String __OBFID = "CL_00002497";
-
-		public ModelBlockDefinition parseModelBlockDefinition(JsonElement p_178336_1_, Type p_178336_2_, JsonDeserializationContext p_178336_3_)
-		{
-			JsonObject jsonobject = p_178336_1_.getAsJsonObject();
-			List list = this.parseVariantsList(p_178336_3_, jsonobject);
-			System.out.println(list);
-			return new ModelBlockDefinition((Collection) list);
-		}
-
-		protected List parseVariantsList(JsonDeserializationContext p_178334_1_, JsonObject p_178334_2_)
-		{
-			JsonObject jsonobject1 = JsonUtils.getJsonObject(p_178334_2_, "variants");
-			ArrayList arraylist = Lists.newArrayList();
-			Iterator iterator = jsonobject1.entrySet().iterator();
-
-			while (iterator.hasNext())
-			{
-
-				Entry entry = (Entry) iterator.next();
-				// arraylist.add(this.parseVariants(p_178334_1_, entry));
-				System.out.println(entry);
-			}
-
-			return arraylist;
-		}
-
-		protected ModelBlockDefinition.Variants parseVariants(JsonDeserializationContext p_178335_1_, Entry p_178335_2_)
-		{
-			String s = (String) p_178335_2_.getKey();
-			ArrayList arraylist = Lists.newArrayList();
-			JsonElement jsonelement = (JsonElement) p_178335_2_.getValue();
-
-			if (jsonelement.isJsonArray())
-			{
-				Iterator iterator = jsonelement.getAsJsonArray().iterator();
-
-				while (iterator.hasNext())
-				{
-					JsonElement jsonelement1 = (JsonElement) iterator.next();
-					arraylist.add((ModelBlockDefinition.Variant) p_178335_1_.deserialize(jsonelement1, ModelBlockDefinition.Variant.class));
-				}
-			} else
-			{
-				arraylist.add((ModelBlockDefinition.Variant) p_178335_1_.deserialize(jsonelement, ModelBlockDefinition.Variant.class));
-			}
-
-			return new ModelBlockDefinition.Variants(s, arraylist);
-		}
-
-		public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
-		{
-			JsonObject jsonobject = p_deserialize_1_.getAsJsonObject();
-			List list = this.parseVariantsList(p_deserialize_3_, jsonobject);
-			System.out.println(list);
-
-			return null;
-		}
 	}
 
 }

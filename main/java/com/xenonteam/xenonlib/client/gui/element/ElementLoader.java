@@ -116,7 +116,6 @@ public class ElementLoader
 
 	public static IGuiElement parseFromXML(Element elm)
 	{
-		IGuiElement res = null;
 
 		String name = null;
 		String type = null;
@@ -153,9 +152,8 @@ public class ElementLoader
 		if (elm.hasAttribute("prio"))
 			x = Integer.parseInt(elm.getAttribute("prio"));
 
-		res = m_parsers.get(type).parseXML(elm, x, y, prio, w, h);
+		return m_parsers.get(type).parseXML(elm, x, y, prio, w, h);
 
-		return res;
 	}
 
 	public static enum LoaderType

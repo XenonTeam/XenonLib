@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,6 +21,7 @@ import com.xenonteam.xenonlib.blocks.IXenonIBP;
 import com.xenonteam.xenonlib.blocks.IXenonTEP;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler.XSide;
 import com.xenonteam.xenonlib.common.networking.packet.NetworkHandler;
+import com.xenonteam.xenonlib.util.Log;
 
 /**
  * @author tim4242
@@ -39,11 +41,18 @@ public class RegistryHelper
 		if (cAn != null)
 		{
 
-			if (c.isAssignableFrom(IMessageHandler.class))
+			if (IMessageHandler.class.isAssignableFrom(c))
 			{
 				XSide side = cAn.side();
 
 				NetworkHandler.registerMessage0((Class<? extends IMessageHandler<? extends IMessage, ? extends IMessage>>) c, side);
+				Log.debug("Regsitered message");
+			}
+			
+			if (TileEntity.class.isAssignableFrom(c))
+			{
+				GameRegistry.registerTileEntity((Class<? extends TileEntity>) c, cAn.modid() + "_" + cAn.unlocName());
+				Log.debug("Regsitered tileentity as: " + cAn.modid() + "_" + cAn.unlocName());
 			}
 
 		}
@@ -121,7 +130,7 @@ public class RegistryHelper
 				b.setUnlocalizedName(modid + "." + unlocName);
 
 				GameRegistry.registerBlock(b, modid + "_" + unlocName);
-
+				Log.debug("Regsitered block as: " + modid + "_" + unlocName);
 				continue;
 
 			}
@@ -158,14 +167,14 @@ public class RegistryHelper
 				b.setUnlocalizedName(modid + "." + unlocName);
 
 				GameRegistry.registerItem(b, modid + "_" + unlocName);
-
+				Log.debug("Regsitered item as: " + modid + "_" + unlocName);
 				continue;
 			}
 
 			if (TileEntity.class.isAssignableFrom(f.getType()))
 			{
 				GameRegistry.registerTileEntity((Class<? extends TileEntity>) f.getDeclaringClass(), modid + "_" + unlocName);
-
+				Log.debug("Regsitered tileentity as: " + cAn.modid() + "_" + cAn.unlocName());
 				continue;
 			}
 		}

@@ -11,7 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
+import com.xenonteam.xenonlib.config.Refs;
+import com.xenonteam.xenonlib.registry.Register;
 
+@Register(modid = Refs.MOD_ID, unlocName = "generic")
 /**
  * @author tim4242
  * @author philipas

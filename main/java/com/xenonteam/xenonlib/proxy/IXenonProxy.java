@@ -3,6 +3,10 @@
  */
 package com.xenonteam.xenonlib.proxy;
 
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
 /**
  * @author tim4242
  * @author philipas
@@ -12,4 +16,10 @@ package com.xenonteam.xenonlib.proxy;
 public interface IXenonProxy
 {
 
+	public void preInit(FMLPreInitializationEvent event);
+	
+	public void init(FMLInitializationEvent event);
+	
+	public void postInit(FMLPostInitializationEvent event);
+	
 }

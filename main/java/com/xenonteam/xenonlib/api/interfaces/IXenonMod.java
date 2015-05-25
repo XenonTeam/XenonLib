@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.xenonteam.xenonlib.api.main;
+package com.xenonteam.xenonlib.api.interfaces;
 
 /**
  * @author tim4242
