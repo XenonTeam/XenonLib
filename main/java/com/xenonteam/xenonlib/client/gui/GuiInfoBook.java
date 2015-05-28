@@ -20,7 +20,7 @@ public class GuiInfoBook extends GuiFactoryScreen
 
 	private String m_modid;
 	private EntityPlayer m_player;
-	
+
 	/**
 	 * @param container
 	 * @param tile
@@ -31,13 +31,6 @@ public class GuiInfoBook extends GuiFactoryScreen
 		m_player = player;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.xenonteam.xenonlib.client.gui.factory.IGuiFactory#generate(java.lang
-	 * .Object)
-	 */
 	@Override
 	public void generate(Object obj)
 	{

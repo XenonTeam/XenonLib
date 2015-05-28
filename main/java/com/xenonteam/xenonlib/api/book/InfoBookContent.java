@@ -10,14 +10,14 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet.Sprite;
  * @author philipas
  *
  */
-public class BookCategory
+public class InfoBookContent
 {
 
 	private String m_title;
 	private String m_spriteSheet;
 	private String m_titleImg;
 	
-	public BookCategory(String title, String sheet, String titleImg)
+	public InfoBookContent(String title, String sheet, String titleImg)
 	{
 		m_title = title;
 		m_spriteSheet = sheet;

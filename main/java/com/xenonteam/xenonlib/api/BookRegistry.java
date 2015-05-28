@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sun.javafx.UnmodifiableArrayList;
-import com.xenonteam.xenonlib.api.book.BookCategory;
+import com.xenonteam.xenonlib.api.book.InfoBookContent;
 
 /**
  * @author tim4242
@@ -19,9 +19,9 @@ import com.xenonteam.xenonlib.api.book.BookCategory;
 public class BookRegistry
 {
 
-	private static Map<String, BookCategory> m_categs = new HashMap<String, BookCategory>();
+	private static Map<String, InfoBookContent> m_categs = new HashMap<String, InfoBookContent>();
 	
-	public static boolean registerCategory(String modid, BookCategory categ)
+	public static boolean registerCategory(String modid, InfoBookContent categ)
 	{
 		if(m_categs.containsKey(modid))
 			return false;
@@ -30,9 +30,9 @@ public class BookRegistry
 		return true;
 	}
 	
-	public static Map<String, BookCategory> getCategorys()
+	public static InfoBookContent getContentForMod(String modid)
 	{
-		return m_categs;
+		return m_categs.get(modid);
 	}
 	
 }

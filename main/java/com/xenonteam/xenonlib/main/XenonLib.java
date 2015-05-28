@@ -68,6 +68,7 @@ import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.interfaces.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
+import com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 import com.xenonteam.xenonlib.client.model.XenonModelRegistry;
@@ -192,6 +193,12 @@ public final class XenonLib implements IXenonMod
 	{
 		Class<?>[] classes = new Class<?>[] { XenonLib.class, TETest.class, GenericTileEntity.class, MessageHandleTextUpdate.class, MessageHandleGuiButtonPress.class };
 		return classes;
+	}
+	
+	@Override
+	public LoaderInfo getBookInfo()
+	{
+		return null;
 	}
 
 }

@@ -37,6 +37,23 @@ import com.xenonteam.xenonlib.util.XUtils;
 public class ElementLoader
 {
 
+	public static class LoaderInfo
+	{
+		public final LoaderType Type;
+		public final ResourceLocation Location;
+		
+		public LoaderInfo(LoaderType t, ResourceLocation rl)
+		{
+			Type = t;
+			Location = rl;
+		}
+		
+		public List<IGuiElement> load()
+		{
+			return ElementLoader.getElements(Type, Location);
+		}
+	}
+	
 	private static HashMap<String, IGuiElementParser<?>> m_parsers = new HashMap<String, IGuiElementParser<?>>();
 
 	public static void addTypeToParse(String type, IGuiElementParser<?> elm)
