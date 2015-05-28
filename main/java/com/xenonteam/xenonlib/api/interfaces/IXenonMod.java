@@ -17,6 +17,12 @@ import com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo;
 public interface IXenonMod
 {
 
+	public static class ModInfo
+	{
+		public String ModID;
+		public String Version;
+	}
+	
 	/**
 	 * @return All the classes to be registered
 	 */

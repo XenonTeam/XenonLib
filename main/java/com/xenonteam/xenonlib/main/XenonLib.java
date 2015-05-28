@@ -155,6 +155,8 @@ public final class XenonLib implements IXenonMod
 		for (IXenonMod mod : m_plugins)
 		{
 			m_toRegister.addAll(Arrays.asList(mod.getRegisterClasses()));
+			
+			
 		}
 
 		for (Class<?> c : m_toRegister)
