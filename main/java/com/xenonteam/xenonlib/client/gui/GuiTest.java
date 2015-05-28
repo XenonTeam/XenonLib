@@ -9,7 +9,7 @@ import com.xenonteam.xenonlib.client.gui.element.ElementHelper;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementButton;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementLable;
-import com.xenonteam.xenonlib.client.gui.factory.GuiFactory;
+import com.xenonteam.xenonlib.client.gui.factory.GuiFactoryContainer;
 import com.xenonteam.xenonlib.server.inventory.container.TestContainer;
 import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
@@ -19,7 +19,7 @@ import com.xenonteam.xenonlib.util.Log;
  * @author philipas
  * 
  */
-public class GuiTest extends GuiFactory
+public class GuiTest extends GuiFactoryContainer
 {
 	
 

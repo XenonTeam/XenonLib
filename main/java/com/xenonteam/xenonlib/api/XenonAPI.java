@@ -72,6 +72,8 @@ public class XenonAPI
 
 	public static void addXenonMod(IXenonMod mod) throws Exception
 	{
+		initAPI();
+		
 		try
 		{
 			if(isXenonLoaded())

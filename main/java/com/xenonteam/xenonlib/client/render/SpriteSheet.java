@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
@@ -209,7 +210,7 @@ public class SpriteSheet
 	 *            The {@link net.minecraft.client.gui.inventory.GuiContainer
 	 *            GuiContainer} to be drawn in
 	 */
-	public static void drawSprite(String spritesheet, IGuiElement elm, String id, GuiContainer container)
+	public static void drawSprite(String spritesheet, IGuiElement elm, String id, GuiScreen container)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -222,7 +223,7 @@ public class SpriteSheet
 		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), s.m_x, s.m_y, s.m_w, s.m_h, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
-	public static void drawSpritePart(String spritesheet, IGuiElement elm, String id, GuiContainer container, int minX, int minY, int maxX, int maxY)
+	public static void drawSpritePart(String spritesheet, IGuiElement elm, String id, GuiScreen container, int minX, int minY, int maxX, int maxY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -259,7 +260,7 @@ public class SpriteSheet
 		container.drawScaledCustomSizeModalRect(elm.getXOff() + elm.getParent().getXOff(), elm.getYOff() + elm.getParent().getYOff(), minX, minY, maxX, maxY, elm.getWidth(), elm.getHeight(), sheet.m_w, sheet.m_h);
 	}
 
-	public static void drawSpritePartWithRelativePos(String spritesheet, IGuiElement elm, String id, GuiContainer container, int minX, int minY, int maxX, int maxY)
+	public static void drawSpritePartWithRelativePos(String spritesheet, IGuiElement elm, String id, GuiScreen container, int minX, int minY, int maxX, int maxY)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 

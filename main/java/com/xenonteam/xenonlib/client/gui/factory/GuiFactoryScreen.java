@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import com.xenonteam.xenonlib.client.gui.element.IGuiContainer;
@@ -25,9 +24,9 @@ import com.xenonteam.xenonlib.util.java.SortingUtils;
 /**
  * @author tim4242
  * @author philipas
- * 
+ *
  */
-public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IGuiContainer, IGuiElement.IGuiActionHandler
+public abstract class GuiFactoryScreen extends GuiScreen implements IGuiFactory, IGuiContainer, IGuiElement.IGuiActionHandler
 {
 
 	protected HashMap<String, IGuiElement> elements = new HashMap<String, IGuiElement>();
@@ -38,17 +37,6 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	protected int m_mouseX, m_mouseY, m_mouseButton;
 
-	private TileEntity tile;
-
-	public GuiFactory(Container container, TileEntity tile)
-	{
-		super(container);
-
-		m_resLoc = new ResourceLocation("xenon_lib:textures/gui/GenBackground.png");
-		this.tile = tile;
-		generate(null);
-	}
-	
 	public String getType()
 	{
 		return "factory";
@@ -62,14 +50,13 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public boolean addGuiElement(String ID, IGuiElement element)
 	{
-		if (!elements.containsKey(ID))
+		if(!elements.containsKey(ID))
 		{
 			elements.put(ID, element);
 			old_keys.add(ID);
 			orderKeys();
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -78,21 +65,20 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public boolean removeGuiElement(String ID)
 	{
-		if (elements.containsKey(ID))
+		if(elements.containsKey(ID))
 		{
 			elements.remove(ID);
 
 			for (int i = 0; i < old_keys.size(); i++)
 			{
-				if (old_keys.get(i).equals(ID))
+				if(old_keys.get(i).equals(ID))
 				{
 					old_keys.remove(i);
 				}
 			}
 			orderKeys();
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -101,11 +87,10 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public IGuiElement getGuiElement(String ID)
 	{
-		if (elements.containsKey(ID))
+		if(elements.containsKey(ID))
 		{
 			return elements.get(ID);
-		}
-		else
+		} else
 		{
 			return null;
 		}
@@ -114,13 +99,12 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public boolean setElementPos(String id, int x, int y)
 	{
-		if (elements.containsKey(id))
+		if(elements.containsKey(id))
 		{
 			IGuiElement element = elements.get(id);
 			element.setPos(x, y);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -129,18 +113,17 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public boolean setElementPos(String id, Point p)
 	{
-		if (elements.containsKey(id))
+		if(elements.containsKey(id))
 		{
 			setElementPos(id, p.x, p.y);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
 	}
 
-	public GuiContainer getGuiScreen()
+	public GuiScreen getGuiScreen()
 	{
 		return this;
 	}
@@ -149,12 +132,11 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	public boolean addElement(String ID, IGuiElement element)
 	{
 
-		if (!elements.containsKey(ID))
+		if(!elements.containsKey(ID))
 		{
 			elements.put(ID, element);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -163,12 +145,11 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public boolean removeElement(String ID)
 	{
-		if (elements.containsKey(ID))
+		if(elements.containsKey(ID))
 		{
 			elements.remove(ID);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -190,30 +171,37 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	public void setXOff(int x)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setYOff(int y)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setPos(int x, int y)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setPos(Point p)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setPriority(int priority)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setHeight(int height)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public void setWidth(int width)
 	{
+		Log.error("Can't set this value on a factory!");
 	}
 
 	public int getXOff()
@@ -256,7 +244,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 
 	}
 
-	public GuiContainer getContainer()
+	public GuiScreen getContainer()
 	{
 		return this;
 	}
@@ -281,7 +269,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 		try
 		{
 			super.mouseClicked(mX, mY, button);
-		} catch (IOException e)
+		} catch(IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -300,15 +288,7 @@ public abstract class GuiFactory extends GuiContainer implements IGuiFactory, IG
 	@Override
 	public void handleAction(int action, Object... args)
 	{
-		if (tile instanceof GenericTileEntity)
-		{
-			MessageHandleGuiButtonPress msg = new MessageHandleGuiButtonPress((GenericTileEntity) tile, action);
-			NetworkHandler.sendToServer(msg);
-		}
-		else
-		{
-			Log.debug("You are not overiding the Method handleAction in the : " + this.getClass().toString() + " :");
-		}
+
 	}
 
 }

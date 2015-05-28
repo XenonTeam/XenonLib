@@ -5,6 +5,7 @@ package com.xenonteam.xenonlib.client.gui.element;
 
 import java.awt.Point;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 
 /**
@@ -14,7 +15,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
  */
 public interface IGuiContainer extends IGuiElement
 {
-	public GuiContainer getGuiScreen();
+	public GuiScreen getGuiScreen();
 	
 	public boolean addGuiElement(String id, IGuiElement elm);
 	
