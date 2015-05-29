@@ -26,13 +26,13 @@ public class InfoBookContent
 	private String m_spriteSheet;
 	private String m_titleImg;
 	
-	public InfoBookContent(String modid, String unlocName, GuiScreen screen, CreativeTabs tab, String title, String sheet, String titleImg)
+	public InfoBookContent(String modid, String unlocName, Class<?extends GuiScreen> screen, CreativeTabs tab, String title, String sheet, String titleImg)
 	{
 		XenonAPI.initAPI();
 		
 		try
 		{
-			m_book = (Item) Class.forName("com.xenonteam.xenonlib.items.ItemXenonInfoBook").getConstructor(String.class, String.class, GuiScreen.class, CreativeTabs.class).newInstance(modid, unlocName, screen, tab);
+			m_book = (Item) Class.forName("com.xenonteam.xenonlib.items.ItemXenonInfoBook").getConstructor(String.class, String.class, Class.class, CreativeTabs.class).newInstance(modid, unlocName, screen, tab);
 		} catch(Exception e)
 		{
 			e.printStackTrace();

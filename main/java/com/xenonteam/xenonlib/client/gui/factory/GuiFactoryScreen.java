@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -128,45 +130,17 @@ public abstract class GuiFactoryScreen extends GuiScreen implements IGuiFactory,
 		return this;
 	}
 
-	@Override
-	public boolean addElement(String ID, IGuiElement element)
-	{
-
-		if(!elements.containsKey(ID))
-		{
-			elements.put(ID, element);
-			return true;
-		} else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public boolean removeElement(String ID)
-	{
-		if(elements.containsKey(ID))
-		{
-			elements.remove(ID);
-			return true;
-		} else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public IGuiElement getElement(String ID)
-	{
-		return elements.get(ID);
-	}
-
 	public void draw(IGuiFactory factory)
 	{
 		for (String s : keys)
 		{
 			elements.get(s).draw(factory);
 		}
+	}
+
+	public void drawScreen(int mouseX, int mouseY, float partialTicks)
+	{
+		draw(this);
 	}
 
 	public void setXOff(int x)

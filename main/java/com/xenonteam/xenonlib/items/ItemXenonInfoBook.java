@@ -22,9 +22,9 @@ public class ItemXenonInfoBook extends Item implements IXenonItem
 {
 
 	protected final String m_modid;
-	protected final GuiScreen m_screen;
+	protected final Class<? extends GuiScreen> m_screen;
 	
-	public ItemXenonInfoBook(String modid, String name, GuiScreen screen, CreativeTabs tab)
+	public ItemXenonInfoBook(String modid, String name, Class<? extends GuiScreen> screen, CreativeTabs tab)
 	{
 		this.setCreativeTab(tab);
 		this.setUnlocalizedName(modid + "_" + name);
@@ -42,7 +42,17 @@ public class ItemXenonInfoBook extends Item implements IXenonItem
 	
 	public GuiScreen getGui()
 	{
-		return m_screen;
+		if(m_screen == null)
+			return null;
+		
+		try
+		{
+			return m_screen.newInstance();
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)

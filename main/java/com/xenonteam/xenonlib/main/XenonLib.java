@@ -29,6 +29,7 @@ import javax.vecmath.Vector3f;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.renderer.block.model.BlockPart;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -36,6 +37,7 @@ import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.JsonUtils;
@@ -70,6 +72,7 @@ import com.xenonteam.xenonlib.api.book.InfoBookContent;
 import com.xenonteam.xenonlib.api.interfaces.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
+import com.xenonteam.xenonlib.client.gui.GuiTest;
 import com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo;
 import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
@@ -207,7 +210,7 @@ public final class XenonLib implements IXenonMod
 	@Override
 	public InfoBookContent getBookInfo()
 	{
-		return null;
+		return new InfoBookContent(MOD_ID, "info_book", CreativeTabs.tabTools, "Xenon Lib Info Book", null, null);
 	}
 	
 	@Override

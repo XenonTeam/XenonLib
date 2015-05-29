@@ -10,6 +10,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
+import com.xenonteam.xenonlib.api.BookRegistry;
 import com.xenonteam.xenonlib.items.ItemXenonInfoBook;
 import com.xenonteam.xenonlib.server.inventory.container.TestContainer;
 import com.xenonteam.xenonlib.tileentity.TETest;
@@ -59,7 +60,7 @@ public class GuiHandler implements IGuiHandler
 					}
 
 					if(ownGui || otherGui == null)
-						return new GuiInfoBook(player, modid);
+						return new GuiInfoBook(player, modid, BookRegistry.getContentForMod(modid));
 					else
 						return otherGui;
 				}

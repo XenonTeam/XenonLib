@@ -8,6 +8,7 @@ import java.awt.Point;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 
+import com.xenonteam.xenonlib.client.gui.element.IGuiContainer;
 import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 
 /**
@@ -15,15 +16,9 @@ import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
  * @author philipas
  * 
  */
-public interface IGuiFactory {
+public interface IGuiFactory extends IGuiContainer{
 
 	public void generate(Object obj);
-	
-	public boolean addElement(String ID, IGuiElement element);
-	
-	public boolean removeElement(String ID);
-
-	public IGuiElement getElement(String ID);
 	
 	public GuiScreen getContainer();
 	

@@ -48,7 +48,7 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 		this.tile = tile;
 		generate(null);
 	}
-	
+
 	public String getType()
 	{
 		return "factory";
@@ -62,14 +62,13 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public boolean addGuiElement(String ID, IGuiElement element)
 	{
-		if (!elements.containsKey(ID))
+		if(!elements.containsKey(ID))
 		{
 			elements.put(ID, element);
 			old_keys.add(ID);
 			orderKeys();
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -78,21 +77,20 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public boolean removeGuiElement(String ID)
 	{
-		if (elements.containsKey(ID))
+		if(elements.containsKey(ID))
 		{
 			elements.remove(ID);
 
 			for (int i = 0; i < old_keys.size(); i++)
 			{
-				if (old_keys.get(i).equals(ID))
+				if(old_keys.get(i).equals(ID))
 				{
 					old_keys.remove(i);
 				}
 			}
 			orderKeys();
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -101,11 +99,10 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public IGuiElement getGuiElement(String ID)
 	{
-		if (elements.containsKey(ID))
+		if(elements.containsKey(ID))
 		{
 			return elements.get(ID);
-		}
-		else
+		} else
 		{
 			return null;
 		}
@@ -114,13 +111,12 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public boolean setElementPos(String id, int x, int y)
 	{
-		if (elements.containsKey(id))
+		if(elements.containsKey(id))
 		{
 			IGuiElement element = elements.get(id);
 			element.setPos(x, y);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -129,12 +125,11 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public boolean setElementPos(String id, Point p)
 	{
-		if (elements.containsKey(id))
+		if(elements.containsKey(id))
 		{
 			setElementPos(id, p.x, p.y);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -144,41 +139,6 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	public GuiContainer getGuiScreen()
 	{
 		return this;
-	}
-
-	@Override
-	public boolean addElement(String ID, IGuiElement element)
-	{
-
-		if (!elements.containsKey(ID))
-		{
-			elements.put(ID, element);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public boolean removeElement(String ID)
-	{
-		if (elements.containsKey(ID))
-		{
-			elements.remove(ID);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public IGuiElement getElement(String ID)
-	{
-		return elements.get(ID);
 	}
 
 	public void draw(IGuiFactory factory)
@@ -289,7 +249,7 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 		try
 		{
 			super.mouseClicked(mX, mY, button);
-		} catch (IOException e)
+		} catch(IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -308,12 +268,11 @@ public abstract class GuiFactoryContainer extends GuiContainer implements IGuiFa
 	@Override
 	public void handleAction(int action, Object... args)
 	{
-		if (tile instanceof GenericTileEntity)
+		if(tile instanceof GenericTileEntity)
 		{
 			MessageHandleGuiButtonPress msg = new MessageHandleGuiButtonPress((GenericTileEntity) tile, action);
 			NetworkHandler.sendToServer(msg);
-		}
-		else
+		} else
 		{
 			Log.debug("You are not overiding the Method handleAction in the : " + this.getClass().toString() + " :");
 		}
