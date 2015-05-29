@@ -3,10 +3,14 @@
  */
 package com.xenonteam.xenonlib.items;
 
+import com.xenonteam.xenonlib.client.gui.GuiHandler;
+import com.xenonteam.xenonlib.main.XenonLib;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -39,6 +43,13 @@ public class ItemXenonInfoBook extends Item implements IXenonItem
 	public GuiScreen getGui()
 	{
 		return m_screen;
+	}
+	
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	{
+		player.openGui(XenonLib.INSTANCE, GuiHandler.guiIds.GUI_BOOK_INFO.ordinal(), world, player.serverPosX, player.serverPosY, player.serverPosZ);
+		
+		return stack;
 	}
 	
 }
