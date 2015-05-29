@@ -65,6 +65,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.xenonteam.xenonlib.api.BookRegistry;
+import com.xenonteam.xenonlib.api.book.InfoBookContent;
 import com.xenonteam.xenonlib.api.interfaces.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
@@ -112,6 +114,8 @@ public final class XenonLib implements IXenonMod
 
 	private ArrayList<IXenonMod> m_plugins;
 	private ArrayList<Class<?>> m_toRegister;
+	
+	
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
@@ -156,7 +160,10 @@ public final class XenonLib implements IXenonMod
 		{
 			m_toRegister.addAll(Arrays.asList(mod.getRegisterClasses()));
 			
-			
+			if(mod.getBookInfo() != null)
+			{
+				BookRegistry.registerContentForMod(mod.getModInfo().ModID, mod.getBookInfo());
+			}
 		}
 
 		for (Class<?> c : m_toRegister)
@@ -198,9 +205,15 @@ public final class XenonLib implements IXenonMod
 	}
 	
 	@Override
-	public LoaderInfo getBookInfo()
+	public InfoBookContent getBookInfo()
 	{
 		return null;
+	}
+	
+	@Override
+	public ModInfo getModInfo()
+	{
+		return Refs.MOD_INFO;
 	}
 
 }

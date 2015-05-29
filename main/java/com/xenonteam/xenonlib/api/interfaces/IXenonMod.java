@@ -3,7 +3,7 @@
  */
 package com.xenonteam.xenonlib.api.interfaces;
 
-import com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo;
+import com.xenonteam.xenonlib.api.book.InfoBookContent;
 
 /**
  * @author tim4242
@@ -21,7 +21,15 @@ public interface IXenonMod
 	{
 		public String ModID;
 		public String Version;
+		
+		public ModInfo(String id, String v)
+		{
+			ModID = id;
+			Version = v;
+		}
 	}
+	
+	public ModInfo getModInfo();
 	
 	/**
 	 * @return All the classes to be registered
@@ -32,6 +40,6 @@ public interface IXenonMod
 	 * 
 	 * @return The {@link com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo LoaderInfo} for this {@link com.xenonteam.xenonlib.api.interfaces.IXenonMod IXenonMod} book, can be null
 	 */
-	public LoaderInfo getBookInfo();
+	public InfoBookContent getBookInfo();
 	
 }

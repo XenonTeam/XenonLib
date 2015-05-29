@@ -3,7 +3,12 @@
  */
 package com.xenonteam.xenonlib.config;
 
+import static com.xenonteam.xenonlib.config.Refs.MOD_ID;
+import static com.xenonteam.xenonlib.config.Refs.MOD_VERSION;
+
 import java.io.File;
+
+import com.xenonteam.xenonlib.api.interfaces.IXenonMod.ModInfo;
 
 
 /**
@@ -44,6 +49,8 @@ public final class Refs
 	 * The authors of the XenonLib.
 	 */
 	public static final String[] MOD_AUTHORS = new String[] {"philipas", "tim4242"};
+	
+	public static final ModInfo MOD_INFO = new ModInfo(MOD_ID, MOD_VERSION);
 	
 	public static File CONFIG_PATH;
 	

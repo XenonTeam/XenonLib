@@ -21,7 +21,7 @@ public class BookRegistry
 
 	private static Map<String, InfoBookContent> m_categs = new HashMap<String, InfoBookContent>();
 	
-	public static boolean registerCategory(String modid, InfoBookContent categ)
+	public static boolean registerContentForMod(String modid, InfoBookContent categ)
 	{
 		if(m_categs.containsKey(modid))
 			return false;

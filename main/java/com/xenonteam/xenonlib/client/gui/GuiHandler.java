@@ -4,11 +4,13 @@ import java.lang.reflect.Constructor;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
+import com.xenonteam.xenonlib.items.ItemXenonInfoBook;
 import com.xenonteam.xenonlib.server.inventory.container.TestContainer;
 import com.xenonteam.xenonlib.tileentity.TETest;
 
@@ -32,66 +34,28 @@ public class GuiHandler implements IGuiHandler
 			case GUI_BOOK_INFO:
 				boolean ownGui = false;
 				GuiScreen otherGui = null;
-				NBTTagCompound stackInfo = player.inventory.mainInventory[player.inventory.currentItem].getTagCompound();
+				ItemStack stack = player.inventory.mainInventory[player.inventory.currentItem];
 
-				if(stackInfo == null)
+				if(stack == null || !(stack.getItem() instanceof ItemXenonInfoBook))
 				{
 					return null;
 				} else
 				{
 
-					String modid = stackInfo.getString("mod");
+					ItemXenonInfoBook book = (ItemXenonInfoBook) stack.getItem();
+					
+					String modid = book.getModID();
 
 					if(modid == null)
 						return null;
 
-					if(stackInfo.getString("gui") != null)
+					if(book.getGui() != null)
 					{
-
-						try
-						{
-							Constructor[] guiConstructs = Class.forName(stackInfo.getString("gui")).getConstructors();
-
-							Constructor guiConstruct = null;
-							Object[] args = null;
-
-							for (Constructor c : guiConstructs)
-							{
-								Class<?>[] ca = c.getParameterTypes();
-
-								if(ca == null || (ca[0] == null && ca.length == 1))
-								{
-									guiConstruct = c;
-									args = new Object[] {};
-									break;
-								} else if(ca[0] == EntityPlayer.class && ca.length == 1)
-								{
-									guiConstruct = c;
-									args = new Object[] { player };
-									break;
-								} else if(ca[0] == World.class && ca.length == 1)
-								{
-									guiConstruct = c;
-									args = new Object[] { world };
-									break;
-								} else if(ca[0] == EntityPlayer.class && ca[1] == World.class && ca.length == 2)
-								{
-									guiConstruct = c;
-									args = new Object[] { player, world };
-									break;
-								}
-							}
-
-							Object o = guiConstruct.newInstance(args);
-
-							if(o instanceof GuiScreen)
-							{
-								otherGui = (GuiScreen) o;
-							}
-						} catch(Exception e)
-						{
-							ownGui = true;
-						}
+						otherGui =  book.getGui();
+					}
+					else
+					{
+						ownGui = true;
 					}
 
 					if(ownGui || otherGui == null)
