@@ -31,6 +31,7 @@ public class DescriptionHandler extends SimpleChannelInboundHandler<FMLProxyPack
         NetworkRegistry.INSTANCE.newChannel(CHANNEL, new DescriptionHandler());
     }
 
+    @Deprecated
     public static void init(){
     }
 
