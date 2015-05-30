@@ -20,53 +20,58 @@ import com.xenonteam.xenonlib.client.render.SpriteSheet.Sprite;
 public class InfoBookContent
 {
 
-	private Item m_book;
-	
+	private Item m_book = null;
+
 	private String m_title;
 	private String m_spriteSheet;
 	private String m_titleImg;
-	
-	public InfoBookContent(String modid, String unlocName, Class<?extends GuiScreen> screen, CreativeTabs tab, String title, String sheet, String titleImg)
+
+	public InfoBookContent(String modid, String unlocName, Class<? extends GuiScreen> screen, CreativeTabs tab, String title, String sheet, String titleImg)
 	{
 		XenonAPI.initAPI();
-		
+
 		try
 		{
-			m_book = (Item) Class.forName("com.xenonteam.xenonlib.items.ItemXenonInfoBook").getConstructor(String.class, String.class, Class.class, CreativeTabs.class).newInstance(modid, unlocName, screen, tab);
+			if(screen == null)
+			{
+				m_book = (Item) Class.forName("com.xenonteam.xenonlib.items.ItemXenonInfoBook").getConstructor(String.class, String.class, CreativeTabs.class).newInstance(modid, unlocName, tab);
+			} else
+			{
+				m_book = (Item) Class.forName("com.xenonteam.xenonlib.items.ItemXenonInfoBook").getConstructor(String.class, String.class, Class.class, CreativeTabs.class).newInstance(modid, unlocName, screen, tab);
+			}
 		} catch(Exception e)
 		{
 			e.printStackTrace();
-			m_book = null;
 		}
-		
+
 		m_title = title;
 		m_spriteSheet = sheet;
 		m_titleImg = titleImg;
 	}
-	
+
 	public InfoBookContent(String modid, String unlocName, CreativeTabs tab, String title, String sheet, String titleImg)
 	{
 		this(modid, unlocName, null, tab, title, sheet, titleImg);
 	}
-	
+
 	public Item getBookItem()
 	{
 		return m_book;
 	}
-	
+
 	public String getTitle()
 	{
 		return m_title;
 	}
-	
+
 	public String getSpriteSheedID()
 	{
 		return m_spriteSheet;
 	}
-	
+
 	public String getTitleSpriteIF()
 	{
 		return m_titleImg;
 	}
-	
+
 }

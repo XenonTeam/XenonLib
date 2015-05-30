@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
@@ -373,6 +374,12 @@ public class XUtils
 		buffer.flip();
 
 		return buffer;
+	}
+	
+	public static IModel getModel(ResourceLocation key, ModelBlock model) throws Exception
+	{
+		Constructor VMWConstruct = ReflectionHelper.getConstructorAccesseble(ModelLoader.class.getDeclaredClasses()[6], ModelLoader.class, ResourceLocation.class, ModelBlock.class);
+		return (IModel) VMWConstruct.newInstance(new ModelLoader(null, null, null), key, model);
 	}
 
 	/**

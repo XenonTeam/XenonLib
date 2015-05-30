@@ -35,6 +35,11 @@ public class ItemXenonInfoBook extends Item implements IXenonItem
 		GameRegistry.registerItem(this, modid + "_" + name);
 	}
 	
+	public ItemXenonInfoBook(String modid, String name, CreativeTabs tab)
+	{
+		this(modid, name, null, tab);
+	}
+	
 	public final String getModID()
 	{
 		return m_modid;
