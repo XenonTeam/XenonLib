@@ -21,6 +21,7 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 public class XenonModelRegistry implements ICustomModelLoader
 {
 
+	private static XenonModelRegistry m_inst;
 	private static boolean m_init = false;
 	private static HashMap<ResourceLocation, IModel> m_models;
 
@@ -28,7 +29,8 @@ public class XenonModelRegistry implements ICustomModelLoader
 	{
 		if(!m_init)
 		{
-			ModelLoaderRegistry.registerLoader(new XenonModelRegistry());
+			m_inst = new XenonModelRegistry();
+			ModelLoaderRegistry.registerLoader(m_inst);
 			m_init = true;
 		}
 	}
@@ -75,6 +77,13 @@ public class XenonModelRegistry implements ICustomModelLoader
 
 		return false;
 	}
+	
+	public boolean acceptsS(ResourceLocation loc)
+	{
+		initRegistry();
+		
+		return m_inst.accepts(loc);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -90,6 +99,13 @@ public class XenonModelRegistry implements ICustomModelLoader
 			return m_models.get(loc);
 
 		return null;
+	}
+	
+	public IModel loadModelS(ResourceLocation loc)
+	{
+		initRegistry();
+		
+		return m_inst.loadModel(loc);
 	}
 
 }

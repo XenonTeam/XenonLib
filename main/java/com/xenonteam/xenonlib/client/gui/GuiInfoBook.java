@@ -42,11 +42,9 @@ public class GuiInfoBook extends GuiFactoryScreen
 	@Override
 	public void generate(Object obj)
 	{
-		this.width = this.mc.displayWidth;
 		
 		GuiElementLable title = new GuiElementLable(this, StatCollector.translateToLocal(m_content.getTitle()));
 		title.setShouldRenderBackground(true);
-		System.out.println(this.width);
 		title.setPos(this.width / 2 - title.getWidth() / 2, 10);
 		
 		

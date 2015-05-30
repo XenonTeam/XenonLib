@@ -50,8 +50,8 @@ public class XenonAPI
 					m_modelReg = ClassLoader.getSystemClassLoader().loadClass("com.xenonteam.xenonlib.client.model.XenonModelRegistry");
 					
 					m_addModel = m_modelReg.getDeclaredMethod("addModel", ResourceLocation.class, IModel.class);
-					m_accepsModel = m_modelReg.getDeclaredMethod("accepts", ResourceLocation.class);
-					m_loadModel = m_modelReg.getDeclaredMethod("loadModel", ResourceLocation.class);
+					m_accepsModel = m_modelReg.getDeclaredMethod("acceptsS", ResourceLocation.class);
+					m_loadModel = m_modelReg.getDeclaredMethod("loadModelS", ResourceLocation.class);
 				}
 			}
 		} catch(Exception e)

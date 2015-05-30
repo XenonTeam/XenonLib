@@ -49,6 +49,11 @@ public class InfoBookContent
 		this(modid, unlocName, null, tab, title, sheet, titleImg);
 	}
 	
+	public Item getBookItem()
+	{
+		return m_book;
+	}
+	
 	public String getTitle()
 	{
 		return m_title;

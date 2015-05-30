@@ -10,39 +10,16 @@ import static com.xenonteam.xenonlib.config.Refs.MOD_NAME;
 import static com.xenonteam.xenonlib.config.Refs.MOD_VERSION;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.vecmath.Vector3f;
-
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.renderer.block.model.BlockPart;
-import net.minecraft.client.renderer.block.model.BlockPartRotation;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -52,32 +29,15 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.xenonteam.xenonlib.api.BookRegistry;
+import com.xenonteam.xenonlib.api.XenonModelAPI;
 import com.xenonteam.xenonlib.api.book.InfoBookContent;
 import com.xenonteam.xenonlib.api.interfaces.IXenonMod;
 import com.xenonteam.xenonlib.blocks.BlockTest;
 import com.xenonteam.xenonlib.client.gui.GuiHandler;
-import com.xenonteam.xenonlib.client.gui.GuiTest;
-import com.xenonteam.xenonlib.client.gui.element.ElementLoader.LoaderInfo;
-import com.xenonteam.xenonlib.client.gui.element.GuiElementImage;
-import com.xenonteam.xenonlib.client.gui.element.IGuiElement;
 import com.xenonteam.xenonlib.client.model.XenonModelRegistry;
-import com.xenonteam.xenonlib.client.render.SpriteSheet;
 import com.xenonteam.xenonlib.common.networking.DescriptionHandler;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleGuiButtonPress;
 import com.xenonteam.xenonlib.common.networking.packet.MessageHandleTextUpdate;
@@ -89,9 +49,6 @@ import com.xenonteam.xenonlib.registry.RegistryHelper;
 import com.xenonteam.xenonlib.tileentity.GenericTileEntity;
 import com.xenonteam.xenonlib.tileentity.TETest;
 import com.xenonteam.xenonlib.util.Log;
-import com.xenonteam.xenonlib.util.XUtils;
-import com.xenonteam.xenonlib.util.java.ReflectionHelper;
-import com.xenonteam.xenonlib.util.java.SortingUtils;
 
 /**
  * @author tim4242
@@ -123,6 +80,8 @@ public final class XenonLib implements IXenonMod
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
+		XenonModelRegistry.initRegistry();
+		
 		Refs.DEBUG = true;
 
 		Log.debug("+---------------------------+", "| Started loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "           |", "| Version: " + MOD_VERSION + "            |", "+---------------------------+");
@@ -152,6 +111,8 @@ public final class XenonLib implements IXenonMod
 
 		config.save();
 		
+		
+		
 		PROXY.preInit(event);
 	}
 
@@ -173,8 +134,7 @@ public final class XenonLib implements IXenonMod
 		{
 			RegistryHelper.registerObjects(c);
 		}
-
-		XenonModelRegistry.initRegistry();
+		
 		
 		PROXY.init(event);
 	}
@@ -185,7 +145,7 @@ public final class XenonLib implements IXenonMod
 
 		Log.debug("+----------------------------+", "| Finished loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "            |", "| Version: " + MOD_VERSION + "             |", "+----------------------------+");
 
-		ResourceLocation key = new ResourceLocation("xenon_lib:models/selfmade/test");
+		
 
 		PROXY.postInit(event);
 	}
