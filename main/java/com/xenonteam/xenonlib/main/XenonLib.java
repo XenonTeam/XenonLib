@@ -112,7 +112,6 @@ public final class XenonLib implements IXenonMod
 		
 		ResourceLocation loc = new ResourceLocation("xenon_lib:selfmade");
 		
-		XenonModelRegistry.addModel(loc, ModelLoader.);
 		
 		PROXY.preInit(event);
 	}

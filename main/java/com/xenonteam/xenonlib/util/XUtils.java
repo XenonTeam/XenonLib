@@ -331,7 +331,7 @@ public class XUtils
 			img = ImageIO.read(getStreamFromRL(loc));
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			return new int[] {0, 0};
 		}
 
 		size[0] = img.getWidth();
