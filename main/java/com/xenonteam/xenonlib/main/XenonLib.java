@@ -144,7 +144,7 @@ public final class XenonLib implements IXenonMod
 
 		Log.debug("+----------------------------+", "| Finished loading " + MOD_ID + " |", "| Name: " + MOD_NAME + "            |", "| Version: " + MOD_VERSION + "             |", "+----------------------------+");
 
-		System.out.println(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("xenon_lib:selfmade#normal")));
+		System.out.println(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getTextureMap().getAtlasSprite(new ResourceLocation("test:test").toString()));
 		
 		PROXY.postInit(event);
 	}
