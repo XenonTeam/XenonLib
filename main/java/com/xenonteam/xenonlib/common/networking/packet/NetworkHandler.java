@@ -103,7 +103,14 @@ public final class NetworkHandler
 	{
 		INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, 64D));
 	}
-
+	
+	/**
+	 * send the given Message to every player within a specified range of blocks of the XYZ of the
+	 * XYZ packet.
+	 * 
+	 * @param message
+	 * @param world
+	 */
 	public static void sendToAllInRange(MessageXYZ message, World world, int range)
 	{
 		INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, range));
