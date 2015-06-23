@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  * @author tim4242
@@ -69,7 +70,7 @@ public class StorageHelper
 	 * @param f The {@link java.io.File File}
 	 * @throws IOException
 	 */
-	public static void writeSerialized(Object obj, File f) throws IOException
+	public static void writeSerializedObject(Object obj, File f) throws IOException
 	{
 		File temp = f;
 		
@@ -101,7 +102,7 @@ public class StorageHelper
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public static Object readSearialized(File f) throws ClassNotFoundException, IOException
+	public static Object readSearializedObject(File f) throws ClassNotFoundException, IOException
 	{
 		File temp = f;
 		
@@ -125,6 +126,42 @@ public class StorageHelper
 		in.close();
 		
 		return deserialize(obj);
+	}
+	
+	public static Object[] readSearializedObjects(File file) {
+		File temp = file;
+
+		ArrayList<Object> object = new ArrayList<Object>();
+
+		if (temp.isDirectory()) {
+			for (int i = 0; i < temp.list().length; i++) {
+				File t = temp.listFiles()[i];
+				try {
+					object.add(readSearializedObject(t));
+				} catch (ClassNotFoundException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			System.out.println("invalid file this is not a file directory");
+		}
+
+		return object.toArray();
+	}
+
+	public static void writeSerializedObjects(File f, String[] names, Object... obj) {
+		for (int i = 0; i < obj.length; i++) {
+			try {
+				if (!(new File(f.getPath()).isDirectory()))
+					new File(f.getPath()).mkdirs();
+				if (!(new File("f.getPath()" + "/" + names[i] + ".jobj").exists()))
+					new File(f.getPath() + "/" + names[i] + ".jobj").createNewFile();
+				writeSerializedObject(obj[i], new File(f.getPath() + "/" + i
+						+ ".jobj"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }
