@@ -150,6 +150,9 @@ public class StorageHelper
 	}
 
 	public static void writeSerializedObjects(File f, String[] names, Object... obj) {
+		
+		if (names.length == obj.length) {
+		
 		for (int i = 0; i < obj.length; i++) {
 			try {
 				if (!(new File(f.getPath()).isDirectory()))
@@ -162,6 +165,10 @@ public class StorageHelper
 				e.printStackTrace();
 			}
 		}
+		}else{
+			System.out.println("your names and object are not the same lenght");
+		}
+		
 	}
 	
 }
