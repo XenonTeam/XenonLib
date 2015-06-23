@@ -23,7 +23,7 @@ import com.xenonteam.xenonlib.util.Log;
  */
 public final class NetworkHandler
 {
-	
+
 	private static SimpleNetworkWrapper INSTANCE;
 	private static int lastID = -1;
 	private static boolean hasInit = false;
@@ -34,7 +34,8 @@ public final class NetworkHandler
 	@Deprecated
 	public static void init()
 	{
-		if (!hasInit) {
+		if (!hasInit)
+		{
 			INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Refs.MOD_ID);
 			hasInit = true;
 		}
@@ -51,18 +52,18 @@ public final class NetworkHandler
 	{
 		lastID++;
 		Class<REQ> requestMessageType = (Class<REQ>) messageHandler;
-		
-		for(Side s : side.getSides())
-		INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, s);
-		//Not necessary already done in Log.debug(Object...)
-		Log.debug("Class "+requestMessageType.toString()+" successfuly registerd");
+
+		for (Side s : side.getSides())
+			INSTANCE.registerMessage(messageHandler, requestMessageType, lastID, s);
+		// Not necessary already done in Log.debug(Object...)
+		Log.debug("Class " + requestMessageType.toString() + " successfuly registerd");
 	}
-	
+
 	/**
 	 * DO NOT USE THIS METHOD IT'S UNSAFE AND JUST FOR INTERNAL USE!!!
 	 */
 	@Deprecated
-	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<?extends IMessageHandler<? extends IMessage ,? extends IMessage>> messageHandler, XSide side)
+	public static <REQ extends IMessage, REPLY extends IMessage> void registerMessage0(Class<? extends IMessageHandler<? extends IMessage, ? extends IMessage>> messageHandler, XSide side)
 	{
 		registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) messageHandler, side);
 	}
@@ -101,6 +102,11 @@ public final class NetworkHandler
 	public static void sendToAllAround(MessageXYZ message, World world)
 	{
 		INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, 64D));
+	}
+
+	public static void sendToAllInRange(MessageXYZ message, World world, int range)
+	{
+		INSTANCE.sendToAllAround(message, new TargetPoint(world.provider.getDimensionId(), message.x, message.y, message.z, range));
 	}
 
 	/**
