@@ -154,7 +154,7 @@ public class StorageHelper
 			try {
 				if (!(new File(f.getPath()).isDirectory()))
 					new File(f.getPath()).mkdirs();
-				if (!(new File("f.getPath()" + "/" + names[i] + ".jobj").exists()))
+				if (!(new File(f.getPath() + "/" + names[i] + ".jobj").exists()))
 					new File(f.getPath() + "/" + names[i] + ".jobj").createNewFile();
 				writeSerializedObject(obj[i], new File(f.getPath() + "/" + i
 						+ ".jobj"));
