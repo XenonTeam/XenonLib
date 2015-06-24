@@ -1,0 +1,21 @@
+/*Config for the development and debugging only features*/
+$Development = {
+
+    /*If it should checked if developer are in the game*/
+    $Check Devs = false
+
+    /*If the debug features should be used*/
+    $Debug Mode = false
+    
+    /*The setting for the debug mode*/
+    $Debug Settings = {
+    
+        /*If this mod should print all the IMC traffic*/
+        $Print IMC = false
+        
+        /*If this mod should print all the initialization events*/
+        $Print Initialization = false
+    
+    }
+    
+}
